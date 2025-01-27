@@ -1,0 +1,88 @@
+project:
+  type: website
+  output-dir: /home/duydao/khuongduying.github.io/docs
+
+website:
+  title: "khuongduying"
+  navbar:
+    background: primary
+    logo:  GO_WITH_THE_FLOW/2.png
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - sidebar:tutorials
+      - sidebar:howto
+      - sidebar:fundamentals
+      - sidebar:reference
+      - sidebar:basic
+      - sidebar:advance
+      - about.qmd
+      - news.qmd
+    tools:
+      - icon: linkedin
+        href: https://www.linkedin.com/in/khuongduying/
+      - icon: github
+        menu:
+          - text: My repositories
+            url: https://github.com/khuongduying
+          - text: Report a bug
+  page-navigation: true
+  back-to-top-navigation: true
+  page-footer: 
+    background: light
+    left: "Copyright 2024, Duy Dao" 
+    right: 
+      - icon: github
+        href: https://github.com/khuongduying
+      - icon: linkedin 
+        href: https://www.linkedin.com/in/khuongduying/
+  reader-mode: true
+  repo-url: https://github.com/khuongduying
+  repo-actions: [edit, issue]
+
+  sidebar:
+    - id: tutorials
+      title: "Tutorials"
+      style: "docked"
+      search: true
+      background: light
+      collapse-level: 2
+      contents:
+        - tutorials.qmd
+        - tutorial-1.qmd
+        - tutorial-2.qmd
+    
+    - id: howto
+      title: "How-to"
+      contents:
+        - howto.qmd
+        # navigation items
+    
+    - id: fundamentals
+      title: "Fundamentals"
+      contents:
+        - fundamentals.qmd
+        # navigation items
+    
+    - id: reference
+      title: "Reference"
+      contents:
+        - reference.qmd
+        # navigation items
+
+    - id: basic
+      title: "Basic"
+      contents:
+        - auto: Basic/
+    - id: advance
+      title: "Advance"
+      contents:
+        - auto: Advance/*
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    #self-contained: true
+    #embed-resources: true
