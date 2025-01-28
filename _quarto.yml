@@ -56,7 +56,7 @@ website:
     - id: machine_learning
       title: "Machine Learning"
       contents:
-        - howto.qmd
+        - auto: machine_learning/*
         # navigation items
     
     - id: fundamentals
