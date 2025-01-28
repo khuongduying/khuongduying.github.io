@@ -12,7 +12,7 @@ website:
       - text: "Home"
         file: index.qmd
       - sidebar:tutorials
-      - sidebar:howto
+      - sidebar:machine_learning
       - sidebar:fundamentals
       - sidebar:reference
       - sidebar:basic
