@@ -1,10 +1,15 @@
 ---
 title: "02. Linear Algebra"
 author: "Duy Dao"
-date: "`r Sys.Date()`"
+date: today
+date-format: long
 format: html
+highlight-style: pygments
 categories: [Mathematics, Linear Algebra, Machine Learning]
 jupyter: python3
+execute:
+  echo: true
+  eval: true
 ---
 
 # Linear Algebra: Foundations and Applications
@@ -97,26 +102,13 @@ print(eigenvectors)
 
 PCA is a dimensionality reduction technique using eigenvectors to project data onto lower-dimensional spaces.
 
-\^\^\^/math$$\[\mathbf{Z} = \mathbf{X} \mathbf{W}\]\[\text{where:}\]\[\mathbf{X} \text{ is the } n \times p \text{ data matrix (centered)},\]\[\mathbf{W} \text{ is the } p \times k \text{ matrix of principal component loadings (eigenvectors)},\]\[\mathbf{Z} \text{ is the } n \times k \text{ matrix of principal component scores.}\]$$
+\\\[ x = \\sqrt{y} \\\]
 
-``` latex
-\[
-\mathbf{Z} = \mathbf{X} \mathbf{W}
-\]
+\\\[ z = \\sqrt{a\^2 + b\^2} \\\]
 
-\[
-\text{where:}
-\]
-\[
-\mathbf{X} \text{ is the } n \times p \text{ data matrix (centered)},
-\]
-\[
-\mathbf{W} \text{ is the } p \times k \text{ matrix of principal component loadings (eigenvectors)},
-\]
-\[
-\mathbf{Z} \text{ is the } n \times k \text{ matrix of principal component scores.}
-\]
-```
+\\\[ \\widetilde{\\mathbf{A}}\_{\\Phi} = \\mathbf{T}\^{-1} \\mathbf{A}\_{\\Phi} \\mathbf{S}. \\\]
+
+\\\[ \\widetilde{b}\_j = s\_{1j} b_1 + \\cdots + s\_{nj} b_n = \\sum\_{i=1}\^n s\_{ij} b_i, \\quad j = 1, \\ldots, n. \\\]
 
 #### Example: Using PCA for Dimensionality Reduction
 
