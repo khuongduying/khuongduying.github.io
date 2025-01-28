@@ -53,8 +53,8 @@ website:
         - tutorial-1.qmd
         - tutorial-2.qmd
     
-    - id: howto
-      title: "How-to"
+    - id: machine_learning
+      title: "Machine Learning"
       contents:
         - howto.qmd
         # navigation items
