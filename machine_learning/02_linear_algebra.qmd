@@ -15,18 +15,19 @@ Linear Algebra forms the backbone of modern computational sciences, including ma
 
 Linear Algebra simplifies:
 
-- **Data Representation**: Representing high-dimensional datasets as matrices or vectors.
-- **Transformations**: Applying operations like rotation, scaling, and projection.
-- **Optimization**: Solving systems of equations and minimizing error in machine learning models.
-
+-   **Data Representation**: Representing high-dimensional datasets as matrices or vectors.
+-   **Transformations**: Applying operations like rotation, scaling, and projection.
+-   **Optimization**: Solving systems of equations and minimizing error in machine learning models.
 
 ## Core Concepts
 
 ### Vectors
+
 A **vector** is a quantity with both magnitude and direction. It can represent points in a space, rows in a dataset, or features in machine learning.
 
 #### Example: Representing Data as Vectors
-```python
+
+``` python
 import numpy as np
 
 # Example: 2D and 3D vectors
@@ -39,10 +40,12 @@ print("Magnitude of 2D vector:", magnitude_2D)
 ```
 
 ### Matrices
+
 A **matrix** is a collection of numbers arranged in rows and columns. It is used to store and manipulate multiple vectors or datasets.
 
 #### Example: Matrix Multiplication
-```python
+
+``` python
 # Defining two matrices
 A = np.array([[1, 2], [3, 4]])
 B = np.array([[2, 0], [1, 3]])
@@ -58,10 +61,12 @@ print(result)
 ```
 
 ### Systems of Linear Equations
+
 Systems of equations can be represented as matrix equations $Ax = b$, where $A$ is a matrix, $x$ is a vector of variables, and $b$ is the result.
 
 #### Example: Solving $Ax = b$
-```python
+
+``` python
 # Solving a system of linear equations
 A = np.array([[2, 3], [1, 2]])
 b = np.array([5, 4])
@@ -72,10 +77,12 @@ print("Solution for Ax = b:", x)
 ```
 
 ### Eigenvalues and Eigenvectors
+
 Eigenvalues and eigenvectors are critical in understanding matrix transformations, such as scaling and rotation.
 
 #### Example: Finding Eigenvalues and Eigenvectors
-```python
+
+``` python
 # Define a matrix
 A = np.array([[2, -1], [-1, 2]])
 
@@ -87,11 +94,12 @@ print(eigenvectors)
 ```
 
 ### Principal Component Analysis (PCA)
+
 PCA is a dimensionality reduction technique using eigenvectors to project data onto lower-dimensional spaces.
 
-^^^/math
+\^\^\^/math$$\[\mathbf{Z} = \mathbf{X} \mathbf{W}\]\[\text{where:}\]\[\mathbf{X} \text{ is the } n \times p \text{ data matrix (centered)},\]\[\mathbf{W} \text{ is the } p \times k \text{ matrix of principal component loadings (eigenvectors)},\]\[\mathbf{Z} \text{ is the } n \times k \text{ matrix of principal component scores.}\]$$
 
-```latex
+``` latex
 \[
 \mathbf{Z} = \mathbf{X} \mathbf{W}
 \]
@@ -111,7 +119,8 @@ PCA is a dimensionality reduction technique using eigenvectors to project data o
 ```
 
 #### Example: Using PCA for Dimensionality Reduction
-```python
+
+``` python
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
@@ -132,16 +141,16 @@ plt.show()
 
 ## Applications of Linear Algebra
 
-- Machine Learning: Gradient descent and feature transformation.
-- Bioinformatics: Analyzing gene expression data using matrix factorization.
-- Graphics: Rotating and scaling objects in 3D space.
+-   Machine Learning: Gradient descent and feature transformation.
+-   Bioinformatics: Analyzing gene expression data using matrix factorization.
+-   Graphics: Rotating and scaling objects in 3D space.
 
 ## Summary
 
 Linear Algebra is a powerful mathematical tool for solving real-world problems across diverse fields. By mastering its principles, you can:
 
-- Represent and manipulate datasets.
-- Understand transformations and projections.
-- Solve complex systems of equations efficiently.
+-   Represent and manipulate datasets.
+-   Understand transformations and projections.
+-   Solve complex systems of equations efficiently.
 
 Dive deeper into applications and enhance your mathematical foundation for tackling computational challenges!

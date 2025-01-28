@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: /home/duydao/khuongduying.github.io/docs
+  output-dir: ./docs
 
 website:
   title: "khuongduying"
