@@ -7,9 +7,9 @@ format: html
 highlight-style: pygments
 categories: [Mathematics, Linear Algebra, Machine Learning]
 jupyter: python3
-execute:
-  echo: true
-  eval: true
+# execute:
+#   echo: true
+#   eval: true
 ---
 
 # Linear Algebra: Foundations and Applications
