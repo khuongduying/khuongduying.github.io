@@ -82,7 +82,7 @@ website:
 format:
   html:
     theme: cosmo
-    css: styles.css
+    #css: styles.css
     toc: true
     code-fold: false
     code-overflow: wrap
