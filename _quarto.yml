@@ -92,5 +92,4 @@ format:
         caption: none
     code-block-bg: true
     code-block-border-left: "#31BAE9"
-    #self-contained: true
-    #embed-resources: true
+highlight-style: pygments
