@@ -11,7 +11,13 @@ website:
     left:
       - text: "Home"
         file: index.qmd
-      - sidebar:tutorials
+      # - text: "Best Practice"
+      #   menu:
+      #     - text: "Git"
+      #       href: best_practice/git/*
+      #     - text: "Test"
+      #       href: best_practice/test/*
+      - sidebar:best_practice
       - sidebar:machine_learning
       - sidebar:fundamentals
       - sidebar:reference
@@ -42,16 +48,19 @@ website:
   repo-actions: [edit, issue]
 
   sidebar:
-    - id: tutorials
-      title: "Tutorials"
+    - id: best_practice
+      title: "Best Practice"
       style: "docked"
       search: true
       background: light
       collapse-level: 2
       contents:
-        - tutorials.qmd
-        - tutorial-1.qmd
-        - tutorial-2.qmd
+        - section: Git
+          contents:
+            - auto: best_practice/git/*
+        - section: test
+          contents:
+            - news.qmd
     
     - id: machine_learning
       title: "Machine Learning"
@@ -84,12 +93,17 @@ format:
     theme: cosmo
     #css: styles.css
     toc: true
+    code-link: true
     code-fold: false
     code-overflow: wrap
     code-tools:
-        source: true
-        toggle: false
-        caption: none
+      source: true
+      toggle: false
+      caption: none
     code-block-bg: true
     code-block-border-left: "#31BAE9"
+python:
+  jupyter: python3
+  freeze-requirements: false
+editor: visual
 highlight-style: pygments

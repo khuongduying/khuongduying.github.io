@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Duy Dao">
+<meta name="dcterms.date" content="2025-02-01">
 
-<title>khuongduying - News</title>
+<title>khuongduying - Setting Up a Git Repository and Connecting to a Remote</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,23 +59,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./best_practice/git/setup_remote_repo.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../news.html" rel="next">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,10 +107,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./GO_WITH_THE_FLOW/2.png" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../GO_WITH_THE_FLOW/2.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">khuongduying</span>
     </a>
   </div>
@@ -119,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -129,13 +131,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-best-practice">    
         <li class="dropdown-header">Git</li>
         <li>
-    <a class="dropdown-item" href="./best_practice/git/setup_remote_repo.html" rel="" target="">
+    <a class="dropdown-item" href="../../best_practice/git/setup_remote_repo.html" rel="" target="">
  <span class="dropdown-text">Setting Up a Git Repository and Connecting to a Remote</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">test</li>
         <li>
-    <a class="dropdown-item" href="./news.html" rel="" target="">
+    <a class="dropdown-item" href="../../news.html" rel="" target="">
  <span class="dropdown-text">News</span></a>
   </li>  
     </ul>
@@ -146,15 +148,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-machine-learning">    
         <li>
-    <a class="dropdown-item" href="./machine_learning/01_introduction.html" rel="" target="">
+    <a class="dropdown-item" href="../../machine_learning/01_introduction.html" rel="" target="">
  <span class="dropdown-text">01. Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machine_learning/02_1_linear_algebra.html" rel="" target="">
+    <a class="dropdown-item" href="../../machine_learning/02_1_linear_algebra.html" rel="" target="">
  <span class="dropdown-text">02. Linear Algebra</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machine_learning/02_2_linear_algebra.html" rel="" target="">
+    <a class="dropdown-item" href="../../machine_learning/02_2_linear_algebra.html" rel="" target="">
  <span class="dropdown-text">02.2. Linear Algebra</span></a>
   </li>  
     </ul>
@@ -165,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-fundamentals">    
         <li>
-    <a class="dropdown-item" href="./fundamentals.html" rel="" target="">
+    <a class="dropdown-item" href="../../fundamentals.html" rel="" target="">
  <span class="dropdown-text">fundamentals.html</span></a>
   </li>  
     </ul>
@@ -176,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-reference">    
         <li>
-    <a class="dropdown-item" href="./reference.html" rel="" target="">
+    <a class="dropdown-item" href="../../reference.html" rel="" target="">
  <span class="dropdown-text">reference.html</span></a>
   </li>  
     </ul>
@@ -188,11 +190,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-basic">    
         <li class="dropdown-header">Basic</li>
         <li>
-    <a class="dropdown-item" href="./Basic/menu1.html" rel="" target="">
+    <a class="dropdown-item" href="../../Basic/menu1.html" rel="" target="">
  <span class="dropdown-text">Basic1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Basic/menu2.html" rel="" target="">
+    <a class="dropdown-item" href="../../Basic/menu2.html" rel="" target="">
  <span class="dropdown-text">Basic2</span></a>
   </li>  
     </ul>
@@ -203,25 +205,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-advance">    
         <li>
-    <a class="dropdown-item" href="./Advance/menu3.html" rel="" target="">
+    <a class="dropdown-item" href="../../Advance/menu3.html" rel="" target="">
  <span class="dropdown-text">Advance1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Advance/menu4.html" rel="" target="">
+    <a class="dropdown-item" href="../../Advance/menu4.html" rel="" target="">
  <span class="dropdown-text">Advance2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Advance/test.html" rel="" target="">
+    <a class="dropdown-item" href="../../Advance/test.html" rel="" target="">
  <span class="dropdown-text">Test</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./news.html" rel="" target="" aria-current="page">
+    <a class="nav-link active" href="../../news.html" rel="" target="" aria-current="page">
  <span class="menu-text">News</span></a>
   </li>  
 </ul>
@@ -256,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./news.html">test</a></li><li class="breadcrumb-item"><a href="./news.html">News</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../best_practice/git/setup_remote_repo.html">Git</a></li><li class="breadcrumb-item"><a href="../../best_practice/git/setup_remote_repo.html">Setting Up a Git Repository and Connecting to a Remote</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -287,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./best_practice/git/setup_remote_repo.html" class="sidebar-item-text sidebar-link">
+  <a href="../../best_practice/git/setup_remote_repo.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Setting Up a Git Repository and Connecting to a Remote</span></a>
   </div>
 </li>
@@ -304,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./news.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../news.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">News</span></a>
   </div>
 </li>
@@ -316,21 +318,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#initialize-a-new-local-repository" id="toc-initialize-a-new-local-repository" class="nav-link active" data-scroll-target="#initialize-a-new-local-repository">Initialize a New Local Repository</a></li>
+  <li><a href="#configure-git-user-information" id="toc-configure-git-user-information" class="nav-link" data-scroll-target="#configure-git-user-information">Configure Git User Information</a></li>
+  <li><a href="#create-a-.gitignore-file" id="toc-create-a-.gitignore-file" class="nav-link" data-scroll-target="#create-a-.gitignore-file">Create a .gitignore File</a></li>
+  <li><a href="#make-the-initial-commit" id="toc-make-the-initial-commit" class="nav-link" data-scroll-target="#make-the-initial-commit">Make the Initial Commit</a></li>
+  <li><a href="#set-up-the-remote-repository" id="toc-set-up-the-remote-repository" class="nav-link" data-scroll-target="#set-up-the-remote-repository">Set Up the Remote Repository</a></li>
+  <li><a href="#push-to-the-remote-repository" id="toc-push-to-the-remote-repository" class="nav-link" data-scroll-target="#push-to-the-remote-repository">Push to the Remote Repository</a></li>
+  <li><a href="#branching-strategy" id="toc-branching-strategy" class="nav-link" data-scroll-target="#branching-strategy">Branching Strategy</a></li>
+  <li><a href="#protect-sensitive-information" id="toc-protect-sensitive-information" class="nav-link" data-scroll-target="#protect-sensitive-information">Protect Sensitive Information</a></li>
+  <li><a href="#use-semantic-commit-messages" id="toc-use-semantic-commit-messages" class="nav-link" data-scroll-target="#use-semantic-commit-messages">Use Semantic Commit Messages</a></li>
+  <li><a href="#implement-continuous-integrationcontinuous-deployment-cicd" id="toc-implement-continuous-integrationcontinuous-deployment-cicd" class="nav-link" data-scroll-target="#implement-continuous-integrationcontinuous-deployment-cicd">Implement Continuous Integration/Continuous Deployment (CI/CD)</a></li>
+  <li><a href="#documentation-and-guidelines" id="toc-documentation-and-guidelines" class="nav-link" data-scroll-target="#documentation-and-guidelines">Documentation and Guidelines</a></li>
+  <li><a href="#tagging-and-releases" id="toc-tagging-and-releases" class="nav-link" data-scroll-target="#tagging-and-releases">Tagging and Releases</a></li>
+  <li><a href="#regular-maintenance" id="toc-regular-maintenance" class="nav-link" data-scroll-target="#regular-maintenance">Regular Maintenance</a></li>
+  <li><a href="#backup-and-recovery" id="toc-backup-and-recovery" class="nav-link" data-scroll-target="#backup-and-recovery">Backup and Recovery</a></li>
+  <li><a href="#security-practices" id="toc-security-practices" class="nav-link" data-scroll-target="#security-practices">Security Practices</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/best_practice/git/setup_remote_repo.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">News</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-</div>
+<h1 class="title">Setting Up a Git Repository and Connecting to a Remote</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Git</div>
+    <div class="quarto-category">Programming</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Duy Dao </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 1, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -338,12 +377,183 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Recently added page.</p>
-<p>Viết thử tiếng Việt xem sao</p>
+<p>Setting up a Git repository and connecting it to a remote server is essential for version control and collaboration. Below are the best practices to follow during this process.</p>
+<section id="initialize-a-new-local-repository" class="level2">
+<h2 class="anchored" data-anchor-id="initialize-a-new-local-repository">Initialize a New Local Repository</h2>
+<p>Create a Project Directory:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> my-project cd my-project</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Initialize Git:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Best Practice: Start with a clean directory to avoid tracking unnecessary files.</p>
+</section>
+<section id="configure-git-user-information" class="level2">
+<h2 class="anchored" data-anchor-id="configure-git-user-information">Configure Git User Information</h2>
+<p>Set your username and email to associate your commits:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your.email@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Best Practice: Use the <code>--global</code> flag to set these configurations for all repositories on your machine.</p>
+</section>
+<section id="create-a-.gitignore-file" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-.gitignore-file">Create a .gitignore File</h2>
+<p>Create a <code>.gitignore</code> file to specify files or directories that Git should ignore:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> .gitignore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Populate it with relevant patterns:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Node.js dependencies </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Logs </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">*.log</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Environment variables </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">.env</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># MacOS files </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">.DS_Store</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Best Practice: Regularly update .gitignore to prevent committing unnecessary or sensitive files.</p>
+</blockquote>
+</section>
+<section id="make-the-initial-commit" class="level2">
+<h2 class="anchored" data-anchor-id="make-the-initial-commit">Make the Initial Commit</h2>
+<p>Add Files to Staging Area:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Commit the Changes:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Initial commit"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Best Practice: Write clear and descriptive commit messages to make the history understandable.</p>
+</blockquote>
+</section>
+<section id="set-up-the-remote-repository" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-the-remote-repository">Set Up the Remote Repository</h2>
+<p><strong>Create a Remote Repository:</strong></p>
+<p>Use a platform like GitHub, GitLab, or Bitbucket.</p>
+<p>Do not initialize with a <code>README</code>, <code>.gitignore</code>, or license to avoid merge conflicts.</p>
+<p><strong>Add the Remote URL:</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/yourusername/my-project.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Best Practice: Use SSH URLs (git@github.com:…) for better security, once you have set up SSH keys.</p>
+</blockquote>
+<p><strong>Verify the Remote:</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="push-to-the-remote-repository" class="level2">
+<h2 class="anchored" data-anchor-id="push-to-the-remote-repository">Push to the Remote Repository</h2>
+<p>Push the Initial Commit:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Best Practice: Use -u to set the upstream branch, simplifying future push and pull commands.</p>
+</blockquote>
+</section>
+<section id="branching-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="branching-strategy">Branching Strategy</h2>
+<p><strong>Create Feature Branches:</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feature/your-feature</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Best Practice: Use descriptive branch names and follow a naming convention (feature/, bugfix/, hotfix/).</p>
+</blockquote>
+<p><strong>Merge Changes via Pull Requests:</strong></p>
+<p>Use pull requests for code reviews.</p>
+<p>Merge into master or main after approval.</p>
+<blockquote class="blockquote">
+<p>Best Practice: Keep the main branch stable and deployable.</p>
+</blockquote>
+</section>
+<section id="protect-sensitive-information" class="level2">
+<h2 class="anchored" data-anchor-id="protect-sensitive-information">Protect Sensitive Information</h2>
+<p><strong>Avoid Committing Secrets:</strong></p>
+<ul>
+<li>Do not commit passwords, API keys, or credentials.</li>
+<li>Use environment variables or secret management tools.</li>
+</ul>
+<p><strong>Scan for Secrets:</strong></p>
+<p>Use tools like <code>git-secrets</code> or <code>truffleHog</code>.</p>
+<blockquote class="blockquote">
+<p>Best Practice: Regularly audit your repository for sensitive information.</p>
+</blockquote>
+</section>
+<section id="use-semantic-commit-messages" class="level2">
+<h2 class="anchored" data-anchor-id="use-semantic-commit-messages">Use Semantic Commit Messages</h2>
+<p>Follow the Conventional Commits specification:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;type&gt;[optional scope]: &lt;description&gt; </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [optional body] </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [optional footer(s)]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Types include: <code>feat</code>, <code>fix</code>, <code>docs</code>, <code>style</code>, <code>refactor</code>, <code>test</code>, <code>chore</code>.</p>
+<blockquote class="blockquote">
+<p>Best Practice: Consistent commit messages improve readability and tooling integration.</p>
+</blockquote>
+</section>
+<section id="implement-continuous-integrationcontinuous-deployment-cicd" class="level2">
+<h2 class="anchored" data-anchor-id="implement-continuous-integrationcontinuous-deployment-cicd">Implement Continuous Integration/Continuous Deployment (CI/CD)</h2>
+<p><strong>Set Up CI/CD Pipelines:</strong></p>
+<ul>
+<li>Use services like GitHub Actions, GitLab CI, or Jenkins.</li>
+<li>Automate testing, linting, and deployment.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Best Practice: Ensure code quality and reduce manual errors.</p>
+</blockquote>
+</section>
+<section id="documentation-and-guidelines" class="level2">
+<h2 class="anchored" data-anchor-id="documentation-and-guidelines">Documentation and Guidelines</h2>
+<p><strong>Create a README.md:</strong></p>
+<p>Explain the project’s purpose, setup instructions, and usage.</p>
+<p><strong>Add CONTRIBUTING.md:</strong></p>
+<p>Outline how others can contribute.</p>
+<p><strong>Include a CODE_OF_CONDUCT.md:</strong></p>
+<p>Define acceptable behavior for contributors.</p>
+<blockquote class="blockquote">
+<p>Best Practice: Clear documentation facilitates collaboration and onboarding.</p>
+</blockquote>
+</section>
+<section id="tagging-and-releases" class="level2">
+<h2 class="anchored" data-anchor-id="tagging-and-releases">Tagging and Releases</h2>
+<p>Create Tags for Releases:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag <span class="at">-a</span> v1.0.0 <span class="at">-m</span> <span class="st">"Release version 1.0.0"</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v1.0.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Best Practice: Use semantic versioning for tags to track releases.</p>
+</section>
+<section id="regular-maintenance" class="level2">
+<h2 class="anchored" data-anchor-id="regular-maintenance">Regular Maintenance</h2>
+<p>Clean Up Branches:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/old-feature </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin <span class="at">--delete</span> feature/old-feature</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Best Practice: Remove merged or stale branches to keep the repository organized.</p>
+</blockquote>
+</section>
+<section id="backup-and-recovery" class="level2">
+<h2 class="anchored" data-anchor-id="backup-and-recovery">Backup and Recovery</h2>
+<p>Regular Backups:</p>
+<ul>
+<li>Ensure the remote repository is backed up.</li>
+<li>Consider mirroring repositories.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Best Practice: Protect against data loss by having multiple backups.</p>
+</blockquote>
+</section>
+<section id="security-practices" class="level2">
+<h2 class="anchored" data-anchor-id="security-practices">Security Practices</h2>
+<p><strong>Enable Two-Factor Authentication (2FA):</strong></p>
+<p>Protect your accounts on Git hosting services.</p>
+<p><strong>Set Up Access Controls</strong></p>
+<p>Limit permissions based on roles.</p>
+<blockquote class="blockquote">
+<p>Best Practice: Regularly reand update security settings.</p>
+</blockquote>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>By adhering to these best practices, you create a robust, secure, and collaborative environment for your project. Key takeaways include:</p>
+<ul>
+<li>Initialization: Start clean and configure user information.</li>
+<li>Ignoring Files: Use .gitignore to prevent tracking unnecessary files.</li>
+<li>Commit Messages: Keep them clear and consistent.</li>
+<li>Branching: Use feature branches and pull requests.</li>
+<li>Security: Protect sensitive data and enforce security measures.</li>
+<li>Documentation: Maintain comprehensive project documentation.</li>
+</ul>
+<p>Implementing these practices will enhance your workflow, facilitate collaboration, and ensure the integrity of your project’s history.</p>
 
 
-<!-- -->
-
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -632,28 +842,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./best_practice/git/setup_remote_repo.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Setting Up a Git Repository and Connecting to a Remote</span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../news.html" class="pagination-link">
+        <span class="nav-page-text">News</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "News"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Recently added page.</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Viết thử tiếng Việt xem sao</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Copyright 2024, Duy Dao</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/news.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

@@ -21,6 +21,13 @@
     "text": "No matching items\n\n Back to top"
   },
   {
+    "objectID": "best_practice/test/test.html",
+    "href": "best_practice/test/test.html",
+    "title": "test",
+    "section": "",
+    "text": "Back to top"
+  },
+  {
     "objectID": "Advance/test.html",
     "href": "Advance/test.html",
     "title": "khuongduying",
@@ -116,7 +123,7 @@
     "href": "machine_learning/02_2_linear_algebra.html",
     "title": "02.2. Linear Algebra",
     "section": "",
-    "text": "import plotly.graph_objs as go\nimport plotly.io as pio\n\nfig = go.Figure(go.Scattermapbox(\n    lat=['37.7749'],\n    lon=['-122.4194'],\n    mode='markers',\n    marker=go.scattermapbox.Marker(size=14),\n    text=['San Francisco']\n))\n\nfig.update_layout(\n    mapbox=dict(\n        style='open-street-map',\n        center=dict(lat=37.7749, lon=-122.4194),\n        zoom=10\n    ),\n    margin={\"r\":0,\"t\":0,\"l\":0,\"b\":0}\n)\n\npio.show(fig)\n\n\n                                                \n\n\n\npip install plotly==5.14.1\n\nRequirement already satisfied: plotly==5.14.1 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (5.14.1)\nRequirement already satisfied: tenacity&gt;=6.2.0 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from plotly==5.14.1) (9.0.0)\nRequirement already satisfied: packaging in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from plotly==5.14.1) (24.2)\nNote: you may need to restart the kernel to use updated packages.\n\n\n\n\n\n Back to top"
+    "text": "import numpy as np\nimport matplotlib.pyplot as plt\n\n\nfrom IPython.display import set_matplotlib_formats\n\n# Use high-resolution images (optional for clarity)\nset_matplotlib_formats('retina')\n\n# Explicitly set larger inline figure size\nplt.rcParams[\"figure.figsize\"] = (15, 5)  # Wider plot\n\n/tmp/ipykernel_287194/4258177917.py:4: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`\n  set_matplotlib_formats('retina')\n\n\n\n\n\n\n\n\n%matplotlib inline\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Define vectors\nx = np.array([1, 2])\ny = np.array([2, 1])\nr = x + y\n\nfig, ax = plt.subplots(figsize=(8,6))\n\n# Plot arrows using annotate\ndef draw_vector(ax, origin, vector, color='black', style='-', label=None):\n    \"\"\"\n    Draws an arrow from 'origin' to 'origin + vector'\n    using `annotate`. Optionally adds a label next to it.\n    \"\"\"\n    # Endpoint of the vector\n    end = origin + vector\n    \n    # Plot the arrow\n    ax.annotate(\n        '', \n        xy=(end[0], end[1]),\n        xytext=(origin[0], origin[1]),\n        arrowprops={\n            'arrowstyle': '-&gt;', \n            'color': color, \n            'linestyle': style,\n            'linewidth': 2\n        }\n    )\n    \n    # If label is given, place text in the midpoint\n    if label is not None:\n        midpoint = origin + vector/2\n        ax.text(midpoint[0], midpoint[1], label, \n                fontsize=12, color=color,\n                ha='center', va='center')\n\n# Draw each vector from the origin (0,0) to x, y, and x+y\norigin = np.array([0, 0])\ndraw_vector(ax, origin, x,  color='red',   style='-', label=r'$\\vec{x}$')\ndraw_vector(ax, origin, y,  color='blue',  style='-', label=r'$\\vec{y}$')\ndraw_vector(ax, origin, r,  color='green', style='--', label=r'$\\vec{x} + \\vec{y}$')\n\n# Axis limits, grid, etc.\nax.set_xlim(0, 4)\nax.set_ylim(0, 4)\nax.set_aspect('equal', adjustable='box')\nax.grid(True, linestyle='--', alpha=0.5)\n\n# Title and labels\nplt.title(\"Geometric vectors\", fontsize=14)\nplt.xlabel(\"X-axis\")\nplt.ylabel(\"Y-axis\")\n\nplt.show()\n\n\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Generate x values\nx = np.linspace(-3, 3, 500)\n\n# Define polynomials\ny1 = x\ny2 = x**2 - 2\ny3 = -x**2 + 3\ny4 = x**3 - 3*x\n\n# Create the plot\nplt.figure(figsize=(10, 4))\n\n# Plot each polynomial\nplt.plot(x, y1, label=r'$y = x$', color='blue')\nplt.plot(x, y2, label=r'$y = x^2 - 2$', color='orange')\nplt.plot(x, y3, label=r'$y = -x^2 + 3$', color='green')\nplt.plot(x, y4, label=r'$y = x^3 - 3x$', color='red')\n\n# Add labels, legend, and grid\nplt.xlabel(r'$x$', fontsize=12)\nplt.ylabel(r'$y$', fontsize=12)\nplt.title(\"Polynomials\", fontsize=14)\nplt.axhline(0, color='black', linewidth=0.5, linestyle='--')\nplt.axvline(0, color='black', linewidth=0.5, linestyle='--')\nplt.grid(color='gray', linestyle='--', linewidth=0.5, alpha=0.7)\nplt.legend(fontsize=10)\nplt.ylim(-6, 6)\n\n# Show the plot\nplt.show()\n\n\n\n\n\nimport plotly.express as px\n\ndf = px.data.iris()\nfig = px.scatter(df, x=\"sepal_width\", y=\"sepal_length\", color=\"species\")\nfig.show()\n\n/opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages/plotly/express/_core.py:1985: FutureWarning: When grouping with a length-1 list-like, you will need to pass a length-1 tuple to get_group in a future version of pandas. Pass `(name,)` instead of `name` to silence this warning.\n  sf: grouped.get_group(s if len(s) &gt; 1 else s[0])\n\n\n\n                                                \n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "machine_learning/01_introduction.html",
@@ -173,6 +180,125 @@
     "title": "Advance2",
     "section": "",
     "text": "About this site\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html",
+    "href": "best_practice/git/setup_remote_repo.html",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "",
+    "text": "Setting up a Git repository and connecting it to a remote server is essential for version control and collaboration. Below are the best practices to follow during this process."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#initialize-a-new-local-repository",
+    "href": "best_practice/git/setup_remote_repo.html#initialize-a-new-local-repository",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Initialize a New Local Repository",
+    "text": "Initialize a New Local Repository\nCreate a Project Directory:\nmkdir my-project cd my-project\nInitialize Git:\ngit init\nBest Practice: Start with a clean directory to avoid tracking unnecessary files."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#configure-git-user-information",
+    "href": "best_practice/git/setup_remote_repo.html#configure-git-user-information",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Configure Git User Information",
+    "text": "Configure Git User Information\nSet your username and email to associate your commits:\ngit config --global user.name \"Your Name\" \ngit config --global user.email \"your.email@example.com\"\nBest Practice: Use the --global flag to set these configurations for all repositories on your machine."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#create-a-.gitignore-file",
+    "href": "best_practice/git/setup_remote_repo.html#create-a-.gitignore-file",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Create a .gitignore File",
+    "text": "Create a .gitignore File\nCreate a .gitignore file to specify files or directories that Git should ignore:\ntouch .gitignore\nPopulate it with relevant patterns:\n# Node.js dependencies \nnode_modules/ \n# Logs \n*.log \n# Environment variables \n.env \n# MacOS files \n.DS_Store\n\nBest Practice: Regularly update .gitignore to prevent committing unnecessary or sensitive files."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#make-the-initial-commit",
+    "href": "best_practice/git/setup_remote_repo.html#make-the-initial-commit",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Make the Initial Commit",
+    "text": "Make the Initial Commit\nAdd Files to Staging Area:\ngit add .\nCommit the Changes:\ngit commit -m \"Initial commit\"\n\nBest Practice: Write clear and descriptive commit messages to make the history understandable."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#set-up-the-remote-repository",
+    "href": "best_practice/git/setup_remote_repo.html#set-up-the-remote-repository",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Set Up the Remote Repository",
+    "text": "Set Up the Remote Repository\nCreate a Remote Repository:\nUse a platform like GitHub, GitLab, or Bitbucket.\nDo not initialize with a README, .gitignore, or license to avoid merge conflicts.\nAdd the Remote URL:\ngit remote add origin https://github.com/yourusername/my-project.git\n\nBest Practice: Use SSH URLs (git@github.com:…) for better security, once you have set up SSH keys.\n\nVerify the Remote:\ngit remote -v"
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#push-to-the-remote-repository",
+    "href": "best_practice/git/setup_remote_repo.html#push-to-the-remote-repository",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Push to the Remote Repository",
+    "text": "Push to the Remote Repository\nPush the Initial Commit:\ngit push -u origin main\n\nBest Practice: Use -u to set the upstream branch, simplifying future push and pull commands."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#branching-strategy",
+    "href": "best_practice/git/setup_remote_repo.html#branching-strategy",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Branching Strategy",
+    "text": "Branching Strategy\nCreate Feature Branches:\ngit checkout -b feature/your-feature\n\nBest Practice: Use descriptive branch names and follow a naming convention (feature/, bugfix/, hotfix/).\n\nMerge Changes via Pull Requests:\nUse pull requests for code reviews.\nMerge into master or main after approval.\n\nBest Practice: Keep the main branch stable and deployable."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#protect-sensitive-information",
+    "href": "best_practice/git/setup_remote_repo.html#protect-sensitive-information",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Protect Sensitive Information",
+    "text": "Protect Sensitive Information\nAvoid Committing Secrets:\n\nDo not commit passwords, API keys, or credentials.\nUse environment variables or secret management tools.\n\nScan for Secrets:\nUse tools like git-secrets or truffleHog.\n\nBest Practice: Regularly audit your repository for sensitive information."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#use-semantic-commit-messages",
+    "href": "best_practice/git/setup_remote_repo.html#use-semantic-commit-messages",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Use Semantic Commit Messages",
+    "text": "Use Semantic Commit Messages\nFollow the Conventional Commits specification:\n# &lt;type&gt;[optional scope]: &lt;description&gt; \n# [optional body] \n# [optional footer(s)]\nTypes include: feat, fix, docs, style, refactor, test, chore.\n\nBest Practice: Consistent commit messages improve readability and tooling integration."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#implement-continuous-integrationcontinuous-deployment-cicd",
+    "href": "best_practice/git/setup_remote_repo.html#implement-continuous-integrationcontinuous-deployment-cicd",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Implement Continuous Integration/Continuous Deployment (CI/CD)",
+    "text": "Implement Continuous Integration/Continuous Deployment (CI/CD)\nSet Up CI/CD Pipelines:\n\nUse services like GitHub Actions, GitLab CI, or Jenkins.\nAutomate testing, linting, and deployment.\n\n\nBest Practice: Ensure code quality and reduce manual errors."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#documentation-and-guidelines",
+    "href": "best_practice/git/setup_remote_repo.html#documentation-and-guidelines",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Documentation and Guidelines",
+    "text": "Documentation and Guidelines\nCreate a README.md:\nExplain the project’s purpose, setup instructions, and usage.\nAdd CONTRIBUTING.md:\nOutline how others can contribute.\nInclude a CODE_OF_CONDUCT.md:\nDefine acceptable behavior for contributors.\n\nBest Practice: Clear documentation facilitates collaboration and onboarding."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#tagging-and-releases",
+    "href": "best_practice/git/setup_remote_repo.html#tagging-and-releases",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Tagging and Releases",
+    "text": "Tagging and Releases\nCreate Tags for Releases:\ngit tag -a v1.0.0 -m \"Release version 1.0.0\" \ngit push origin v1.0.0\nBest Practice: Use semantic versioning for tags to track releases."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#regular-maintenance",
+    "href": "best_practice/git/setup_remote_repo.html#regular-maintenance",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Regular Maintenance",
+    "text": "Regular Maintenance\nClean Up Branches:\ngit branch -d feature/old-feature \ngit push origin --delete feature/old-feature\n\nBest Practice: Remove merged or stale branches to keep the repository organized."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#backup-and-recovery",
+    "href": "best_practice/git/setup_remote_repo.html#backup-and-recovery",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Backup and Recovery",
+    "text": "Backup and Recovery\nRegular Backups:\n\nEnsure the remote repository is backed up.\nConsider mirroring repositories.\n\n\nBest Practice: Protect against data loss by having multiple backups."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#security-practices",
+    "href": "best_practice/git/setup_remote_repo.html#security-practices",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Security Practices",
+    "text": "Security Practices\nEnable Two-Factor Authentication (2FA):\nProtect your accounts on Git hosting services.\nSet Up Access Controls\nLimit permissions based on roles.\n\nBest Practice: Regularly reand update security settings."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#summary",
+    "href": "best_practice/git/setup_remote_repo.html#summary",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Summary",
+    "text": "Summary\nBy adhering to these best practices, you create a robust, secure, and collaborative environment for your project. Key takeaways include:\n\nInitialization: Start clean and configure user information.\nIgnoring Files: Use .gitignore to prevent tracking unnecessary files.\nCommit Messages: Keep them clear and consistent.\nBranching: Use feature branches and pull requests.\nSecurity: Protect sensitive data and enforce security measures.\nDocumentation: Maintain comprehensive project documentation.\n\nImplementing these practices will enhance your workflow, facilitate collaboration, and ensure the integrity of your project’s history."
   },
   {
     "objectID": "about.html",
