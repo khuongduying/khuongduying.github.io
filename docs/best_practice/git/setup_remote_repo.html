@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Duy Dao">
-<meta name="dcterms.date" content="2025-02-01">
+<meta name="dcterms.date" content="2025-02-02">
 
 <title>khuongduying - Setting Up a Git Repository and Connecting to a Remote</title>
 <style>
@@ -367,7 +367,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 1, 2025</p>
+      <p class="date">February 2, 2025</p>
     </div>
   </div>
   
@@ -449,8 +449,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Best Practice: Use descriptive branch names and follow a naming convention (feature/, bugfix/, hotfix/).</p>
 </blockquote>
 <p><strong>Merge Changes via Pull Requests:</strong></p>
-<p>Use pull requests for code reviews.</p>
-<p>Merge into master or main after approval.</p>
+<ul>
+<li>Use pull requests for code reviews.</li>
+<li>Merge into master or main after approval.</li>
+</ul>
 <blockquote class="blockquote">
 <p>Best Practice: Keep the main branch stable and deployable.</p>
 </blockquote>
@@ -492,12 +494,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="documentation-and-guidelines" class="level2">
 <h2 class="anchored" data-anchor-id="documentation-and-guidelines">Documentation and Guidelines</h2>
-<p><strong>Create a README.md:</strong></p>
-<p>Explain the project’s purpose, setup instructions, and usage.</p>
-<p><strong>Add CONTRIBUTING.md:</strong></p>
-<p>Outline how others can contribute.</p>
-<p><strong>Include a CODE_OF_CONDUCT.md:</strong></p>
-<p>Define acceptable behavior for contributors.</p>
+<p><strong>Create a <code>README.md</code>:</strong></p>
+<ul>
+<li>Explain the project’s purpose, setup instructions, and usage.</li>
+</ul>
+<p><strong>Add <code>CONTRIBUTING.md</code>:</strong></p>
+<ul>
+<li>Outline how others can contribute.</li>
+</ul>
+<p><strong>Include a <code>CODE_OF_CONDUCT.md</code>:</strong></p>
+<ul>
+<li>Define acceptable behavior for contributors.</li>
+</ul>
 <blockquote class="blockquote">
 <p>Best Practice: Clear documentation facilitates collaboration and onboarding.</p>
 </blockquote>
@@ -507,7 +515,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Create Tags for Releases:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag <span class="at">-a</span> v1.0.0 <span class="at">-m</span> <span class="st">"Release version 1.0.0"</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v1.0.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
 <p>Best Practice: Use semantic versioning for tags to track releases.</p>
+</blockquote>
 </section>
 <section id="regular-maintenance" class="level2">
 <h2 class="anchored" data-anchor-id="regular-maintenance">Regular Maintenance</h2>
@@ -532,9 +542,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="security-practices" class="level2">
 <h2 class="anchored" data-anchor-id="security-practices">Security Practices</h2>
 <p><strong>Enable Two-Factor Authentication (2FA):</strong></p>
-<p>Protect your accounts on Git hosting services.</p>
+<ul>
+<li>Protect your accounts on Git hosting services.</li>
+</ul>
 <p><strong>Set Up Access Controls</strong></p>
-<p>Limit permissions based on roles.</p>
+<ul>
+<li>Limit permissions based on roles.</li>
+</ul>
 <blockquote class="blockquote">
 <p>Best Practice: Regularly reand update security settings.</p>
 </blockquote>
@@ -543,12 +557,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>By adhering to these best practices, you create a robust, secure, and collaborative environment for your project. Key takeaways include:</p>
 <ul>
-<li>Initialization: Start clean and configure user information.</li>
-<li>Ignoring Files: Use .gitignore to prevent tracking unnecessary files.</li>
-<li>Commit Messages: Keep them clear and consistent.</li>
-<li>Branching: Use feature branches and pull requests.</li>
-<li>Security: Protect sensitive data and enforce security measures.</li>
-<li>Documentation: Maintain comprehensive project documentation.</li>
+<li><strong>Initialization</strong>: Start clean and configure user information.</li>
+<li><strong>Ignoring Files</strong>: Use .gitignore to prevent tracking unnecessary files.</li>
+<li><strong>Commit Messages</strong>: Keep them clear and consistent.</li>
+<li><strong>Branching</strong>: Use feature branches and pull requests.</li>
+<li><strong>Security</strong>: Protect sensitive data and enforce security measures.</li>
+<li><strong>Documentation</strong>: Maintain comprehensive project documentation.</li>
 </ul>
 <p>Implementing these practices will enhance your workflow, facilitate collaboration, and ensure the integrity of your project’s history.</p>
 

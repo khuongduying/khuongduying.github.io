@@ -109,9 +109,8 @@ git checkout -b feature/your-feature
 
 **Merge Changes via Pull Requests:**
 
-Use pull requests for code reviews.
-
-Merge into master or main after approval.
+- Use pull requests for code reviews.
+- Merge into master or main after approval.
 
 > Best Practice: Keep the main branch stable and deployable.
 
@@ -148,17 +147,17 @@ Types include: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
 > Best Practice: Ensure code quality and reduce manual errors.
 
 ## Documentation and Guidelines
-**Create a README.md:**
+**Create a `README.md`:**
 
-Explain the project's purpose, setup instructions, and usage.
+- Explain the project's purpose, setup instructions, and usage.
 
-**Add CONTRIBUTING.md:**
+**Add `CONTRIBUTING.md`:**
 
-Outline how others can contribute.
+- Outline how others can contribute.
 
-**Include a CODE_OF_CONDUCT.md:**
+**Include a `CODE_OF_CONDUCT.md`:**
 
-Define acceptable behavior for contributors.
+- Define acceptable behavior for contributors.
 
 > Best Practice: Clear documentation facilitates collaboration and onboarding.
 
@@ -170,7 +169,7 @@ Create Tags for Releases:
 git tag -a v1.0.0 -m "Release version 1.0.0" 
 git push origin v1.0.0
 ``` 
-Best Practice: Use semantic versioning for tags to track releases.
+> Best Practice: Use semantic versioning for tags to track releases.
 
 ## Regular Maintenance
 Clean Up Branches:
@@ -191,22 +190,22 @@ Regular Backups:
 ## Security Practices
 **Enable Two-Factor Authentication (2FA):**
 
-Protect your accounts on Git hosting services.
+- Protect your accounts on Git hosting services.
 
 **Set Up Access Controls**
 
-Limit permissions based on roles.
+- Limit permissions based on roles.
 
 > Best Practice: Regularly reand update security settings.
 
 ## Summary
 By adhering to these best practices, you create a robust, secure, and collaborative environment for your project. Key takeaways include:
 
-- Initialization: Start clean and configure user information.
-- Ignoring Files: Use .gitignore to prevent tracking unnecessary files.
-- Commit Messages: Keep them clear and consistent.
-- Branching: Use feature branches and pull requests.
-- Security: Protect sensitive data and enforce security measures.
-- Documentation: Maintain comprehensive project documentation.
+- **Initialization**: Start clean and configure user information.
+- **Ignoring Files**: Use .gitignore to prevent tracking unnecessary files.
+- **Commit Messages**: Keep them clear and consistent.
+- **Branching**: Use feature branches and pull requests.
+- **Security**: Protect sensitive data and enforce security measures.
+- **Documentation**: Maintain comprehensive project documentation.
 
 Implementing these practices will enhance your workflow, facilitate collaboration, and ensure the integrity of your project's history.

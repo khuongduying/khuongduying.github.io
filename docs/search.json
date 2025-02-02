@@ -235,7 +235,7 @@
     "href": "best_practice/git/setup_remote_repo.html#branching-strategy",
     "title": "Setting Up a Git Repository and Connecting to a Remote",
     "section": "Branching Strategy",
-    "text": "Branching Strategy\nCreate Feature Branches:\ngit checkout -b feature/your-feature\n\nBest Practice: Use descriptive branch names and follow a naming convention (feature/, bugfix/, hotfix/).\n\nMerge Changes via Pull Requests:\nUse pull requests for code reviews.\nMerge into master or main after approval.\n\nBest Practice: Keep the main branch stable and deployable."
+    "text": "Branching Strategy\nCreate Feature Branches:\ngit checkout -b feature/your-feature\n\nBest Practice: Use descriptive branch names and follow a naming convention (feature/, bugfix/, hotfix/).\n\nMerge Changes via Pull Requests:\n\nUse pull requests for code reviews.\nMerge into master or main after approval.\n\n\nBest Practice: Keep the main branch stable and deployable."
   },
   {
     "objectID": "best_practice/git/setup_remote_repo.html#protect-sensitive-information",
@@ -263,14 +263,14 @@
     "href": "best_practice/git/setup_remote_repo.html#documentation-and-guidelines",
     "title": "Setting Up a Git Repository and Connecting to a Remote",
     "section": "Documentation and Guidelines",
-    "text": "Documentation and Guidelines\nCreate a README.md:\nExplain the project’s purpose, setup instructions, and usage.\nAdd CONTRIBUTING.md:\nOutline how others can contribute.\nInclude a CODE_OF_CONDUCT.md:\nDefine acceptable behavior for contributors.\n\nBest Practice: Clear documentation facilitates collaboration and onboarding."
+    "text": "Documentation and Guidelines\nCreate a README.md:\n\nExplain the project’s purpose, setup instructions, and usage.\n\nAdd CONTRIBUTING.md:\n\nOutline how others can contribute.\n\nInclude a CODE_OF_CONDUCT.md:\n\nDefine acceptable behavior for contributors.\n\n\nBest Practice: Clear documentation facilitates collaboration and onboarding."
   },
   {
     "objectID": "best_practice/git/setup_remote_repo.html#tagging-and-releases",
     "href": "best_practice/git/setup_remote_repo.html#tagging-and-releases",
     "title": "Setting Up a Git Repository and Connecting to a Remote",
     "section": "Tagging and Releases",
-    "text": "Tagging and Releases\nCreate Tags for Releases:\ngit tag -a v1.0.0 -m \"Release version 1.0.0\" \ngit push origin v1.0.0\nBest Practice: Use semantic versioning for tags to track releases."
+    "text": "Tagging and Releases\nCreate Tags for Releases:\ngit tag -a v1.0.0 -m \"Release version 1.0.0\" \ngit push origin v1.0.0\n\nBest Practice: Use semantic versioning for tags to track releases."
   },
   {
     "objectID": "best_practice/git/setup_remote_repo.html#regular-maintenance",
@@ -291,7 +291,7 @@
     "href": "best_practice/git/setup_remote_repo.html#security-practices",
     "title": "Setting Up a Git Repository and Connecting to a Remote",
     "section": "Security Practices",
-    "text": "Security Practices\nEnable Two-Factor Authentication (2FA):\nProtect your accounts on Git hosting services.\nSet Up Access Controls\nLimit permissions based on roles.\n\nBest Practice: Regularly reand update security settings."
+    "text": "Security Practices\nEnable Two-Factor Authentication (2FA):\n\nProtect your accounts on Git hosting services.\n\nSet Up Access Controls\n\nLimit permissions based on roles.\n\n\nBest Practice: Regularly reand update security settings."
   },
   {
     "objectID": "best_practice/git/setup_remote_repo.html#summary",
