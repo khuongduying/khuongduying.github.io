@@ -1,0 +1,218 @@
+---
+title: "Bioinformatics Folder Structure"
+author: "Duy Dao"
+date: today
+date-format: long
+
+format: 
+    html:
+        code-line-numbers: false
+        code-fold: false
+        code-overflow: scroll
+        code-tools:
+            source: false
+            toggle: false
+            caption: none
+        code-block-bg: true
+        code-block-border-left: "#31BAE9"
+        code-link: true
+highlight-style: pygments
+categories: [Workspace, Bioinformatics]
+---
+# Designing a Folder Structure for a Bioinformatics Project
+
+Proper organization of your bioinformatics project directory is crucial for efficient data management, reproducibility, and collaboration. A well-designed folder structure helps in keeping raw data separate from processed data, scripts, results, and documentation. Below are guidelines and best practices for designing an input/output folder structure tailored for bioinformatics projects.
+
+## Goals of a Good Folder Structure
+- **Reproducibility**: Enable others (and your future self) to reproduce results easily.
+
+- **Scalability**: Accommodate the addition of new data and analyses without clutter.
+
+- **Clarity**: Make it easy to locate specific files or outputs.
+
+- **Modularity**: Separate different stages of data processing and analysis.
+
+## Recommended Folder Structure
+Here is a general template for a bioinformatics project folder structure:
+
+```{.bash}
+project_root/
+├── README.md
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── reference/
+├── scripts/
+│   ├── preprocessing/
+│   ├── analysis/
+│   └── visualization/
+├── results/
+│   ├── figures/
+│   ├── tables/
+│   └── logs/
+├── docs/
+├── config/
+├── src/
+├── notebooks/
+└── bin/
+```
+### Explanation of Each Folder
+`project_root/`: The main directory of your project.
+
+`README.md`: A markdown file explaining the project, how to run analyses, and the folder structure.
+
+`data/`: Contains all data files.
+
+- `raw/`: Raw input data (e.g., sequencing reads, raw counts).
+  - Should be read-only to prevent accidental modification.
+  - Original data as obtained from the source.
+
+- `processed/`: Data that has been processed or transformed.
+  - Intermediate files generated during analysis.
+
+- `reference/`: Reference genomes, annotations, or any external datasets required.
+  - Keep a record of versions and sources.
+
+`scripts/`: Contains all scripts used in the project.
+
+- `preprocessing/`: Scripts for data cleaning and preprocessing.
+
+- `analysis/`: Scripts for the main analysis.
+
+- `visualization/`: Scripts for generating plots and figures.
+
+- Use consistent naming conventions and document scripts thoroughly.
+
+`results/`: Output files from analyses.
+
+- `figures/`: Generated plots and images.
+
+- `tables/`: Resulting tables or summary statistics.
+
+- `logs/`: Log files from scripts or pipeline runs.
+
+- Organize results corresponding to different analyses or experiments.
+
+`docs/`: Documentation related to the project.
+
+- Protocols, notes, or supplementary information.
+
+- Can include a `CHANGELOG` or project timeline.
+
+`config/`: Configuration files.
+
+- Parameters, settings, or environment files used in scripts.
+
+- Helps in maintaining consistency across different runs.
+
+`src/`: Source code if developing software or packages.
+
+- Custom modules or functions used across scripts.
+
+`notebooks/`: Jupyter or R Markdown notebooks.
+
+- Interactive analyses, exploratory data analysis, or reports.
+
+`bin/`: Executable scripts or compiled binaries.
+
+- Custom tools or compiled programs used in the project.
+
+## Best Practices
+### Keep Raw Data Unchanged
+- **Immutable Raw Data**: Never modify files in the data/raw/ directory.
+
+- **Data Integrity**: Use checksums (e.g., `MD5`, `SHA256`) to verify data integrity.
+
+- **Documentation**: Record the source, version, and acquisition date of the data.
+
+### Use Relative Paths in Scripts
+- **Portability**: Avoid hardcoding absolute paths; use paths relative to the project root.
+
+**Example**:
+```{.bash}
+INPUT_DIR="../data/raw/"
+OUTPUT_DIR="../results/tables/"
+```
+
+### Version Control with Git
+- **Track Changes**: Use Git to track changes in scripts, configurations, and documentation.
+
+- **Exclude Large Files**: Do not add large data files to Git; use `.gitignore` to exclude them.
+
+- **Git LFS**: If necessary, use Git Large File Storage for versioning large files.
+
+### Documentation and Metadata
+- **README Files**: Place `README.md` files in key directories explaining their contents.
+
+- **Metadata Files**: Include metadata for datasets, such as sample information or experimental conditions.
+
+### Consistent Naming Conventions
+- **Descriptive Names**: Use clear and descriptive file and folder names.
+
+- **Date Formats**: Use ISO 8601 date formats (YYYY-MM-DD) for filenames if dates are relevant.
+
+- **Avoid Spaces**: Use underscores _ or hyphens - instead of spaces.
+
+### Separate Code from Data
+- **Scripts vs. Data**: Keep scripts in the scripts/ directory and data in data/.
+
+- **Reusability**: This separation makes it easier to reuse scripts with different datasets.
+
+### Organize Scripts by Functionality
+- **Modularity**: Break down scripts into smaller, reusable components.
+
+- **Script Dependencies**: Clearly document dependencies and required software versions.
+
+### Use Configurations for Parameters
+- **Config Files**: Store parameters and settings in configuration files within config/.
+
+- **Ease of Use**: Makes it easier to adjust parameters without modifying scripts.
+
+### Logs and Error Handling
+- **Logging**: Direct log outputs to the results/logs/ directory.
+
+- **Error Tracking**: Helps in debugging and tracking the progress of analyses.
+
+### Data Processing Pipelines
+- **Pipeline Tools**: Consider using workflow management tools like Snakemake, Nextflow, or CWL.
+
+- **Reproducibility**: Pipelines can help automate analyses and improve reproducibility.
+
+- **Integration**: Store pipeline definitions in the `scripts/` or `config/` directories.
+
+
+## Tips for Collaborative Projects
+- **Standardize the Structure**: Agree upon a folder structure with your team at the project's outset.
+
+- **Shared Storage**: Use a shared file system or cloud storage with appropriate permissions.
+
+- **Data Security**: Ensure sensitive data is stored securely and access is controlled.
+
+## Handling Large Datasets
+- **Data Storage Solutions**: Use high-performance storage systems or cloud-based solutions for large datasets.
+
+- **Data Access**: For very large datasets, consider accessing data directly from the source or using data indexing.
+
+## Automate the Setup
+**Scripts for Setup**: Create a script to set up the folder structure automatically.
+
+**Example**:
+```{.bash}
+#!/bin/bash
+mkdir -p data/{raw,processed,reference}
+mkdir -p scripts/{preprocessing,analysis,visualization}
+mkdir -p results/{figures,tables,logs}
+mkdir -p docs
+mkdir -p config
+mkdir -p src
+mkdir -p notebooks
+mkdir -p bin
+```
+
+## Real-World Examples
+Cookiecutter Data Science: A standardized project structure for data science projects.
+
+[Cookiecutter Data Science](https://cookiecutter-data-science.drivendata.org/)
+
+## Summary
+By implementing a well-thought-out folder structure, you enhance the efficiency, reproducibility, and collaboration potential of your bioinformatics project. It allows team members to navigate the project seamlessly and ensures that analyses can be replicated and validated with ease.

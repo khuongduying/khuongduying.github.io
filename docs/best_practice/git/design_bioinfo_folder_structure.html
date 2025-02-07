@@ -9,7 +9,7 @@
 <meta name="author" content="Duy Dao">
 <meta name="dcterms.date" content="2025-02-07">
 
-<title>khuongduying - Setting Up a Git Repository and Connecting to a Remote</title>
+<title>khuongduying - Bioinformatics Folder Structure</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,8 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../news.html" rel="next">
-<link href="../../best_practice/git/design_bioinfo_folder_structure.html" rel="prev">
+<link href="../../best_practice/git/setup_remote_repo.html" rel="next">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -263,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../best_practice/git/design_bioinfo_folder_structure.html">Git</a></li><li class="breadcrumb-item"><a href="../../best_practice/git/setup_remote_repo.html">Setting Up a Git Repository and Connecting to a Remote</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../best_practice/git/design_bioinfo_folder_structure.html">Git</a></li><li class="breadcrumb-item"><a href="../../best_practice/git/design_bioinfo_folder_structure.html">Bioinformatics Folder Structure</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -294,13 +293,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../best_practice/git/design_bioinfo_folder_structure.html" class="sidebar-item-text sidebar-link">
+  <a href="../../best_practice/git/design_bioinfo_folder_structure.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Bioinformatics Folder Structure</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../best_practice/git/setup_remote_repo.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../best_practice/git/setup_remote_repo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setting Up a Git Repository and Connecting to a Remote</span></a>
   </div>
 </li>
@@ -333,34 +332,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#initialize-a-new-local-repository" id="toc-initialize-a-new-local-repository" class="nav-link active" data-scroll-target="#initialize-a-new-local-repository">Initialize a New Local Repository</a></li>
-  <li><a href="#configure-git-user-information" id="toc-configure-git-user-information" class="nav-link" data-scroll-target="#configure-git-user-information">Configure Git User Information</a></li>
-  <li><a href="#create-a-.gitignore-file" id="toc-create-a-.gitignore-file" class="nav-link" data-scroll-target="#create-a-.gitignore-file">Create a .gitignore File</a></li>
-  <li><a href="#make-the-initial-commit" id="toc-make-the-initial-commit" class="nav-link" data-scroll-target="#make-the-initial-commit">Make the Initial Commit</a></li>
-  <li><a href="#set-up-the-remote-repository" id="toc-set-up-the-remote-repository" class="nav-link" data-scroll-target="#set-up-the-remote-repository">Set Up the Remote Repository</a></li>
-  <li><a href="#push-to-the-remote-repository" id="toc-push-to-the-remote-repository" class="nav-link" data-scroll-target="#push-to-the-remote-repository">Push to the Remote Repository</a></li>
-  <li><a href="#branching-strategy" id="toc-branching-strategy" class="nav-link" data-scroll-target="#branching-strategy">Branching Strategy</a></li>
-  <li><a href="#protect-sensitive-information" id="toc-protect-sensitive-information" class="nav-link" data-scroll-target="#protect-sensitive-information">Protect Sensitive Information</a></li>
-  <li><a href="#use-semantic-commit-messages" id="toc-use-semantic-commit-messages" class="nav-link" data-scroll-target="#use-semantic-commit-messages">Use Semantic Commit Messages</a></li>
-  <li><a href="#implement-continuous-integrationcontinuous-deployment-cicd" id="toc-implement-continuous-integrationcontinuous-deployment-cicd" class="nav-link" data-scroll-target="#implement-continuous-integrationcontinuous-deployment-cicd">Implement Continuous Integration/Continuous Deployment (CI/CD)</a></li>
-  <li><a href="#documentation-and-guidelines" id="toc-documentation-and-guidelines" class="nav-link" data-scroll-target="#documentation-and-guidelines">Documentation and Guidelines</a></li>
-  <li><a href="#tagging-and-releases" id="toc-tagging-and-releases" class="nav-link" data-scroll-target="#tagging-and-releases">Tagging and Releases</a></li>
-  <li><a href="#regular-maintenance" id="toc-regular-maintenance" class="nav-link" data-scroll-target="#regular-maintenance">Regular Maintenance</a></li>
-  <li><a href="#backup-and-recovery" id="toc-backup-and-recovery" class="nav-link" data-scroll-target="#backup-and-recovery">Backup and Recovery</a></li>
-  <li><a href="#security-practices" id="toc-security-practices" class="nav-link" data-scroll-target="#security-practices">Security Practices</a></li>
+  <li><a href="#designing-a-folder-structure-for-a-bioinformatics-project" id="toc-designing-a-folder-structure-for-a-bioinformatics-project" class="nav-link active" data-scroll-target="#designing-a-folder-structure-for-a-bioinformatics-project">Designing a Folder Structure for a Bioinformatics Project</a>
+  <ul class="collapse">
+  <li><a href="#goals-of-a-good-folder-structure" id="toc-goals-of-a-good-folder-structure" class="nav-link" data-scroll-target="#goals-of-a-good-folder-structure">Goals of a Good Folder Structure</a></li>
+  <li><a href="#recommended-folder-structure" id="toc-recommended-folder-structure" class="nav-link" data-scroll-target="#recommended-folder-structure">Recommended Folder Structure</a>
+  <ul class="collapse">
+  <li><a href="#explanation-of-each-folder" id="toc-explanation-of-each-folder" class="nav-link" data-scroll-target="#explanation-of-each-folder">Explanation of Each Folder</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#keep-raw-data-unchanged" id="toc-keep-raw-data-unchanged" class="nav-link" data-scroll-target="#keep-raw-data-unchanged">Keep Raw Data Unchanged</a></li>
+  <li><a href="#use-relative-paths-in-scripts" id="toc-use-relative-paths-in-scripts" class="nav-link" data-scroll-target="#use-relative-paths-in-scripts">Use Relative Paths in Scripts</a></li>
+  <li><a href="#version-control-with-git" id="toc-version-control-with-git" class="nav-link" data-scroll-target="#version-control-with-git">Version Control with Git</a></li>
+  <li><a href="#documentation-and-metadata" id="toc-documentation-and-metadata" class="nav-link" data-scroll-target="#documentation-and-metadata">Documentation and Metadata</a></li>
+  <li><a href="#consistent-naming-conventions" id="toc-consistent-naming-conventions" class="nav-link" data-scroll-target="#consistent-naming-conventions">Consistent Naming Conventions</a></li>
+  <li><a href="#separate-code-from-data" id="toc-separate-code-from-data" class="nav-link" data-scroll-target="#separate-code-from-data">Separate Code from Data</a></li>
+  <li><a href="#organize-scripts-by-functionality" id="toc-organize-scripts-by-functionality" class="nav-link" data-scroll-target="#organize-scripts-by-functionality">Organize Scripts by Functionality</a></li>
+  <li><a href="#use-configurations-for-parameters" id="toc-use-configurations-for-parameters" class="nav-link" data-scroll-target="#use-configurations-for-parameters">Use Configurations for Parameters</a></li>
+  <li><a href="#logs-and-error-handling" id="toc-logs-and-error-handling" class="nav-link" data-scroll-target="#logs-and-error-handling">Logs and Error Handling</a></li>
+  <li><a href="#data-processing-pipelines" id="toc-data-processing-pipelines" class="nav-link" data-scroll-target="#data-processing-pipelines">Data Processing Pipelines</a></li>
+  </ul></li>
+  <li><a href="#tips-for-collaborative-projects" id="toc-tips-for-collaborative-projects" class="nav-link" data-scroll-target="#tips-for-collaborative-projects">Tips for Collaborative Projects</a></li>
+  <li><a href="#handling-large-datasets" id="toc-handling-large-datasets" class="nav-link" data-scroll-target="#handling-large-datasets">Handling Large Datasets</a></li>
+  <li><a href="#automate-the-setup" id="toc-automate-the-setup" class="nav-link" data-scroll-target="#automate-the-setup">Automate the Setup</a></li>
+  <li><a href="#real-world-examples" id="toc-real-world-examples" class="nav-link" data-scroll-target="#real-world-examples">Real-World Examples</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/best_practice/git/setup_remote_repo.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/best_practice/git/design_bioinfo_folder_structure.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setting Up a Git Repository and Connecting to a Remote</h1>
+<h1 class="title">Bioinformatics Folder Structure</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Git</div>
-    <div class="quarto-category">Programming</div>
+    <div class="quarto-category">Workspace</div>
+    <div class="quarto-category">Bioinformatics</div>
   </div>
   </div>
 
@@ -388,196 +397,217 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Setting up a Git repository and connecting it to a remote server is essential for version control and collaboration. Below are the best practices to follow during this process.</p>
-<section id="initialize-a-new-local-repository" class="level2">
-<h2 class="anchored" data-anchor-id="initialize-a-new-local-repository">Initialize a New Local Repository</h2>
-<p>Create a Project Directory:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> my-project cd my-project</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Initialize Git:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Best Practice: Start with a clean directory to avoid tracking unnecessary files.</p>
-</section>
-<section id="configure-git-user-information" class="level2">
-<h2 class="anchored" data-anchor-id="configure-git-user-information">Configure Git User Information</h2>
-<p>Set your username and email to associate your commits:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your.email@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Best Practice: Use the <code>--global</code> flag to set these configurations for all repositories on your machine.</p>
-</section>
-<section id="create-a-.gitignore-file" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-.gitignore-file">Create a .gitignore File</h2>
-<p>Create a <code>.gitignore</code> file to specify files or directories that Git should ignore:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> .gitignore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Populate it with relevant patterns:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Node.js dependencies </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Logs </span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">*.log</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Environment variables </span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">.env</span> </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># MacOS files </span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">.DS_Store</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p>Best Practice: Regularly update .gitignore to prevent committing unnecessary or sensitive files.</p>
-</blockquote>
-</section>
-<section id="make-the-initial-commit" class="level2">
-<h2 class="anchored" data-anchor-id="make-the-initial-commit">Make the Initial Commit</h2>
-<p>Add Files to Staging Area:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Commit the Changes:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Initial commit"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p>Best Practice: Write clear and descriptive commit messages to make the history understandable.</p>
-</blockquote>
-</section>
-<section id="set-up-the-remote-repository" class="level2">
-<h2 class="anchored" data-anchor-id="set-up-the-remote-repository">Set Up the Remote Repository</h2>
-<p><strong>Create a Remote Repository:</strong></p>
-<p>Use a platform like GitHub, GitLab, or Bitbucket.</p>
-<p>Do not initialize with a <code>README</code>, <code>.gitignore</code>, or license to avoid merge conflicts.</p>
-<p><strong>Add the Remote URL:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/yourusername/my-project.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p>Best Practice: Use SSH URLs (git@github.com:…) for better security, once you have set up SSH keys.</p>
-</blockquote>
-<p><strong>Verify the Remote:</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="push-to-the-remote-repository" class="level2">
-<h2 class="anchored" data-anchor-id="push-to-the-remote-repository">Push to the Remote Repository</h2>
-<p>Push the Initial Commit:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p>Best Practice: Use -u to set the upstream branch, simplifying future push and pull commands.</p>
-</blockquote>
-</section>
-<section id="branching-strategy" class="level2">
-<h2 class="anchored" data-anchor-id="branching-strategy">Branching Strategy</h2>
-<p><strong>Create Feature Branches:</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feature/your-feature</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p>Best Practice: Use descriptive branch names and follow a naming convention (feature/, bugfix/, hotfix/).</p>
-</blockquote>
-<p><strong>Merge Changes via Pull Requests:</strong></p>
+<section id="designing-a-folder-structure-for-a-bioinformatics-project" class="level1">
+<h1>Designing a Folder Structure for a Bioinformatics Project</h1>
+<p>Proper organization of your bioinformatics project directory is crucial for efficient data management, reproducibility, and collaboration. A well-designed folder structure helps in keeping raw data separate from processed data, scripts, results, and documentation. Below are guidelines and best practices for designing an input/output folder structure tailored for bioinformatics projects.</p>
+<section id="goals-of-a-good-folder-structure" class="level2">
+<h2 class="anchored" data-anchor-id="goals-of-a-good-folder-structure">Goals of a Good Folder Structure</h2>
 <ul>
-<li>Use pull requests for code reviews.</li>
-<li>Merge into master or main after approval.</li>
+<li><p><strong>Reproducibility</strong>: Enable others (and your future self) to reproduce results easily.</p></li>
+<li><p><strong>Scalability</strong>: Accommodate the addition of new data and analyses without clutter.</p></li>
+<li><p><strong>Clarity</strong>: Make it easy to locate specific files or outputs.</p></li>
+<li><p><strong>Modularity</strong>: Separate different stages of data processing and analysis.</p></li>
 </ul>
-<blockquote class="blockquote">
-<p>Best Practice: Keep the main branch stable and deployable.</p>
-</blockquote>
 </section>
-<section id="protect-sensitive-information" class="level2">
-<h2 class="anchored" data-anchor-id="protect-sensitive-information">Protect Sensitive Information</h2>
-<p><strong>Avoid Committing Secrets:</strong></p>
+<section id="recommended-folder-structure" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-folder-structure">Recommended Folder Structure</h2>
+<p>Here is a general template for a bioinformatics project folder structure:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">project_root/</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> README.md</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> data/</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── raw/</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── processed/</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   └── reference/</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> scripts/</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── preprocessing/</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── analysis/</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   └── visualization/</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> results/</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── figures/</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── tables/</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   └── logs/</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> docs/</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> config/</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> src/</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> notebooks/</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> bin/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="explanation-of-each-folder" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-each-folder">Explanation of Each Folder</h3>
+<p><code>project_root/</code>: The main directory of your project.</p>
+<p><code>README.md</code>: A markdown file explaining the project, how to run analyses, and the folder structure.</p>
+<p><code>data/</code>: Contains all data files.</p>
 <ul>
-<li>Do not commit passwords, API keys, or credentials.</li>
-<li>Use environment variables or secret management tools.</li>
+<li><code>raw/</code>: Raw input data (e.g., sequencing reads, raw counts).
+<ul>
+<li>Should be read-only to prevent accidental modification.</li>
+<li>Original data as obtained from the source.</li>
+</ul></li>
+<li><code>processed/</code>: Data that has been processed or transformed.
+<ul>
+<li>Intermediate files generated during analysis.</li>
+</ul></li>
+<li><code>reference/</code>: Reference genomes, annotations, or any external datasets required.
+<ul>
+<li>Keep a record of versions and sources.</li>
+</ul></li>
 </ul>
-<p><strong>Scan for Secrets:</strong></p>
-<p>Use tools like <code>git-secrets</code> or <code>truffleHog</code>.</p>
-<blockquote class="blockquote">
-<p>Best Practice: Regularly audit your repository for sensitive information.</p>
-</blockquote>
+<p><code>scripts/</code>: Contains all scripts used in the project.</p>
+<ul>
+<li><p><code>preprocessing/</code>: Scripts for data cleaning and preprocessing.</p></li>
+<li><p><code>analysis/</code>: Scripts for the main analysis.</p></li>
+<li><p><code>visualization/</code>: Scripts for generating plots and figures.</p></li>
+<li><p>Use consistent naming conventions and document scripts thoroughly.</p></li>
+</ul>
+<p><code>results/</code>: Output files from analyses.</p>
+<ul>
+<li><p><code>figures/</code>: Generated plots and images.</p></li>
+<li><p><code>tables/</code>: Resulting tables or summary statistics.</p></li>
+<li><p><code>logs/</code>: Log files from scripts or pipeline runs.</p></li>
+<li><p>Organize results corresponding to different analyses or experiments.</p></li>
+</ul>
+<p><code>docs/</code>: Documentation related to the project.</p>
+<ul>
+<li><p>Protocols, notes, or supplementary information.</p></li>
+<li><p>Can include a <code>CHANGELOG</code> or project timeline.</p></li>
+</ul>
+<p><code>config/</code>: Configuration files.</p>
+<ul>
+<li><p>Parameters, settings, or environment files used in scripts.</p></li>
+<li><p>Helps in maintaining consistency across different runs.</p></li>
+</ul>
+<p><code>src/</code>: Source code if developing software or packages.</p>
+<ul>
+<li>Custom modules or functions used across scripts.</li>
+</ul>
+<p><code>notebooks/</code>: Jupyter or R Markdown notebooks.</p>
+<ul>
+<li>Interactive analyses, exploratory data analysis, or reports.</li>
+</ul>
+<p><code>bin/</code>: Executable scripts or compiled binaries.</p>
+<ul>
+<li>Custom tools or compiled programs used in the project.</li>
+</ul>
 </section>
-<section id="use-semantic-commit-messages" class="level2">
-<h2 class="anchored" data-anchor-id="use-semantic-commit-messages">Use Semantic Commit Messages</h2>
-<p>Follow the Conventional Commits specification:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;type&gt;[optional scope]: &lt;description&gt; </span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [optional body] </span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [optional footer(s)]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Types include: <code>feat</code>, <code>fix</code>, <code>docs</code>, <code>style</code>, <code>refactor</code>, <code>test</code>, <code>chore</code>.</p>
-<blockquote class="blockquote">
-<p>Best Practice: Consistent commit messages improve readability and tooling integration.</p>
-</blockquote>
 </section>
-<section id="implement-continuous-integrationcontinuous-deployment-cicd" class="level2">
-<h2 class="anchored" data-anchor-id="implement-continuous-integrationcontinuous-deployment-cicd">Implement Continuous Integration/Continuous Deployment (CI/CD)</h2>
-<p><strong>Set Up CI/CD Pipelines:</strong></p>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<section id="keep-raw-data-unchanged" class="level3">
+<h3 class="anchored" data-anchor-id="keep-raw-data-unchanged">Keep Raw Data Unchanged</h3>
 <ul>
-<li>Use services like GitHub Actions, GitLab CI, or Jenkins.</li>
-<li>Automate testing, linting, and deployment.</li>
+<li><p><strong>Immutable Raw Data</strong>: Never modify files in the data/raw/ directory.</p></li>
+<li><p><strong>Data Integrity</strong>: Use checksums (e.g., <code>MD5</code>, <code>SHA256</code>) to verify data integrity.</p></li>
+<li><p><strong>Documentation</strong>: Record the source, version, and acquisition date of the data.</p></li>
 </ul>
-<blockquote class="blockquote">
-<p>Best Practice: Ensure code quality and reduce manual errors.</p>
-</blockquote>
 </section>
-<section id="documentation-and-guidelines" class="level2">
-<h2 class="anchored" data-anchor-id="documentation-and-guidelines">Documentation and Guidelines</h2>
-<p><strong>Create a <code>README.md</code>:</strong></p>
+<section id="use-relative-paths-in-scripts" class="level3">
+<h3 class="anchored" data-anchor-id="use-relative-paths-in-scripts">Use Relative Paths in Scripts</h3>
 <ul>
-<li>Explain the project’s purpose, setup instructions, and usage.</li>
+<li><strong>Portability</strong>: Avoid hardcoding absolute paths; use paths relative to the project root.</li>
 </ul>
-<p><strong>Add <code>CONTRIBUTING.md</code>:</strong></p>
-<ul>
-<li>Outline how others can contribute.</li>
-</ul>
-<p><strong>Include a <code>CODE_OF_CONDUCT.md</code>:</strong></p>
-<ul>
-<li>Define acceptable behavior for contributors.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Best Practice: Clear documentation facilitates collaboration and onboarding.</p>
-</blockquote>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"../data/raw/"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"../results/tables/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="tagging-and-releases" class="level2">
-<h2 class="anchored" data-anchor-id="tagging-and-releases">Tagging and Releases</h2>
-<p>Create Tags for Releases:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag <span class="at">-a</span> v1.0.0 <span class="at">-m</span> <span class="st">"Release version 1.0.0"</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v1.0.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p>Best Practice: Use semantic versioning for tags to track releases.</p>
-</blockquote>
-</section>
-<section id="regular-maintenance" class="level2">
-<h2 class="anchored" data-anchor-id="regular-maintenance">Regular Maintenance</h2>
-<p>Clean Up Branches:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/old-feature </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin <span class="at">--delete</span> feature/old-feature</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p>Best Practice: Remove merged or stale branches to keep the repository organized.</p>
-</blockquote>
-</section>
-<section id="backup-and-recovery" class="level2">
-<h2 class="anchored" data-anchor-id="backup-and-recovery">Backup and Recovery</h2>
-<p>Regular Backups:</p>
+<section id="version-control-with-git" class="level3">
+<h3 class="anchored" data-anchor-id="version-control-with-git">Version Control with Git</h3>
 <ul>
-<li>Ensure the remote repository is backed up.</li>
-<li>Consider mirroring repositories.</li>
+<li><p><strong>Track Changes</strong>: Use Git to track changes in scripts, configurations, and documentation.</p></li>
+<li><p><strong>Exclude Large Files</strong>: Do not add large data files to Git; use <code>.gitignore</code> to exclude them.</p></li>
+<li><p><strong>Git LFS</strong>: If necessary, use Git Large File Storage for versioning large files.</p></li>
 </ul>
-<blockquote class="blockquote">
-<p>Best Practice: Protect against data loss by having multiple backups.</p>
-</blockquote>
 </section>
-<section id="security-practices" class="level2">
-<h2 class="anchored" data-anchor-id="security-practices">Security Practices</h2>
-<p><strong>Enable Two-Factor Authentication (2FA):</strong></p>
+<section id="documentation-and-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="documentation-and-metadata">Documentation and Metadata</h3>
 <ul>
-<li>Protect your accounts on Git hosting services.</li>
+<li><p><strong>README Files</strong>: Place <code>README.md</code> files in key directories explaining their contents.</p></li>
+<li><p><strong>Metadata Files</strong>: Include metadata for datasets, such as sample information or experimental conditions.</p></li>
 </ul>
-<p><strong>Set Up Access Controls</strong></p>
+</section>
+<section id="consistent-naming-conventions" class="level3">
+<h3 class="anchored" data-anchor-id="consistent-naming-conventions">Consistent Naming Conventions</h3>
 <ul>
-<li>Limit permissions based on roles.</li>
+<li><p><strong>Descriptive Names</strong>: Use clear and descriptive file and folder names.</p></li>
+<li><p><strong>Date Formats</strong>: Use ISO 8601 date formats (YYYY-MM-DD) for filenames if dates are relevant.</p></li>
+<li><p><strong>Avoid Spaces</strong>: Use underscores _ or hyphens - instead of spaces.</p></li>
 </ul>
-<blockquote class="blockquote">
-<p>Best Practice: Regularly reand update security settings.</p>
-</blockquote>
+</section>
+<section id="separate-code-from-data" class="level3">
+<h3 class="anchored" data-anchor-id="separate-code-from-data">Separate Code from Data</h3>
+<ul>
+<li><p><strong>Scripts vs.&nbsp;Data</strong>: Keep scripts in the scripts/ directory and data in data/.</p></li>
+<li><p><strong>Reusability</strong>: This separation makes it easier to reuse scripts with different datasets.</p></li>
+</ul>
+</section>
+<section id="organize-scripts-by-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="organize-scripts-by-functionality">Organize Scripts by Functionality</h3>
+<ul>
+<li><p><strong>Modularity</strong>: Break down scripts into smaller, reusable components.</p></li>
+<li><p><strong>Script Dependencies</strong>: Clearly document dependencies and required software versions.</p></li>
+</ul>
+</section>
+<section id="use-configurations-for-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="use-configurations-for-parameters">Use Configurations for Parameters</h3>
+<ul>
+<li><p><strong>Config Files</strong>: Store parameters and settings in configuration files within config/.</p></li>
+<li><p><strong>Ease of Use</strong>: Makes it easier to adjust parameters without modifying scripts.</p></li>
+</ul>
+</section>
+<section id="logs-and-error-handling" class="level3">
+<h3 class="anchored" data-anchor-id="logs-and-error-handling">Logs and Error Handling</h3>
+<ul>
+<li><p><strong>Logging</strong>: Direct log outputs to the results/logs/ directory.</p></li>
+<li><p><strong>Error Tracking</strong>: Helps in debugging and tracking the progress of analyses.</p></li>
+</ul>
+</section>
+<section id="data-processing-pipelines" class="level3">
+<h3 class="anchored" data-anchor-id="data-processing-pipelines">Data Processing Pipelines</h3>
+<ul>
+<li><p><strong>Pipeline Tools</strong>: Consider using workflow management tools like Snakemake, Nextflow, or CWL.</p></li>
+<li><p><strong>Reproducibility</strong>: Pipelines can help automate analyses and improve reproducibility.</p></li>
+<li><p><strong>Integration</strong>: Store pipeline definitions in the <code>scripts/</code> or <code>config/</code> directories.</p></li>
+</ul>
+</section>
+</section>
+<section id="tips-for-collaborative-projects" class="level2">
+<h2 class="anchored" data-anchor-id="tips-for-collaborative-projects">Tips for Collaborative Projects</h2>
+<ul>
+<li><p><strong>Standardize the Structure</strong>: Agree upon a folder structure with your team at the project’s outset.</p></li>
+<li><p><strong>Shared Storage</strong>: Use a shared file system or cloud storage with appropriate permissions.</p></li>
+<li><p><strong>Data Security</strong>: Ensure sensitive data is stored securely and access is controlled.</p></li>
+</ul>
+</section>
+<section id="handling-large-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="handling-large-datasets">Handling Large Datasets</h2>
+<ul>
+<li><p><strong>Data Storage Solutions</strong>: Use high-performance storage systems or cloud-based solutions for large datasets.</p></li>
+<li><p><strong>Data Access</strong>: For very large datasets, consider accessing data directly from the source or using data indexing.</p></li>
+</ul>
+</section>
+<section id="automate-the-setup" class="level2">
+<h2 class="anchored" data-anchor-id="automate-the-setup">Automate the Setup</h2>
+<p><strong>Scripts for Setup</strong>: Create a script to set up the folder structure automatically.</p>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> data/<span class="dt">{raw</span><span class="op">,</span><span class="dt">processed</span><span class="op">,</span><span class="dt">reference}</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> scripts/<span class="dt">{preprocessing</span><span class="op">,</span><span class="dt">analysis</span><span class="op">,</span><span class="dt">visualization}</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/<span class="dt">{figures</span><span class="op">,</span><span class="dt">tables</span><span class="op">,</span><span class="dt">logs}</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> docs</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> config</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> src</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> notebooks</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> bin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="real-world-examples" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-examples">Real-World Examples</h2>
+<p>Cookiecutter Data Science: A standardized project structure for data science projects.</p>
+<p><a href="https://cookiecutter-data-science.drivendata.org/">Cookiecutter Data Science</a></p>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>By adhering to these best practices, you create a robust, secure, and collaborative environment for your project. Key takeaways include:</p>
-<ul>
-<li><strong>Initialization</strong>: Start clean and configure user information.</li>
-<li><strong>Ignoring Files</strong>: Use .gitignore to prevent tracking unnecessary files.</li>
-<li><strong>Commit Messages</strong>: Keep them clear and consistent.</li>
-<li><strong>Branching</strong>: Use feature branches and pull requests.</li>
-<li><strong>Security</strong>: Protect sensitive data and enforce security measures.</li>
-<li><strong>Documentation</strong>: Maintain comprehensive project documentation.</li>
-</ul>
-<p>Implementing these practices will enhance your workflow, facilitate collaboration, and ensure the integrity of your project’s history.</p>
+<p>By implementing a well-thought-out folder structure, you enhance the efficiency, reproducibility, and collaboration potential of your bioinformatics project. It allows team members to navigate the project seamlessly and ensures that analyses can be replicated and validated with ease.</p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -867,13 +897,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../best_practice/git/design_bioinfo_folder_structure.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bioinformatics Folder Structure</span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../news.html" class="pagination-link">
-        <span class="nav-page-text">News</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../best_practice/git/setup_remote_repo.html" class="pagination-link">
+        <span class="nav-page-text">Setting Up a Git Repository and Connecting to a Remote</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
