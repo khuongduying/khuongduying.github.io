@@ -58,6 +58,9 @@ website:
         - section: Git
           contents:
             - auto: best_practice/git/*
+        - section: Useful Bash
+          contents:
+            - auto: best_practice/useful_bash/*
         - section: test
           contents:
             - news.qmd

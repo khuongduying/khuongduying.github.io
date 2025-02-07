@@ -1,5 +1,5 @@
 ---
-title: "Bioinformatics Folder Structure"
+title: "Useful Bash Command Line"
 author: "Duy Dao"
 date: today
 date-format: long

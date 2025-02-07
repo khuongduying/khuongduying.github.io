@@ -23,7 +23,7 @@
   {
     "objectID": "best_practice/useful_bash/bash.html",
     "href": "best_practice/useful_bash/bash.html",
-    "title": "Bioinformatics Folder Structure",
+    "title": "Useful Bash Command Line",
     "section": "",
     "text": "Align the columns of data and headers properly in a tab-separated format\nUse column piped awk\nawk 'BEGIN {OFS=\"\\t\"} {print}' filename.txt | column -t -s $'\\t'\n\n\n\n\n Back to top"
   },
