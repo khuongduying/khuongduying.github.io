@@ -91,6 +91,125 @@
     "text": "By implementing a well-thought-out folder structure, you enhance the efficiency, reproducibility, and collaboration potential of your bioinformatics project. It allows team members to navigate the project seamlessly and ensures that analyses can be replicated and validated with ease."
   },
   {
+    "objectID": "best_practice/git/setup_remote_repo.html",
+    "href": "best_practice/git/setup_remote_repo.html",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "",
+    "text": "Setting up a Git repository and connecting it to a remote server is essential for version control and collaboration. Below are the best practices to follow during this process."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#initialize-a-new-local-repository",
+    "href": "best_practice/git/setup_remote_repo.html#initialize-a-new-local-repository",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Initialize a New Local Repository",
+    "text": "Initialize a New Local Repository\nCreate a Project Directory:\nmkdir my-project cd my-project\nInitialize Git:\ngit init\nBest Practice: Start with a clean directory to avoid tracking unnecessary files."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#configure-git-user-information",
+    "href": "best_practice/git/setup_remote_repo.html#configure-git-user-information",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Configure Git User Information",
+    "text": "Configure Git User Information\nSet your username and email to associate your commits:\ngit config --global user.name \"Your Name\" \ngit config --global user.email \"your.email@example.com\"\nBest Practice: Use the --global flag to set these configurations for all repositories on your machine."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#create-a-.gitignore-file",
+    "href": "best_practice/git/setup_remote_repo.html#create-a-.gitignore-file",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Create a .gitignore File",
+    "text": "Create a .gitignore File\nCreate a .gitignore file to specify files or directories that Git should ignore:\ntouch .gitignore\nPopulate it with relevant patterns:\n# Node.js dependencies \nnode_modules/ \n# Logs \n*.log \n# Environment variables \n.env \n# MacOS files \n.DS_Store\n\nBest Practice: Regularly update .gitignore to prevent committing unnecessary or sensitive files."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#make-the-initial-commit",
+    "href": "best_practice/git/setup_remote_repo.html#make-the-initial-commit",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Make the Initial Commit",
+    "text": "Make the Initial Commit\nAdd Files to Staging Area:\ngit add .\nCommit the Changes:\ngit commit -m \"Initial commit\"\n\nBest Practice: Write clear and descriptive commit messages to make the history understandable."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#set-up-the-remote-repository",
+    "href": "best_practice/git/setup_remote_repo.html#set-up-the-remote-repository",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Set Up the Remote Repository",
+    "text": "Set Up the Remote Repository\nCreate a Remote Repository:\nUse a platform like GitHub, GitLab, or Bitbucket.\nDo not initialize with a README, .gitignore, or license to avoid merge conflicts.\nAdd the Remote URL:\ngit remote add origin https://github.com/yourusername/my-project.git\n\nBest Practice: Use SSH URLs (git@github.com:…) for better security, once you have set up SSH keys.\n\nVerify the Remote:\ngit remote -v"
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#push-to-the-remote-repository",
+    "href": "best_practice/git/setup_remote_repo.html#push-to-the-remote-repository",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Push to the Remote Repository",
+    "text": "Push to the Remote Repository\nPush the Initial Commit:\ngit push -u origin main\n\nBest Practice: Use -u to set the upstream branch, simplifying future push and pull commands."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#branching-strategy",
+    "href": "best_practice/git/setup_remote_repo.html#branching-strategy",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Branching Strategy",
+    "text": "Branching Strategy\nCreate Feature Branches:\ngit checkout -b feature/your-feature\n\nBest Practice: Use descriptive branch names and follow a naming convention (feature/, bugfix/, hotfix/).\n\nMerge Changes via Pull Requests:\n\nUse pull requests for code reviews.\nMerge into master or main after approval.\n\n\nBest Practice: Keep the main branch stable and deployable."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#protect-sensitive-information",
+    "href": "best_practice/git/setup_remote_repo.html#protect-sensitive-information",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Protect Sensitive Information",
+    "text": "Protect Sensitive Information\nAvoid Committing Secrets:\n\nDo not commit passwords, API keys, or credentials.\nUse environment variables or secret management tools.\n\nScan for Secrets:\nUse tools like git-secrets or truffleHog.\n\nBest Practice: Regularly audit your repository for sensitive information."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#use-semantic-commit-messages",
+    "href": "best_practice/git/setup_remote_repo.html#use-semantic-commit-messages",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Use Semantic Commit Messages",
+    "text": "Use Semantic Commit Messages\nFollow the Conventional Commits specification:\n# &lt;type&gt;[optional scope]: &lt;description&gt; \n# [optional body] \n# [optional footer(s)]\nTypes include: feat, fix, docs, style, refactor, test, chore.\n\nBest Practice: Consistent commit messages improve readability and tooling integration."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#implement-continuous-integrationcontinuous-deployment-cicd",
+    "href": "best_practice/git/setup_remote_repo.html#implement-continuous-integrationcontinuous-deployment-cicd",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Implement Continuous Integration/Continuous Deployment (CI/CD)",
+    "text": "Implement Continuous Integration/Continuous Deployment (CI/CD)\nSet Up CI/CD Pipelines:\n\nUse services like GitHub Actions, GitLab CI, or Jenkins.\nAutomate testing, linting, and deployment.\n\n\nBest Practice: Ensure code quality and reduce manual errors."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#documentation-and-guidelines",
+    "href": "best_practice/git/setup_remote_repo.html#documentation-and-guidelines",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Documentation and Guidelines",
+    "text": "Documentation and Guidelines\nCreate a README.md:\n\nExplain the project’s purpose, setup instructions, and usage.\n\nAdd CONTRIBUTING.md:\n\nOutline how others can contribute.\n\nInclude a CODE_OF_CONDUCT.md:\n\nDefine acceptable behavior for contributors.\n\n\nBest Practice: Clear documentation facilitates collaboration and onboarding."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#tagging-and-releases",
+    "href": "best_practice/git/setup_remote_repo.html#tagging-and-releases",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Tagging and Releases",
+    "text": "Tagging and Releases\nCreate Tags for Releases:\ngit tag -a v1.0.0 -m \"Release version 1.0.0\" \ngit push origin v1.0.0\n\nBest Practice: Use semantic versioning for tags to track releases."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#regular-maintenance",
+    "href": "best_practice/git/setup_remote_repo.html#regular-maintenance",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Regular Maintenance",
+    "text": "Regular Maintenance\nClean Up Branches:\ngit branch -d feature/old-feature \ngit push origin --delete feature/old-feature\n\nBest Practice: Remove merged or stale branches to keep the repository organized."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#backup-and-recovery",
+    "href": "best_practice/git/setup_remote_repo.html#backup-and-recovery",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Backup and Recovery",
+    "text": "Backup and Recovery\nRegular Backups:\n\nEnsure the remote repository is backed up.\nConsider mirroring repositories.\n\n\nBest Practice: Protect against data loss by having multiple backups."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#security-practices",
+    "href": "best_practice/git/setup_remote_repo.html#security-practices",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Security Practices",
+    "text": "Security Practices\nEnable Two-Factor Authentication (2FA):\n\nProtect your accounts on Git hosting services.\n\nSet Up Access Controls\n\nLimit permissions based on roles.\n\n\nBest Practice: Regularly reand update security settings."
+  },
+  {
+    "objectID": "best_practice/git/setup_remote_repo.html#summary",
+    "href": "best_practice/git/setup_remote_repo.html#summary",
+    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "section": "Summary",
+    "text": "Summary\nBy adhering to these best practices, you create a robust, secure, and collaborative environment for your project. Key takeaways include:\n\nInitialization: Start clean and configure user information.\nIgnoring Files: Use .gitignore to prevent tracking unnecessary files.\nCommit Messages: Keep them clear and consistent.\nBranching: Use feature branches and pull requests.\nSecurity: Protect sensitive data and enforce security measures.\nDocumentation: Maintain comprehensive project documentation.\n\nImplementing these practices will enhance your workflow, facilitate collaboration, and ensure the integrity of your project’s history."
+  },
+  {
     "objectID": "Advance/test.html",
     "href": "Advance/test.html",
     "title": "khuongduying",
@@ -245,123 +364,18 @@
     "text": "About this site\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "best_practice/git/setup_remote_repo.html",
-    "href": "best_practice/git/setup_remote_repo.html",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
+    "objectID": "best_practice/git/git_github_cicd.html",
+    "href": "best_practice/git/git_github_cicd.html",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
     "section": "",
-    "text": "Setting up a Git repository and connecting it to a remote server is essential for version control and collaboration. Below are the best practices to follow during this process."
+    "text": "Agenda\n\nOverview of Version Control in Pipeline Development [Git, GitHub]\nIntroduction to Continuous Integration (CI) [GitHub Action]\nBest Practices & Practical Exercises\nSharing, collaboration and nf-core resources\n\n\n\nIntroduction to Version Control\n\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "best_practice/git/setup_remote_repo.html#initialize-a-new-local-repository",
-    "href": "best_practice/git/setup_remote_repo.html#initialize-a-new-local-repository",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Initialize a New Local Repository",
-    "text": "Initialize a New Local Repository\nCreate a Project Directory:\nmkdir my-project cd my-project\nInitialize Git:\ngit init\nBest Practice: Start with a clean directory to avoid tracking unnecessary files."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#configure-git-user-information",
-    "href": "best_practice/git/setup_remote_repo.html#configure-git-user-information",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Configure Git User Information",
-    "text": "Configure Git User Information\nSet your username and email to associate your commits:\ngit config --global user.name \"Your Name\" \ngit config --global user.email \"your.email@example.com\"\nBest Practice: Use the --global flag to set these configurations for all repositories on your machine."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#create-a-.gitignore-file",
-    "href": "best_practice/git/setup_remote_repo.html#create-a-.gitignore-file",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Create a .gitignore File",
-    "text": "Create a .gitignore File\nCreate a .gitignore file to specify files or directories that Git should ignore:\ntouch .gitignore\nPopulate it with relevant patterns:\n# Node.js dependencies \nnode_modules/ \n# Logs \n*.log \n# Environment variables \n.env \n# MacOS files \n.DS_Store\n\nBest Practice: Regularly update .gitignore to prevent committing unnecessary or sensitive files."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#make-the-initial-commit",
-    "href": "best_practice/git/setup_remote_repo.html#make-the-initial-commit",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Make the Initial Commit",
-    "text": "Make the Initial Commit\nAdd Files to Staging Area:\ngit add .\nCommit the Changes:\ngit commit -m \"Initial commit\"\n\nBest Practice: Write clear and descriptive commit messages to make the history understandable."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#set-up-the-remote-repository",
-    "href": "best_practice/git/setup_remote_repo.html#set-up-the-remote-repository",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Set Up the Remote Repository",
-    "text": "Set Up the Remote Repository\nCreate a Remote Repository:\nUse a platform like GitHub, GitLab, or Bitbucket.\nDo not initialize with a README, .gitignore, or license to avoid merge conflicts.\nAdd the Remote URL:\ngit remote add origin https://github.com/yourusername/my-project.git\n\nBest Practice: Use SSH URLs (git@github.com:…) for better security, once you have set up SSH keys.\n\nVerify the Remote:\ngit remote -v"
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#push-to-the-remote-repository",
-    "href": "best_practice/git/setup_remote_repo.html#push-to-the-remote-repository",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Push to the Remote Repository",
-    "text": "Push to the Remote Repository\nPush the Initial Commit:\ngit push -u origin main\n\nBest Practice: Use -u to set the upstream branch, simplifying future push and pull commands."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#branching-strategy",
-    "href": "best_practice/git/setup_remote_repo.html#branching-strategy",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Branching Strategy",
-    "text": "Branching Strategy\nCreate Feature Branches:\ngit checkout -b feature/your-feature\n\nBest Practice: Use descriptive branch names and follow a naming convention (feature/, bugfix/, hotfix/).\n\nMerge Changes via Pull Requests:\n\nUse pull requests for code reviews.\nMerge into master or main after approval.\n\n\nBest Practice: Keep the main branch stable and deployable."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#protect-sensitive-information",
-    "href": "best_practice/git/setup_remote_repo.html#protect-sensitive-information",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Protect Sensitive Information",
-    "text": "Protect Sensitive Information\nAvoid Committing Secrets:\n\nDo not commit passwords, API keys, or credentials.\nUse environment variables or secret management tools.\n\nScan for Secrets:\nUse tools like git-secrets or truffleHog.\n\nBest Practice: Regularly audit your repository for sensitive information."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#use-semantic-commit-messages",
-    "href": "best_practice/git/setup_remote_repo.html#use-semantic-commit-messages",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Use Semantic Commit Messages",
-    "text": "Use Semantic Commit Messages\nFollow the Conventional Commits specification:\n# &lt;type&gt;[optional scope]: &lt;description&gt; \n# [optional body] \n# [optional footer(s)]\nTypes include: feat, fix, docs, style, refactor, test, chore.\n\nBest Practice: Consistent commit messages improve readability and tooling integration."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#implement-continuous-integrationcontinuous-deployment-cicd",
-    "href": "best_practice/git/setup_remote_repo.html#implement-continuous-integrationcontinuous-deployment-cicd",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Implement Continuous Integration/Continuous Deployment (CI/CD)",
-    "text": "Implement Continuous Integration/Continuous Deployment (CI/CD)\nSet Up CI/CD Pipelines:\n\nUse services like GitHub Actions, GitLab CI, or Jenkins.\nAutomate testing, linting, and deployment.\n\n\nBest Practice: Ensure code quality and reduce manual errors."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#documentation-and-guidelines",
-    "href": "best_practice/git/setup_remote_repo.html#documentation-and-guidelines",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Documentation and Guidelines",
-    "text": "Documentation and Guidelines\nCreate a README.md:\n\nExplain the project’s purpose, setup instructions, and usage.\n\nAdd CONTRIBUTING.md:\n\nOutline how others can contribute.\n\nInclude a CODE_OF_CONDUCT.md:\n\nDefine acceptable behavior for contributors.\n\n\nBest Practice: Clear documentation facilitates collaboration and onboarding."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#tagging-and-releases",
-    "href": "best_practice/git/setup_remote_repo.html#tagging-and-releases",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Tagging and Releases",
-    "text": "Tagging and Releases\nCreate Tags for Releases:\ngit tag -a v1.0.0 -m \"Release version 1.0.0\" \ngit push origin v1.0.0\n\nBest Practice: Use semantic versioning for tags to track releases."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#regular-maintenance",
-    "href": "best_practice/git/setup_remote_repo.html#regular-maintenance",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Regular Maintenance",
-    "text": "Regular Maintenance\nClean Up Branches:\ngit branch -d feature/old-feature \ngit push origin --delete feature/old-feature\n\nBest Practice: Remove merged or stale branches to keep the repository organized."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#backup-and-recovery",
-    "href": "best_practice/git/setup_remote_repo.html#backup-and-recovery",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Backup and Recovery",
-    "text": "Backup and Recovery\nRegular Backups:\n\nEnsure the remote repository is backed up.\nConsider mirroring repositories.\n\n\nBest Practice: Protect against data loss by having multiple backups."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#security-practices",
-    "href": "best_practice/git/setup_remote_repo.html#security-practices",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Security Practices",
-    "text": "Security Practices\nEnable Two-Factor Authentication (2FA):\n\nProtect your accounts on Git hosting services.\n\nSet Up Access Controls\n\nLimit permissions based on roles.\n\n\nBest Practice: Regularly reand update security settings."
-  },
-  {
-    "objectID": "best_practice/git/setup_remote_repo.html#summary",
-    "href": "best_practice/git/setup_remote_repo.html#summary",
-    "title": "Setting Up a Git Repository and Connecting to a Remote",
-    "section": "Summary",
-    "text": "Summary\nBy adhering to these best practices, you create a robust, secure, and collaborative environment for your project. Key takeaways include:\n\nInitialization: Start clean and configure user information.\nIgnoring Files: Use .gitignore to prevent tracking unnecessary files.\nCommit Messages: Keep them clear and consistent.\nBranching: Use feature branches and pull requests.\nSecurity: Protect sensitive data and enforce security measures.\nDocumentation: Maintain comprehensive project documentation.\n\nImplementing these practices will enhance your workflow, facilitate collaboration, and ensure the integrity of your project’s history."
+    "objectID": "best_practice/git/test.html",
+    "href": "best_practice/git/test.html",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "",
+    "text": "lkjasdf\n\n\n\n Back to top"
   },
   {
     "objectID": "best_practice/test/test.html",
