@@ -429,6 +429,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pipeline-versioning-strategies" id="toc-pipeline-versioning-strategies" class="nav-link" data-scroll-target="#pipeline-versioning-strategies">Pipeline Versioning Strategies</a>
   <ul class="collapse">
   <li><a href="#introduction-to-semantic-versioning-semver" id="toc-introduction-to-semantic-versioning-semver" class="nav-link" data-scroll-target="#introduction-to-semantic-versioning-semver">Introduction to Semantic Versioning (SemVer)</a></li>
+  <li><a href="#managing-updates-with-semver" id="toc-managing-updates-with-semver" class="nav-link" data-scroll-target="#managing-updates-with-semver">Managing Updates with SemVer</a></li>
+  </ul></li>
+  <li><a href="#maintaining-stable-release-versions" id="toc-maintaining-stable-release-versions" class="nav-link" data-scroll-target="#maintaining-stable-release-versions">Maintaining Stable Release Versions</a>
+  <ul class="collapse">
+  <li><a href="#importance-of-stable-releases-for-reproducibility" id="toc-importance-of-stable-releases-for-reproducibility" class="nav-link" data-scroll-target="#importance-of-stable-releases-for-reproducibility">Importance of Stable Releases for Reproducibility</a></li>
+  <li><a href="#techniques-for-tagging-and-releasing-pipelines" id="toc-techniques-for-tagging-and-releasing-pipelines" class="nav-link" data-scroll-target="#techniques-for-tagging-and-releasing-pipelines">Techniques for Tagging and Releasing Pipelines</a></li>
+  <li><a href="#manual-changelog-with-a-markdown-file" id="toc-manual-changelog-with-a-markdown-file" class="nav-link" data-scroll-target="#manual-changelog-with-a-markdown-file">Manual Changelog with a Markdown File</a>
+  <ul class="collapse">
+  <li><a href="#using-github-releases" id="toc-using-github-releases" class="nav-link" data-scroll-target="#using-github-releases">Using GitHub Releases</a></li>
+  <li><a href="#automated-changelog-generation" id="toc-automated-changelog-generation" class="nav-link" data-scroll-target="#automated-changelog-generation">Automated Changelog Generation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#introduction-to-continuous-integration-ci" id="toc-introduction-to-continuous-integration-ci" class="nav-link" data-scroll-target="#introduction-to-continuous-integration-ci">Introduction to Continuous Integration (CI)</a>
+  <ul class="collapse">
+  <li><a href="#definition-2" id="toc-definition-2" class="nav-link" data-scroll-target="#definition-2">Definition</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/best_practice/git/git_github_cicd.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -789,6 +804,182 @@ Note
 <figure class="figure">
 <p><img src="images/paste-17.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">https://medium.com/@kodegasm.id/semantic-versioning-in-software-engineering-8bc42c61364b</figcaption>
+</figure>
+</div>
+<p>Semantic Versioning, or SemVer, is a versioning scheme that uses a three-part number format: <strong>MAJOR.MINOR.PATCH</strong>. This structure helps to communicate the nature of changes made in each new release of your pipeline.</p>
+<ul>
+<li><p><strong>MAJOR:</strong><br>
+Increment this number when you make incompatible API changes or significant modifications that <strong>break backward compatibility</strong>.</p></li>
+<li><p><strong>MINOR:</strong><br>
+Increment this number when you add functionality in a <strong>backward-compatible</strong> manner. This signals new features without disrupting existing functionality.</p></li>
+<li><p><strong>PATCH:</strong><br>
+Increment this number when you make <strong>backwards-compatible</strong> bug fixes. This indicates maintenance updates without affecting functionality.</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Backwards compatibility means that when you update or change something, it still works with the old stuff that was made before the update.</p>
+</div>
+</div>
+</section>
+<section id="managing-updates-with-semver" class="level2">
+<h2 class="anchored" data-anchor-id="managing-updates-with-semver">Managing Updates with SemVer</h2>
+<p>Using SemVer in your pipeline development means you can clearly signal the impact of changes:</p>
+<ul>
+<li><p><strong>Major updates</strong> (e.g., 2.0.0) indicate a shift that might require users to adjust their integration.</p></li>
+<li><p><strong>Minor updates</strong> (e.g., 1.1.0) add features while maintaining compatibility.</p></li>
+<li><p><strong>Patch updates</strong> (e.g., 1.0.1) improve stability through bug fixes without changing functionality.</p></li>
+</ul>
+<section id="code-example" class="level4">
+<h4 class="anchored" data-anchor-id="code-example">Code Example</h4>
+<p>Below is an example Bash script that automates bumping the version number in a pipeline configuration file (e.g., pipeline.yml):</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the current version from the pipeline configuration file</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="va">current_version</span><span class="op">=</span><span class="va">$(</span><span class="fu">grep</span> <span class="st">'version:'</span> pipeline.yml <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2}'</span><span class="va">)</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="va">IFS</span><span class="op">=</span><span class="st">'.'</span> <span class="bu">read</span> <span class="at">-r</span> <span class="va">major</span> <span class="va">minor</span> <span class="va">patch</span> <span class="op">&lt;&lt;&lt;</span> <span class="st">"</span><span class="va">$current_version</span><span class="st">"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># For a patch update, increment the patch number</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="va">patch</span><span class="op">=</span><span class="va">$((patch</span> <span class="op">+</span> <span class="dv">1</span><span class="va">))</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="va">new_version</span><span class="op">=</span><span class="st">"</span><span class="va">$major</span><span class="st">.</span><span class="va">$minor</span><span class="st">.</span><span class="va">$patch</span><span class="st">"</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the version in the configuration file</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">"s/version: </span><span class="va">$current_version</span><span class="st">/version: </span><span class="va">$new_version</span><span class="st">/g"</span> pipeline.yml</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Pipeline version updated from </span><span class="va">$current_version</span><span class="st"> to </span><span class="va">$new_version</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="explanation" class="level4">
+<h4 class="anchored" data-anchor-id="explanation"><strong>Explanation</strong></h4>
+<ul>
+<li><p>The script extracts the current semantic version from pipeline.yml.</p></li>
+<li><p>It splits the version number into major, minor, and patch components.</p></li>
+<li><p>For a patch update, the script increments the patch value.</p></li>
+<li><p>Finally, it uses sed to update the version in the configuration file and outputs the new version.</p></li>
+</ul>
+<p>This approach provides a simple and effective way to implement and manage versioning in your pipeline, ensuring that users and collaborators understand the impact of each release update.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="maintaining-stable-release-versions" class="level1">
+<h1>Maintaining Stable Release Versions</h1>
+<section id="importance-of-stable-releases-for-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="importance-of-stable-releases-for-reproducibility">Importance of Stable Releases for Reproducibility</h2>
+<ul>
+<li><p><strong>Consistent Results:</strong><br>
+Stable releases ensure that when you run a pipeline at a given version, it behaves the same way every time. This consistency is crucial for reproducibility, where you need to trust that results won’t change unexpectedly between runs.</p></li>
+<li><p><strong>Reliable Benchmarking:</strong><br>
+With stable versions, you can benchmark and compare outcomes over time without worrying that changes in the pipeline are affecting performance or outputs.</p></li>
+<li><p><strong>User Confidence:</strong><br>
+Stable releases give users a predictable and tested version of the pipeline, making it easier to integrate into production environments and build trust in its reliability.</p></li>
+</ul>
+</section>
+<section id="techniques-for-tagging-and-releasing-pipelines" class="level2">
+<h2 class="anchored" data-anchor-id="techniques-for-tagging-and-releasing-pipelines">Techniques for Tagging and Releasing Pipelines</h2>
+<ul>
+<li><p><strong>Semantic Versioning (SemVer):</strong><br>
+Adopt a versioning scheme like MAJOR.MINOR.PATCH. This communicates the nature of changes (e.g., bug fixes, new features, breaking changes) to users.</p></li>
+<li><p><strong>Git Tagging:</strong><br>
+Use Git tags to mark specific commits as release points. This makes it easy to retrieve or revert to a stable version of the code. For example:</p></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag <span class="at">-a</span> v1.0.0 <span class="at">-m</span> <span class="st">"Stable release version 1.0.0"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v1.0.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><p><strong>Release Branches:</strong><br>
+Create dedicated branches for releases (e.g., release/1.0.0) to isolate stable code from ongoing development. Once tested, these branches are merged into the main production branch.</p></li>
+<li><p><strong>Automated Release Pipelines:</strong><br>
+Use CI/CD tools to automate tests and deploy stable releases when certain conditions (like passing all tests) are met. This minimizes human error and ensures that only verified changes are released.</p></li>
+<li><p><strong>Changelogs and Release Notes:</strong><br>
+Maintain clear documentation of changes for each release. This helps users understand what’s new, what’s fixed, and what might be breaking changes.</p></li>
+</ul>
+<p>In summary, maintaining stable release versions is key to reproducible results and user confidence. By using semantic versioning, Git tagging, release branches, and automated CI/CD pipelines, you can manage and distribute your pipeline in a reliable and systematic way.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Changelog Entry Example</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## [1.0.0] - 2025-02-16</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">### Added</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Initial release of Nextflow pipeline for data processing.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="manual-changelog-with-a-markdown-file" class="level2">
+<h2 class="anchored" data-anchor-id="manual-changelog-with-a-markdown-file">Manual Changelog with a Markdown File</h2>
+<p>One popular format is the <a href="https://keepachangelog.com/">Keep a Changelog</a> style, which provides a clear structure. For example:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Changelog</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>All notable changes to this project will be documented in this file.</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## [Unreleased]</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">### Added</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>New feature X.</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fixed</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bug related to Y.</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## [1.0.0] - 2025-02-16</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### Added</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Initial release.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Update Regularly:</strong><br>
+Each time you make changes or prepare a new release, update the changelog with details of added, changed, or fixed items.</p>
+<section id="using-github-releases" class="level3">
+<h3 class="anchored" data-anchor-id="using-github-releases">Using GitHub Releases</h3>
+<section id="github-releases-feature" class="level4">
+<h4 class="anchored" data-anchor-id="github-releases-feature"><strong>GitHub Releases Feature</strong></h4>
+<p>Instead of—or in addition to—a CHANGELOG.md file, you can use the GitHub Releases feature:</p>
+<ul>
+<li><p>Go to the “Releases” section in your GitHub repository.</p></li>
+<li><p>Click “Draft a new release.”</p></li>
+<li><p>Tag the release (e.g., v1.0.0) and write release notes detailing the changes.</p></li>
+</ul>
+<p>This creates an accessible record of changes tied to specific Git tags.</p>
+</section>
+</section>
+<section id="automated-changelog-generation" class="level3">
+<h3 class="anchored" data-anchor-id="automated-changelog-generation">Automated Changelog Generation</h3>
+<ul>
+<li><p><strong>Automation Tools:</strong><br>
+Tools like <a href="https://github.com/semantic-release/semantic-release">semantic-release</a> or <a href="https://github.com/conventional-changelog/standard-version">standard-version</a> can generate changelogs automatically based on your commit messages and tags.</p></li>
+<li><p><strong>GitHub Actions Integration:</strong><br>
+You can set up a GitHub Action that triggers on new tags or pull requests. For example, you might add a workflow that runs semantic-release, which:</p>
+<ul>
+<li><p>Determines the next version based on commit history.</p></li>
+<li><p>Updates the changelog.</p></li>
+<li><p>Creates a Git tag and GitHub release with the release notes.</p></li>
+</ul>
+<p>An example snippet for a GitHub Action workflow might look like:</p></li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml yml code-with-copy"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Release</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tags</span><span class="kw">:</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">'v*'</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">release</span><span class="kw">:</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Checkout code</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v3</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run semantic-release</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">GITHUB_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npx semantic-release</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="introduction-to-continuous-integration-ci" class="level1">
+<h1>Introduction to Continuous Integration (CI)</h1>
+<section id="definition-2" class="level2">
+<h2 class="anchored" data-anchor-id="definition-2">Definition</h2>
+<p>Continuous Integration (CI) is a software development practice where developers frequently merge code changes into a shared repository. Every change is automatically built and tested to detect integration issues early, ensuring that new code works well with the existing codebase.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-18.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">ByteByteGo Diagram of CI/CD</figcaption>
 </figure>
 </div>
 

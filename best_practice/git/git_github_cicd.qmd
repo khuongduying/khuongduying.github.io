@@ -331,3 +331,190 @@ Once your feature is complete, finish it to merge it back into develop
 ## Introduction to Semantic Versioning (SemVer)
 
 ![https://medium.com/\@kodegasm.id/semantic-versioning-in-software-engineering-8bc42c61364b](images/paste-17.png)
+
+Semantic Versioning, or SemVer, is a versioning scheme that uses a three-part number format: **MAJOR.MINOR.PATCH**. This structure helps to communicate the nature of changes made in each new release of your pipeline.
+
+-   **MAJOR:**\
+    Increment this number when you make incompatible API changes or significant modifications that **break backward compatibility**.
+
+-   **MINOR:**\
+    Increment this number when you add functionality in a **backward-compatible** manner. This signals new features without disrupting existing functionality.
+
+-   **PATCH:**\
+    Increment this number when you make **backwards-compatible** bug fixes. This indicates maintenance updates without affecting functionality.
+
+::: callout-note
+Backwards compatibility means that when you update or change something, it still works with the old stuff that was made before the update.
+:::
+
+## Managing Updates with SemVer
+
+Using SemVer in your pipeline development means you can clearly signal the impact of changes:
+
+-   **Major updates** (e.g., 2.0.0) indicate a shift that might require users to adjust their integration.
+
+-   **Minor updates** (e.g., 1.1.0) add features while maintaining compatibility.
+
+-   **Patch updates** (e.g., 1.0.1) improve stability through bug fixes without changing functionality.
+
+#### Code Example
+
+Below is an example Bash script that automates bumping the version number in a pipeline configuration file (e.g., pipeline.yml):
+
+``` bash
+#!/bin/bash
+# Extract the current version from the pipeline configuration file
+current_version=$(grep 'version:' pipeline.yml | awk '{print $2}')
+IFS='.' read -r major minor patch <<< "$current_version"
+
+# For a patch update, increment the patch number
+patch=$((patch + 1))
+new_version="$major.$minor.$patch"
+
+# Update the version in the configuration file
+sed -i "s/version: $current_version/version: $new_version/g" pipeline.yml
+
+echo "Pipeline version updated from $current_version to $new_version"
+```
+
+#### **Explanation**
+
+-   The script extracts the current semantic version from pipeline.yml.
+
+-   It splits the version number into major, minor, and patch components.
+
+-   For a patch update, the script increments the patch value.
+
+-   Finally, it uses sed to update the version in the configuration file and outputs the new version.
+
+This approach provides a simple and effective way to implement and manage versioning in your pipeline, ensuring that users and collaborators understand the impact of each release update.
+
+---
+
+# Maintaining Stable Release Versions
+
+## Importance of Stable Releases for Reproducibility
+
+-   **Consistent Results:**\
+    Stable releases ensure that when you run a pipeline at a given version, it behaves the same way every time. This consistency is crucial for reproducibility, where you need to trust that results won't change unexpectedly between runs.
+
+-   **Reliable Benchmarking:**\
+    With stable versions, you can benchmark and compare outcomes over time without worrying that changes in the pipeline are affecting performance or outputs.
+
+-   **User Confidence:**\
+    Stable releases give users a predictable and tested version of the pipeline, making it easier to integrate into production environments and build trust in its reliability.
+
+## Techniques for Tagging and Releasing Pipelines
+
+-   **Semantic Versioning (SemVer):**\
+    Adopt a versioning scheme like MAJOR.MINOR.PATCH. This communicates the nature of changes (e.g., bug fixes, new features, breaking changes) to users.
+
+-   **Git Tagging:**\
+    Use Git tags to mark specific commits as release points. This makes it easy to retrieve or revert to a stable version of the code. For example:
+
+``` bash
+git tag -a v1.0.0 -m "Stable release version 1.0.0"
+git push origin v1.0.0
+```
+
+-   **Release Branches:**\
+    Create dedicated branches for releases (e.g., release/1.0.0) to isolate stable code from ongoing development. Once tested, these branches are merged into the main production branch.
+
+-   **Automated Release Pipelines:**\
+    Use CI/CD tools to automate tests and deploy stable releases when certain conditions (like passing all tests) are met. This minimizes human error and ensures that only verified changes are released.
+
+-   **Changelogs and Release Notes:**\
+    Maintain clear documentation of changes for each release. This helps users understand what’s new, what’s fixed, and what might be breaking changes.
+
+In summary, maintaining stable release versions is key to reproducible results and user confidence. By using semantic versioning, Git tagging, release branches, and automated CI/CD pipelines, you can manage and distribute your pipeline in a reliable and systematic way.
+
+``` md
+# Changelog Entry Example
+## [1.0.0] - 2025-02-16
+### Added
+- Initial release of Nextflow pipeline for data processing.
+```
+
+## Manual Changelog with a Markdown File
+
+One popular format is the [Keep a Changelog](https://keepachangelog.com/) style, which provides a clear structure. For example:
+
+``` md
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+### Added
+- New feature X.
+### Fixed
+- Bug related to Y.
+
+## [1.0.0] - 2025-02-16
+### Added
+- Initial release.
+```
+
+**Update Regularly:**\
+Each time you make changes or prepare a new release, update the changelog with details of added, changed, or fixed items.
+
+### Using GitHub Releases
+
+#### **GitHub Releases Feature**
+
+Instead of—or in addition to—a CHANGELOG.md file, you can use the GitHub Releases feature:
+
+-   Go to the "Releases" section in your GitHub repository.
+
+-   Click "Draft a new release."
+
+-   Tag the release (e.g., v1.0.0) and write release notes detailing the changes.
+
+This creates an accessible record of changes tied to specific Git tags.
+
+### Automated Changelog Generation
+
+-   **Automation Tools:**\
+    Tools like [semantic-release](https://github.com/semantic-release/semantic-release) or [standard-version](https://github.com/conventional-changelog/standard-version) can generate changelogs automatically based on your commit messages and tags.
+
+-   **GitHub Actions Integration:**\
+    You can set up a GitHub Action that triggers on new tags or pull requests. For example, you might add a workflow that runs semantic-release, which:
+
+    -   Determines the next version based on commit history.
+
+    -   Updates the changelog.
+
+    -   Creates a Git tag and GitHub release with the release notes.
+
+    An example snippet for a GitHub Action workflow might look like:
+
+``` {.yaml .yml}
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
+```
+
+---
+
+# Introduction to Continuous Integration (CI)
+
+## Definition
+
+Continuous Integration (CI) is a software development practice where developers frequently merge code changes into a shared repository. Every change is automatically built and tested to detect integration issues early, ensuring that new code works well with the existing codebase.
+
+![ByteByteGo Diagram of CI/CD](images/paste-18.png)
