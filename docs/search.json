@@ -91,6 +91,258 @@
     "text": "By implementing a well-thought-out folder structure, you enhance the efficiency, reproducibility, and collaboration potential of your bioinformatics project. It allows team members to navigate the project seamlessly and ensures that analyses can be replicated and validated with ease."
   },
   {
+    "objectID": "best_practice/git/git_github_cicd.html",
+    "href": "best_practice/git/git_github_cicd.html",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "",
+    "text": "Overview of Version Control in Pipeline Development [Git, GitHub]\nIntroduction to Continuous Integration (CI) [GitHub Action]\nBest Practices & Practical Exercises\nSharing, collaboration and nf-core resources"
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#git-workflow-basics",
+    "href": "best_practice/git/git_github_cicd.html#git-workflow-basics",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Git Workflow Basics",
+    "text": "Git Workflow Basics\n\nThree Core Areas of a Git Repository\n\nWorking Directory: The current files you see and edit on your local machine.\nStaging Area (Index): A snapshot of changes that will be included in your next commit.\nRepository (History): The complete record of commits made over time."
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#the-typical-workflow",
+    "href": "best_practice/git/git_github_cicd.html#the-typical-workflow",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "The Typical Workflow",
+    "text": "The Typical Workflow\n\nEdit Files: Make changes in the working directory.\nStage Changes: Use git add to move changes to the staging area.\n\ngit add .\ngit add *\ngit add file.txt\n\nCommit: Use git commit to permanently record the changes in the repository.\n\ngit commit -m \"update README.md\""
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#basic-command",
+    "href": "best_practice/git/git_github_cicd.html#basic-command",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Basic Command",
+    "text": "Basic Command\n\nInitializing a Repository\ngit init my_project\nThis command creates a new Git repository in the “my_project” directory, setting up the structure needed for version control.\n\n\nStaging and Committing Changes\ngit add index.html\ngit commit -m \"Add initial HTML file\"\nThe git add command stages the changes in the file for commit, while the git commit records the snapshot with a descriptive message.\n\n\nViewing Commit History\ngit log\nDisplays a chronological list of commits, allowing you to review what changes were made, by whom, and when."
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#setting-up-a-github-repository",
+    "href": "best_practice/git/git_github_cicd.html#setting-up-a-github-repository",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Setting Up a GitHub Repository",
+    "text": "Setting Up a GitHub Repository\n\nCreating a New Repository\nSteps:\n\nLog in to GitHub and click the “New Repository” button.\nProvide a repository name, an optional description, and choose whether the repository is public or private.\nOptionally, initialize with a README file to describe the project.\n\n\n\n\nGo to “repositories” and create a new repo\n\n\n\n\n\nRepository Creation Interface\n\n\n\n\nConnecting Local Git to GitHub\nCopy the URL when the repo created.\n\ngit remote add origin https://github.com/username/my_project.git\ngit push -u origin master\nExplanation:\n\ngit remote add origin sets the URL of the remote repository.\ngit push -u origin master uploads your local commits to the GitHub repository and sets the upstream branch for future pushes.\n\n\n\n\n\n\n\nUse meaningful repository names and clear README documentation to ensure that others understand your project quickly."
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#branching-model-for-collaboration",
+    "href": "best_practice/git/git_github_cicd.html#branching-model-for-collaboration",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Branching Model for Collaboration",
+    "text": "Branching Model for Collaboration\n\nCreating a Branch\ngit checkout -b feature/new-feature\nThis creates and switches you to a new branch where you can develop a new user interface without affecting the main code.\n\n\nMerging Branches\nAfter development, merge the feature branch back into the main branch using a pull request.\n&lt;&lt; Example &gt;&gt;\n\n\nPull Requests (PR)\nDevelopers open a pull request on GitHub to propose changes, allowing team members to review, comment, and discuss the modifications.\n&lt;&lt; Example &gt;&gt;\n\n\nCode Review Process\nA structured review process helps maintain code quality and ensures that multiple perspectives are considered before merging.\n&lt;&lt; Example &gt;&gt;"
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#merging-branches-1",
+    "href": "best_practice/git/git_github_cicd.html#merging-branches-1",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Merging Branches",
+    "text": "Merging Branches\ngit checkout master\ngit merge feature/new-ui\nMerges changes from the feature branch into the master branch."
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#merge-conflicts",
+    "href": "best_practice/git/git_github_cicd.html#merge-conflicts",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Merge Conflicts",
+    "text": "Merge Conflicts\n\nOccur when changes in two branches conflict. Resolve by editing the files manually and then completing the merge.\nUse tools like git mergetool for guided resolution."
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#rebasing",
+    "href": "best_practice/git/git_github_cicd.html#rebasing",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Rebasing",
+    "text": "Rebasing\nRebasing rewrites commit history to create a linear progression of changes, which can make the project history cleaner.\n\n\n\nSource: https://tecadmin.net/wp-content/uploads/2023/05/git-rebase-practical-guide.png"
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#difference-between-merge-and-rebase",
+    "href": "best_practice/git/git_github_cicd.html#difference-between-merge-and-rebase",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Difference between Merge and Rebase",
+    "text": "Difference between Merge and Rebase\n\n\n\nSource: https://www.threads.net/@bytebytego/post/C3Nz-T5xsMM?hl=vi"
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#install-gitflow",
+    "href": "best_practice/git/git_github_cicd.html#install-gitflow",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Install GitFlow",
+    "text": "Install GitFlow\n# Install git-flow\nsudo apt-get install git-flow"
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#initialize-git-flow-in-your-repository",
+    "href": "best_practice/git/git_github_cicd.html#initialize-git-flow-in-your-repository",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Initialize Git Flow in Your Repository",
+    "text": "Initialize Git Flow in Your Repository\n# Initialize GitFlow and start a new feature branch\ngit flow init\nThis command will ask you a series of questions about branch naming conventions (e.g., master/main, develop, feature, release, hotfix). You can usually accept the defaults."
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#working-with-feature-branches",
+    "href": "best_practice/git/git_github_cicd.html#working-with-feature-branches",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Working with Feature Branches",
+    "text": "Working with Feature Branches\n\nStart a Feature\ngit flow feature start add-new-module\n\n\nWork on Your Feature\nMake your changes, and commit them as usual:\ngit add .\ngit commit -m \"Add new feature\"\n\n\nFinish the Feature\nOnce your feature is complete, finish it to merge it back into develop"
+  },
+  {
+    "objectID": "best_practice/git/git_github_cicd.html#introduction-to-semantic-versioning-semver",
+    "href": "best_practice/git/git_github_cicd.html#introduction-to-semantic-versioning-semver",
+    "title": "Version Control and Continuous Integration for Pipeline Developing",
+    "section": "Introduction to Semantic Versioning (SemVer)",
+    "text": "Introduction to Semantic Versioning (SemVer)\n\n\n\nhttps://medium.com/@kodegasm.id/semantic-versioning-in-software-engineering-8bc42c61364b"
+  },
+  {
+    "objectID": "Advance/menu4.html",
+    "href": "Advance/menu4.html",
+    "title": "Advance2",
+    "section": "",
+    "text": "About this site\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "machine_learning/01_introduction.html",
+    "href": "machine_learning/01_introduction.html",
+    "title": "01. Introduction",
+    "section": "",
+    "text": "Machine learning is revolutionizing the way we approach complex challenges in bioinformatics and biomedical science. This blog serves as a comprehensive resource for understanding how machine learning can be applied to decipher biological data, design predictive models, and improve healthcare outcomes. Whether you are a researcher, data scientist, or enthusiast, this project aims to bridge the technical and biological domains, unlocking the potential of AI in these fields.\n\n\nThis project focuses on exploring the integration of machine learning techniques with bioinformatics and biomedical sciences. The objective is to:\n\nSimplify Data Complexity: Handle high-dimensional and heterogeneous biological data, such as genomics, proteomics, and imaging datasets.\nDiscover Patterns: Uncover hidden patterns in diseases and biological processes.\nEnhance Predictive Accuracy: Build robust models for diagnostics, personalized medicine, and disease prediction.\nInnovate with Algorithms: Leverage tools like regression, clustering, neural networks, and deep learning.\n\n\n\n\n\n\nModern technologies, such as next-generation sequencing and advanced imaging, generate enormous amounts of data. Machine learning helps process this data to extract meaningful insights.\n\n\n\nFrom predicting disease outcomes to suggesting personalized treatments, machine learning models provide evidence-based support for better healthcare decisions.\n\n\n\nMachine learning accelerates hypothesis testing, drug discovery, and understanding of molecular mechanisms.\n\n\n\n\n\n\nUnderstanding the foundational mathematics is critical. Concepts such as linear algebra, probability, and optimization will be discussed with real-world biological examples.\n\n\n\n\nSupervised Learning: Predict disease outcomes based on labeled datasets.\nUnsupervised Learning: Cluster genes or proteins with unknown functions.\nReinforcement Learning: Optimize treatment regimens in a dynamic environment.\n\n\n\n\n\nGene expression analysis using dimensionality reduction techniques like PCA.\nIdentification of biomarkers with classification algorithms such as support vector machines.\nBuilding predictive models for disease diagnosis using deep learning.\n\n\n\n\n\nAnalyzing medical images with convolutional neural networks.\nDrug discovery through generative models and reinforcement learning.\nPersonalized medicine based on patient-specific data analysis.\n\n\n\n\n\n\n\nDive deep into the mathematical underpinnings necessary to understand machine learning models. Topics include:\n\nLinear algebra for genomic data analysis.\nProbability and statistics for modeling biological uncertainty.\n\n\n\n\nExplore how algorithms like neural networks and Gaussian mixture models can solve specific problems in bioinformatics.\n\n\n\nUnderstand the deployment of machine learning tools in biological and clinical settings with tutorials and case studies.\n\n\n\n\nThis blog is for anyone passionate about the intersection of machine learning and biological sciences:\n\nResearchers aiming to integrate AI into their studies.\nStudents learning about bioinformatics or machine learning.\nProfessionals seeking to understand how AI can be applied in healthcare.\n\n\n\n\nJoin us as we delve into the fascinating world where algorithms meet biology. Through tutorials, insights, and practical examples, this blog will help you stay ahead in the rapidly evolving field of AI in bioinformatics and biomedical science.\nLet’s innovate together!"
+  },
+  {
+    "objectID": "machine_learning/01_introduction.html#what-is-this-project-about",
+    "href": "machine_learning/01_introduction.html#what-is-this-project-about",
+    "title": "01. Introduction",
+    "section": "",
+    "text": "This project focuses on exploring the integration of machine learning techniques with bioinformatics and biomedical sciences. The objective is to:\n\nSimplify Data Complexity: Handle high-dimensional and heterogeneous biological data, such as genomics, proteomics, and imaging datasets.\nDiscover Patterns: Uncover hidden patterns in diseases and biological processes.\nEnhance Predictive Accuracy: Build robust models for diagnostics, personalized medicine, and disease prediction.\nInnovate with Algorithms: Leverage tools like regression, clustering, neural networks, and deep learning."
+  },
+  {
+    "objectID": "machine_learning/01_introduction.html#why-machine-learning-in-bioinformatics-and-biomedical-science",
+    "href": "machine_learning/01_introduction.html#why-machine-learning-in-bioinformatics-and-biomedical-science",
+    "title": "01. Introduction",
+    "section": "",
+    "text": "Modern technologies, such as next-generation sequencing and advanced imaging, generate enormous amounts of data. Machine learning helps process this data to extract meaningful insights.\n\n\n\nFrom predicting disease outcomes to suggesting personalized treatments, machine learning models provide evidence-based support for better healthcare decisions.\n\n\n\nMachine learning accelerates hypothesis testing, drug discovery, and understanding of molecular mechanisms."
+  },
+  {
+    "objectID": "machine_learning/01_introduction.html#key-concepts-youll-learn",
+    "href": "machine_learning/01_introduction.html#key-concepts-youll-learn",
+    "title": "01. Introduction",
+    "section": "",
+    "text": "Understanding the foundational mathematics is critical. Concepts such as linear algebra, probability, and optimization will be discussed with real-world biological examples.\n\n\n\n\nSupervised Learning: Predict disease outcomes based on labeled datasets.\nUnsupervised Learning: Cluster genes or proteins with unknown functions.\nReinforcement Learning: Optimize treatment regimens in a dynamic environment.\n\n\n\n\n\nGene expression analysis using dimensionality reduction techniques like PCA.\nIdentification of biomarkers with classification algorithms such as support vector machines.\nBuilding predictive models for disease diagnosis using deep learning.\n\n\n\n\n\nAnalyzing medical images with convolutional neural networks.\nDrug discovery through generative models and reinforcement learning.\nPersonalized medicine based on patient-specific data analysis."
+  },
+  {
+    "objectID": "machine_learning/01_introduction.html#learning-path",
+    "href": "machine_learning/01_introduction.html#learning-path",
+    "title": "01. Introduction",
+    "section": "",
+    "text": "Dive deep into the mathematical underpinnings necessary to understand machine learning models. Topics include:\n\nLinear algebra for genomic data analysis.\nProbability and statistics for modeling biological uncertainty.\n\n\n\n\nExplore how algorithms like neural networks and Gaussian mixture models can solve specific problems in bioinformatics.\n\n\n\nUnderstand the deployment of machine learning tools in biological and clinical settings with tutorials and case studies."
+  },
+  {
+    "objectID": "machine_learning/01_introduction.html#who-should-join-this-journey",
+    "href": "machine_learning/01_introduction.html#who-should-join-this-journey",
+    "title": "01. Introduction",
+    "section": "",
+    "text": "This blog is for anyone passionate about the intersection of machine learning and biological sciences:\n\nResearchers aiming to integrate AI into their studies.\nStudents learning about bioinformatics or machine learning.\nProfessionals seeking to understand how AI can be applied in healthcare."
+  },
+  {
+    "objectID": "machine_learning/01_introduction.html#stay-connected",
+    "href": "machine_learning/01_introduction.html#stay-connected",
+    "title": "01. Introduction",
+    "section": "",
+    "text": "Join us as we delve into the fascinating world where algorithms meet biology. Through tutorials, insights, and practical examples, this blog will help you stay ahead in the rapidly evolving field of AI in bioinformatics and biomedical science.\nLet’s innovate together!"
+  },
+  {
+    "objectID": "machine_learning/02_2_linear_algebra.html",
+    "href": "machine_learning/02_2_linear_algebra.html",
+    "title": "02.2. Linear Algebra",
+    "section": "",
+    "text": "import numpy as np\nimport matplotlib.pyplot as plt\n\n\nfrom IPython.display import set_matplotlib_formats\n\n# Use high-resolution images (optional for clarity)\nset_matplotlib_formats('retina')\n\n# Explicitly set larger inline figure size\nplt.rcParams[\"figure.figsize\"] = (15, 5)  # Wider plot\n\n/tmp/ipykernel_287194/4258177917.py:4: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`\n  set_matplotlib_formats('retina')\n\n\n\n\n\n\n\n\n%matplotlib inline\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Define vectors\nx = np.array([1, 2])\ny = np.array([2, 1])\nr = x + y\n\nfig, ax = plt.subplots(figsize=(8,6))\n\n# Plot arrows using annotate\ndef draw_vector(ax, origin, vector, color='black', style='-', label=None):\n    \"\"\"\n    Draws an arrow from 'origin' to 'origin + vector'\n    using `annotate`. Optionally adds a label next to it.\n    \"\"\"\n    # Endpoint of the vector\n    end = origin + vector\n    \n    # Plot the arrow\n    ax.annotate(\n        '', \n        xy=(end[0], end[1]),\n        xytext=(origin[0], origin[1]),\n        arrowprops={\n            'arrowstyle': '-&gt;', \n            'color': color, \n            'linestyle': style,\n            'linewidth': 2\n        }\n    )\n    \n    # If label is given, place text in the midpoint\n    if label is not None:\n        midpoint = origin + vector/2\n        ax.text(midpoint[0], midpoint[1], label, \n                fontsize=12, color=color,\n                ha='center', va='center')\n\n# Draw each vector from the origin (0,0) to x, y, and x+y\norigin = np.array([0, 0])\ndraw_vector(ax, origin, x,  color='red',   style='-', label=r'$\\vec{x}$')\ndraw_vector(ax, origin, y,  color='blue',  style='-', label=r'$\\vec{y}$')\ndraw_vector(ax, origin, r,  color='green', style='--', label=r'$\\vec{x} + \\vec{y}$')\n\n# Axis limits, grid, etc.\nax.set_xlim(0, 4)\nax.set_ylim(0, 4)\nax.set_aspect('equal', adjustable='box')\nax.grid(True, linestyle='--', alpha=0.5)\n\n# Title and labels\nplt.title(\"Geometric vectors\", fontsize=14)\nplt.xlabel(\"X-axis\")\nplt.ylabel(\"Y-axis\")\n\nplt.show()\n\n\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Generate x values\nx = np.linspace(-3, 3, 500)\n\n# Define polynomials\ny1 = x\ny2 = x**2 - 2\ny3 = -x**2 + 3\ny4 = x**3 - 3*x\n\n# Create the plot\nplt.figure(figsize=(10, 4))\n\n# Plot each polynomial\nplt.plot(x, y1, label=r'$y = x$', color='blue')\nplt.plot(x, y2, label=r'$y = x^2 - 2$', color='orange')\nplt.plot(x, y3, label=r'$y = -x^2 + 3$', color='green')\nplt.plot(x, y4, label=r'$y = x^3 - 3x$', color='red')\n\n# Add labels, legend, and grid\nplt.xlabel(r'$x$', fontsize=12)\nplt.ylabel(r'$y$', fontsize=12)\nplt.title(\"Polynomials\", fontsize=14)\nplt.axhline(0, color='black', linewidth=0.5, linestyle='--')\nplt.axvline(0, color='black', linewidth=0.5, linestyle='--')\nplt.grid(color='gray', linestyle='--', linewidth=0.5, alpha=0.7)\nplt.legend(fontsize=10)\nplt.ylim(-6, 6)\n\n# Show the plot\nplt.show()\n\n\n\n\n\nimport plotly.express as px\n\ndf = px.data.iris()\nfig = px.scatter(df, x=\"sepal_width\", y=\"sepal_length\", color=\"species\")\nfig.show()\n\n/opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages/plotly/express/_core.py:1985: FutureWarning: When grouping with a length-1 list-like, you will need to pass a length-1 tuple to get_group in a future version of pandas. Pass `(name,)` instead of `name` to silence this warning.\n  sf: grouped.get_group(s if len(s) &gt; 1 else s[0])\n\n\n\n                                                \n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "Basic/menu2.html",
+    "href": "Basic/menu2.html",
+    "title": "Basic2",
+    "section": "",
+    "text": "About this site\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "tutorial-2.html",
+    "href": "tutorial-2.html",
+    "title": "Tutorial 2",
+    "section": "",
+    "text": "What is Lorem Ipsum?\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of “de Finibus Bonorum et Malorum” (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, “Lorem ipsum dolor sit amet..”, comes from a line in section 1.10.32.\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from “de Finibus Bonorum et Malorum” by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "tutorial-1.html",
+    "href": "tutorial-1.html",
+    "title": "Tutorial 1",
+    "section": "",
+    "text": "What is Lorem Ipsum?\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of “de Finibus Bonorum et Malorum” (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, “Lorem ipsum dolor sit amet..”, comes from a line in section 1.10.32.\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from “de Finibus Bonorum et Malorum” by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\n\n\nWhat is Lorem Ipsum?\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of “de Finibus Bonorum et Malorum” (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, “Lorem ipsum dolor sit amet..”, comes from a line in section 1.10.32.\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from “de Finibus Bonorum et Malorum” by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "news.html",
+    "href": "news.html",
+    "title": "News",
+    "section": "",
+    "text": "Recently added page.\nViết thử tiếng Việt xem sao\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "Basic/menu1.html",
+    "href": "Basic/menu1.html",
+    "title": "Basic1",
+    "section": "",
+    "text": "About this site\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "machine_learning/02_1_linear_algebra.html",
+    "href": "machine_learning/02_1_linear_algebra.html",
+    "title": "02. Linear Algebra",
+    "section": "",
+    "text": "Linear Algebra forms the backbone of modern computational sciences, including machine learning, bioinformatics, and computer graphics. It enables efficient manipulation of large datasets and the mathematical modeling of systems. This blog explores the fundamental concepts of linear algebra, supplemented by detailed examples.\n\n\nLinear Algebra simplifies:\n\nData Representation: Representing high-dimensional datasets as matrices or vectors.\nTransformations: Applying operations like rotation, scaling, and projection.\nOptimization: Solving systems of equations and minimizing error in machine learning models.\n\n\n\n\n\n\nA vector is a quantity with both magnitude and direction. It can represent points in a space, rows in a dataset, or features in machine learning.\n\n\n\nimport numpy as np\n\n# Example: 2D and 3D vectors\nvector_2D = np.array([3, 4])\nvector_3D = np.array([2, -1, 5])\n\n# Magnitude of a vector\nmagnitude_2D = np.linalg.norm(vector_2D)\nprint(\"Magnitude of 2D vector:\", magnitude_2D)\n\nMagnitude of 2D vector: 5.0\n\n\n\n\n\n\nA matrix is a collection of numbers arranged in rows and columns. It is used to store and manipulate multiple vectors or datasets.\n\n\n\n# Defining two matrices\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[2, 0], [1, 3]])\n\n# Matrix multiplication\nresult = np.dot(A, B)\nprint(\"Matrix A:\")\nprint(A)\nprint(\"Matrix B:\")\nprint(B)\nprint(\"A * B:\")\nprint(result)\n\nMatrix A:\n[[1 2]\n [3 4]]\nMatrix B:\n[[2 0]\n [1 3]]\nA * B:\n[[ 4  6]\n [10 12]]\n\n\n\n\n\n\nSystems of equations can be represented as matrix equations \\(Ax = b\\), where \\(A\\) is a matrix, \\(x\\) is a vector of variables, and \\(b\\) is the result.\n\n\n\n# Solving a system of linear equations\nA = np.array([[2, 3], [1, 2]])\nb = np.array([5, 4])\n\n# Solving for x\nx = np.linalg.solve(A, b)\nprint(\"Solution for Ax = b:\", x)\n\nSolution for Ax = b: [-2.  3.]\n\n\n\n\n\n\nEigenvalues and eigenvectors are critical in understanding matrix transformations, such as scaling and rotation.\n\n\n\n# Define a matrix\nA = np.array([[2, -1], [-1, 2]])\n\n# Compute eigenvalues and eigenvectors\neigenvalues, eigenvectors = np.linalg.eig(A)\nprint(\"Eigenvalues:\", eigenvalues)\nprint(\"Eigenvectors:\")\nprint(eigenvectors)\n\nEigenvalues: [3. 1.]\nEigenvectors:\n[[ 0.70710678  0.70710678]\n [-0.70710678  0.70710678]]\n\n\n\n\n\n\nPCA is a dimensionality reduction technique using eigenvectors to project data onto lower-dimensional spaces.\n\\[ x = \\sqrt{y} \\]\n\\[ z = \\sqrt{a^2 + b^2} \\]\n\\[ \\widetilde{\\mathbf{A}}_{\\Phi} = \\mathbf{T}^{-1} \\mathbf{A}_{\\Phi} \\mathbf{S}. \\]\n\\[ \\widetilde{b}_j = s_{1j} b_1 + \\cdots + s_{nj} b_n = \\sum_{i=1}^n s_{ij} b_i, \\quad j = 1, \\ldots, n. \\]\n\n\n\n\nCode\nfrom sklearn.decomposition import PCA\nimport matplotlib.pyplot as plt\n\n# Create example data\ndata = np.random.rand(100, 3)\n\n# Apply PCA to reduce dimensions to 2\npca = PCA(n_components=2)\nreduced_data = pca.fit_transform(data)\n\n# Plot reduced data\nplt.scatter(reduced_data[:, 0], reduced_data[:, 1])\nplt.title(\"2D Projection of 3D Data Using PCA\")\nplt.xlabel(\"Principal Component 1\")\nplt.ylabel(\"Principal Component 2\")\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nMachine Learning: Gradient descent and feature transformation.\nBioinformatics: Analyzing gene expression data using matrix factorization.\nGraphics: Rotating and scaling objects in 3D space.\n\n\n\n\nLinear Algebra is a powerful mathematical tool for solving real-world problems across diverse fields. By mastering its principles, you can:\n\nRepresent and manipulate datasets.\nUnderstand transformations and projections.\nSolve complex systems of equations efficiently.\n\nDive deeper into applications and enhance your mathematical foundation for tackling computational challenges!\nTest (Zheng et al., 2024)\nTest_2 (Zhou et al., 2020)\nTest_3 (Tirosh et al., 2016)\n\n\n\n\n\nTirosh, I., Venteicher, A. S., Hebert, C., Escalante, L. E., Patel, A. P., Yizhak, K., Fisher, J. M., Rodman, C., Mount, C., Filbin, M. G., Neftel, C., Desai, N., Nyman, J., Izar, B., Luo, C. C., Francis, J. M., Patel, A. A., Onozato, M. L., Riggi, N., … Suvà, M. L. (2016). Single-cell RNA-seq supports a developmental hierarchy in human oligodendroglioma. Nature, 539(7628), 309–313. https://doi.org/10.1038/nature20123\n\n\nZheng, X., Liu, X., Zhang, X., Zhao, Z., Wu, W., & Yu, S. (2024). A single-cell and spatially resolved atlas of human osteosarcomas. Journal of Hematology & Oncology, 17(1), 71. https://doi.org/10.1186/s13045-024-01598-7\n\n\nZhou, Y., Yang, D., Yang, Q., Lv, X., Huang, W., Zhou, Z., Wang, Y., Zhang, Z., Yuan, T., Ding, X., Tang, L., Zhang, J., Yin, J., Huang, Y., Yu, W., Wang, Y., Zhou, C., Su, Y., He, A., … Hu, H. (2020). Single-cell RNA landscape of intratumoral heterogeneity and immunosuppressive microenvironment in advanced osteosarcoma. Nature Communications, 11(1), 6322. https://doi.org/10.1038/s41467-020-20059-6"
+  },
+  {
+    "objectID": "machine_learning/02_1_linear_algebra.html#why-learn-linear-algebra",
+    "href": "machine_learning/02_1_linear_algebra.html#why-learn-linear-algebra",
+    "title": "02. Linear Algebra",
+    "section": "",
+    "text": "Linear Algebra simplifies:\n\nData Representation: Representing high-dimensional datasets as matrices or vectors.\nTransformations: Applying operations like rotation, scaling, and projection.\nOptimization: Solving systems of equations and minimizing error in machine learning models."
+  },
+  {
+    "objectID": "machine_learning/02_1_linear_algebra.html#core-concepts",
+    "href": "machine_learning/02_1_linear_algebra.html#core-concepts",
+    "title": "02. Linear Algebra",
+    "section": "",
+    "text": "A vector is a quantity with both magnitude and direction. It can represent points in a space, rows in a dataset, or features in machine learning.\n\n\n\nimport numpy as np\n\n# Example: 2D and 3D vectors\nvector_2D = np.array([3, 4])\nvector_3D = np.array([2, -1, 5])\n\n# Magnitude of a vector\nmagnitude_2D = np.linalg.norm(vector_2D)\nprint(\"Magnitude of 2D vector:\", magnitude_2D)\n\nMagnitude of 2D vector: 5.0\n\n\n\n\n\n\nA matrix is a collection of numbers arranged in rows and columns. It is used to store and manipulate multiple vectors or datasets.\n\n\n\n# Defining two matrices\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[2, 0], [1, 3]])\n\n# Matrix multiplication\nresult = np.dot(A, B)\nprint(\"Matrix A:\")\nprint(A)\nprint(\"Matrix B:\")\nprint(B)\nprint(\"A * B:\")\nprint(result)\n\nMatrix A:\n[[1 2]\n [3 4]]\nMatrix B:\n[[2 0]\n [1 3]]\nA * B:\n[[ 4  6]\n [10 12]]\n\n\n\n\n\n\nSystems of equations can be represented as matrix equations \\(Ax = b\\), where \\(A\\) is a matrix, \\(x\\) is a vector of variables, and \\(b\\) is the result.\n\n\n\n# Solving a system of linear equations\nA = np.array([[2, 3], [1, 2]])\nb = np.array([5, 4])\n\n# Solving for x\nx = np.linalg.solve(A, b)\nprint(\"Solution for Ax = b:\", x)\n\nSolution for Ax = b: [-2.  3.]\n\n\n\n\n\n\nEigenvalues and eigenvectors are critical in understanding matrix transformations, such as scaling and rotation.\n\n\n\n# Define a matrix\nA = np.array([[2, -1], [-1, 2]])\n\n# Compute eigenvalues and eigenvectors\neigenvalues, eigenvectors = np.linalg.eig(A)\nprint(\"Eigenvalues:\", eigenvalues)\nprint(\"Eigenvectors:\")\nprint(eigenvectors)\n\nEigenvalues: [3. 1.]\nEigenvectors:\n[[ 0.70710678  0.70710678]\n [-0.70710678  0.70710678]]\n\n\n\n\n\n\nPCA is a dimensionality reduction technique using eigenvectors to project data onto lower-dimensional spaces.\n\\[ x = \\sqrt{y} \\]\n\\[ z = \\sqrt{a^2 + b^2} \\]\n\\[ \\widetilde{\\mathbf{A}}_{\\Phi} = \\mathbf{T}^{-1} \\mathbf{A}_{\\Phi} \\mathbf{S}. \\]\n\\[ \\widetilde{b}_j = s_{1j} b_1 + \\cdots + s_{nj} b_n = \\sum_{i=1}^n s_{ij} b_i, \\quad j = 1, \\ldots, n. \\]\n\n\n\n\nCode\nfrom sklearn.decomposition import PCA\nimport matplotlib.pyplot as plt\n\n# Create example data\ndata = np.random.rand(100, 3)\n\n# Apply PCA to reduce dimensions to 2\npca = PCA(n_components=2)\nreduced_data = pca.fit_transform(data)\n\n# Plot reduced data\nplt.scatter(reduced_data[:, 0], reduced_data[:, 1])\nplt.title(\"2D Projection of 3D Data Using PCA\")\nplt.xlabel(\"Principal Component 1\")\nplt.ylabel(\"Principal Component 2\")\nplt.show()"
+  },
+  {
+    "objectID": "machine_learning/02_1_linear_algebra.html#applications-of-linear-algebra",
+    "href": "machine_learning/02_1_linear_algebra.html#applications-of-linear-algebra",
+    "title": "02. Linear Algebra",
+    "section": "",
+    "text": "Machine Learning: Gradient descent and feature transformation.\nBioinformatics: Analyzing gene expression data using matrix factorization.\nGraphics: Rotating and scaling objects in 3D space."
+  },
+  {
+    "objectID": "machine_learning/02_1_linear_algebra.html#summary",
+    "href": "machine_learning/02_1_linear_algebra.html#summary",
+    "title": "02. Linear Algebra",
+    "section": "",
+    "text": "Linear Algebra is a powerful mathematical tool for solving real-world problems across diverse fields. By mastering its principles, you can:\n\nRepresent and manipulate datasets.\nUnderstand transformations and projections.\nSolve complex systems of equations efficiently.\n\nDive deeper into applications and enhance your mathematical foundation for tackling computational challenges!\nTest (Zheng et al., 2024)\nTest_2 (Zhou et al., 2020)\nTest_3 (Tirosh et al., 2016)"
+  },
+  {
+    "objectID": "machine_learning/02_1_linear_algebra.html#references",
+    "href": "machine_learning/02_1_linear_algebra.html#references",
+    "title": "02. Linear Algebra",
+    "section": "",
+    "text": "Tirosh, I., Venteicher, A. S., Hebert, C., Escalante, L. E., Patel, A. P., Yizhak, K., Fisher, J. M., Rodman, C., Mount, C., Filbin, M. G., Neftel, C., Desai, N., Nyman, J., Izar, B., Luo, C. C., Francis, J. M., Patel, A. A., Onozato, M. L., Riggi, N., … Suvà, M. L. (2016). Single-cell RNA-seq supports a developmental hierarchy in human oligodendroglioma. Nature, 539(7628), 309–313. https://doi.org/10.1038/nature20123\n\n\nZheng, X., Liu, X., Zhang, X., Zhao, Z., Wu, W., & Yu, S. (2024). A single-cell and spatially resolved atlas of human osteosarcomas. Journal of Hematology & Oncology, 17(1), 71. https://doi.org/10.1186/s13045-024-01598-7\n\n\nZhou, Y., Yang, D., Yang, Q., Lv, X., Huang, W., Zhou, Z., Wang, Y., Zhang, Z., Yuan, T., Ding, X., Tang, L., Zhang, J., Yin, J., Huang, Y., Yu, W., Wang, Y., Zhou, C., Su, Y., He, A., … Hu, H. (2020). Single-cell RNA landscape of intratumoral heterogeneity and immunosuppressive microenvironment in advanced osteosarcoma. Nature Communications, 11(1), 6322. https://doi.org/10.1038/s41467-020-20059-6"
+  },
+  {
+    "objectID": "Advance/menu3.html",
+    "href": "Advance/menu3.html",
+    "title": "Advance1",
+    "section": "",
+    "text": "About this site\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "Advance/test.html",
+    "href": "Advance/test.html",
+    "title": "khuongduying",
+    "section": "",
+    "text": "Hello World!\n\npip install pandas\n\nRequirement already satisfied: pandas in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (2.2.3)\nRequirement already satisfied: numpy&gt;=1.26.0 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from pandas) (2.2.2)\nRequirement already satisfied: python-dateutil&gt;=2.8.2 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from pandas) (2.9.0.post0)\nRequirement already satisfied: pytz&gt;=2020.1 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from pandas) (2025.1)\nRequirement already satisfied: tzdata&gt;=2022.7 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from pandas) (2025.1)\nRequirement already satisfied: six&gt;=1.5 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)\nNote: you may need to restart the kernel to use updated packages.\n\n\n\nimport pandas as pd\n\n\n\n\n Back to top"
+  },
+  {
     "objectID": "best_practice/git/setup_remote_repo.html",
     "href": "best_practice/git/setup_remote_repo.html",
     "title": "Setting Up a Git Repository and Connecting to a Remote",
@@ -208,174 +460,6 @@
     "title": "Setting Up a Git Repository and Connecting to a Remote",
     "section": "Summary",
     "text": "Summary\nBy adhering to these best practices, you create a robust, secure, and collaborative environment for your project. Key takeaways include:\n\nInitialization: Start clean and configure user information.\nIgnoring Files: Use .gitignore to prevent tracking unnecessary files.\nCommit Messages: Keep them clear and consistent.\nBranching: Use feature branches and pull requests.\nSecurity: Protect sensitive data and enforce security measures.\nDocumentation: Maintain comprehensive project documentation.\n\nImplementing these practices will enhance your workflow, facilitate collaboration, and ensure the integrity of your project’s history."
-  },
-  {
-    "objectID": "Advance/test.html",
-    "href": "Advance/test.html",
-    "title": "khuongduying",
-    "section": "",
-    "text": "Hello World!\n\npip install pandas\n\nRequirement already satisfied: pandas in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (2.2.3)\nRequirement already satisfied: numpy&gt;=1.26.0 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from pandas) (2.2.2)\nRequirement already satisfied: python-dateutil&gt;=2.8.2 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from pandas) (2.9.0.post0)\nRequirement already satisfied: pytz&gt;=2020.1 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from pandas) (2025.1)\nRequirement already satisfied: tzdata&gt;=2022.7 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from pandas) (2025.1)\nRequirement already satisfied: six&gt;=1.5 in /opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)\nNote: you may need to restart the kernel to use updated packages.\n\n\n\nimport pandas as pd\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "Advance/menu3.html",
-    "href": "Advance/menu3.html",
-    "title": "Advance1",
-    "section": "",
-    "text": "About this site\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "machine_learning/02_1_linear_algebra.html",
-    "href": "machine_learning/02_1_linear_algebra.html",
-    "title": "02. Linear Algebra",
-    "section": "",
-    "text": "Linear Algebra forms the backbone of modern computational sciences, including machine learning, bioinformatics, and computer graphics. It enables efficient manipulation of large datasets and the mathematical modeling of systems. This blog explores the fundamental concepts of linear algebra, supplemented by detailed examples.\n\n\nLinear Algebra simplifies:\n\nData Representation: Representing high-dimensional datasets as matrices or vectors.\nTransformations: Applying operations like rotation, scaling, and projection.\nOptimization: Solving systems of equations and minimizing error in machine learning models.\n\n\n\n\n\n\nA vector is a quantity with both magnitude and direction. It can represent points in a space, rows in a dataset, or features in machine learning.\n\n\n\nimport numpy as np\n\n# Example: 2D and 3D vectors\nvector_2D = np.array([3, 4])\nvector_3D = np.array([2, -1, 5])\n\n# Magnitude of a vector\nmagnitude_2D = np.linalg.norm(vector_2D)\nprint(\"Magnitude of 2D vector:\", magnitude_2D)\n\nMagnitude of 2D vector: 5.0\n\n\n\n\n\n\nA matrix is a collection of numbers arranged in rows and columns. It is used to store and manipulate multiple vectors or datasets.\n\n\n\n# Defining two matrices\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[2, 0], [1, 3]])\n\n# Matrix multiplication\nresult = np.dot(A, B)\nprint(\"Matrix A:\")\nprint(A)\nprint(\"Matrix B:\")\nprint(B)\nprint(\"A * B:\")\nprint(result)\n\nMatrix A:\n[[1 2]\n [3 4]]\nMatrix B:\n[[2 0]\n [1 3]]\nA * B:\n[[ 4  6]\n [10 12]]\n\n\n\n\n\n\nSystems of equations can be represented as matrix equations \\(Ax = b\\), where \\(A\\) is a matrix, \\(x\\) is a vector of variables, and \\(b\\) is the result.\n\n\n\n# Solving a system of linear equations\nA = np.array([[2, 3], [1, 2]])\nb = np.array([5, 4])\n\n# Solving for x\nx = np.linalg.solve(A, b)\nprint(\"Solution for Ax = b:\", x)\n\nSolution for Ax = b: [-2.  3.]\n\n\n\n\n\n\nEigenvalues and eigenvectors are critical in understanding matrix transformations, such as scaling and rotation.\n\n\n\n# Define a matrix\nA = np.array([[2, -1], [-1, 2]])\n\n# Compute eigenvalues and eigenvectors\neigenvalues, eigenvectors = np.linalg.eig(A)\nprint(\"Eigenvalues:\", eigenvalues)\nprint(\"Eigenvectors:\")\nprint(eigenvectors)\n\nEigenvalues: [3. 1.]\nEigenvectors:\n[[ 0.70710678  0.70710678]\n [-0.70710678  0.70710678]]\n\n\n\n\n\n\nPCA is a dimensionality reduction technique using eigenvectors to project data onto lower-dimensional spaces.\n\\[ x = \\sqrt{y} \\]\n\\[ z = \\sqrt{a^2 + b^2} \\]\n\\[ \\widetilde{\\mathbf{A}}_{\\Phi} = \\mathbf{T}^{-1} \\mathbf{A}_{\\Phi} \\mathbf{S}. \\]\n\\[ \\widetilde{b}_j = s_{1j} b_1 + \\cdots + s_{nj} b_n = \\sum_{i=1}^n s_{ij} b_i, \\quad j = 1, \\ldots, n. \\]\n\n\n\n\nCode\nfrom sklearn.decomposition import PCA\nimport matplotlib.pyplot as plt\n\n# Create example data\ndata = np.random.rand(100, 3)\n\n# Apply PCA to reduce dimensions to 2\npca = PCA(n_components=2)\nreduced_data = pca.fit_transform(data)\n\n# Plot reduced data\nplt.scatter(reduced_data[:, 0], reduced_data[:, 1])\nplt.title(\"2D Projection of 3D Data Using PCA\")\nplt.xlabel(\"Principal Component 1\")\nplt.ylabel(\"Principal Component 2\")\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nMachine Learning: Gradient descent and feature transformation.\nBioinformatics: Analyzing gene expression data using matrix factorization.\nGraphics: Rotating and scaling objects in 3D space.\n\n\n\n\nLinear Algebra is a powerful mathematical tool for solving real-world problems across diverse fields. By mastering its principles, you can:\n\nRepresent and manipulate datasets.\nUnderstand transformations and projections.\nSolve complex systems of equations efficiently.\n\nDive deeper into applications and enhance your mathematical foundation for tackling computational challenges!\nTest (Zheng et al., 2024)\nTest_2 (Zhou et al., 2020)\nTest_3 (Tirosh et al., 2016)\n\n\n\n\n\nTirosh, I., Venteicher, A. S., Hebert, C., Escalante, L. E., Patel, A. P., Yizhak, K., Fisher, J. M., Rodman, C., Mount, C., Filbin, M. G., Neftel, C., Desai, N., Nyman, J., Izar, B., Luo, C. C., Francis, J. M., Patel, A. A., Onozato, M. L., Riggi, N., … Suvà, M. L. (2016). Single-cell RNA-seq supports a developmental hierarchy in human oligodendroglioma. Nature, 539(7628), 309–313. https://doi.org/10.1038/nature20123\n\n\nZheng, X., Liu, X., Zhang, X., Zhao, Z., Wu, W., & Yu, S. (2024). A single-cell and spatially resolved atlas of human osteosarcomas. Journal of Hematology & Oncology, 17(1), 71. https://doi.org/10.1186/s13045-024-01598-7\n\n\nZhou, Y., Yang, D., Yang, Q., Lv, X., Huang, W., Zhou, Z., Wang, Y., Zhang, Z., Yuan, T., Ding, X., Tang, L., Zhang, J., Yin, J., Huang, Y., Yu, W., Wang, Y., Zhou, C., Su, Y., He, A., … Hu, H. (2020). Single-cell RNA landscape of intratumoral heterogeneity and immunosuppressive microenvironment in advanced osteosarcoma. Nature Communications, 11(1), 6322. https://doi.org/10.1038/s41467-020-20059-6"
-  },
-  {
-    "objectID": "machine_learning/02_1_linear_algebra.html#why-learn-linear-algebra",
-    "href": "machine_learning/02_1_linear_algebra.html#why-learn-linear-algebra",
-    "title": "02. Linear Algebra",
-    "section": "",
-    "text": "Linear Algebra simplifies:\n\nData Representation: Representing high-dimensional datasets as matrices or vectors.\nTransformations: Applying operations like rotation, scaling, and projection.\nOptimization: Solving systems of equations and minimizing error in machine learning models."
-  },
-  {
-    "objectID": "machine_learning/02_1_linear_algebra.html#core-concepts",
-    "href": "machine_learning/02_1_linear_algebra.html#core-concepts",
-    "title": "02. Linear Algebra",
-    "section": "",
-    "text": "A vector is a quantity with both magnitude and direction. It can represent points in a space, rows in a dataset, or features in machine learning.\n\n\n\nimport numpy as np\n\n# Example: 2D and 3D vectors\nvector_2D = np.array([3, 4])\nvector_3D = np.array([2, -1, 5])\n\n# Magnitude of a vector\nmagnitude_2D = np.linalg.norm(vector_2D)\nprint(\"Magnitude of 2D vector:\", magnitude_2D)\n\nMagnitude of 2D vector: 5.0\n\n\n\n\n\n\nA matrix is a collection of numbers arranged in rows and columns. It is used to store and manipulate multiple vectors or datasets.\n\n\n\n# Defining two matrices\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[2, 0], [1, 3]])\n\n# Matrix multiplication\nresult = np.dot(A, B)\nprint(\"Matrix A:\")\nprint(A)\nprint(\"Matrix B:\")\nprint(B)\nprint(\"A * B:\")\nprint(result)\n\nMatrix A:\n[[1 2]\n [3 4]]\nMatrix B:\n[[2 0]\n [1 3]]\nA * B:\n[[ 4  6]\n [10 12]]\n\n\n\n\n\n\nSystems of equations can be represented as matrix equations \\(Ax = b\\), where \\(A\\) is a matrix, \\(x\\) is a vector of variables, and \\(b\\) is the result.\n\n\n\n# Solving a system of linear equations\nA = np.array([[2, 3], [1, 2]])\nb = np.array([5, 4])\n\n# Solving for x\nx = np.linalg.solve(A, b)\nprint(\"Solution for Ax = b:\", x)\n\nSolution for Ax = b: [-2.  3.]\n\n\n\n\n\n\nEigenvalues and eigenvectors are critical in understanding matrix transformations, such as scaling and rotation.\n\n\n\n# Define a matrix\nA = np.array([[2, -1], [-1, 2]])\n\n# Compute eigenvalues and eigenvectors\neigenvalues, eigenvectors = np.linalg.eig(A)\nprint(\"Eigenvalues:\", eigenvalues)\nprint(\"Eigenvectors:\")\nprint(eigenvectors)\n\nEigenvalues: [3. 1.]\nEigenvectors:\n[[ 0.70710678  0.70710678]\n [-0.70710678  0.70710678]]\n\n\n\n\n\n\nPCA is a dimensionality reduction technique using eigenvectors to project data onto lower-dimensional spaces.\n\\[ x = \\sqrt{y} \\]\n\\[ z = \\sqrt{a^2 + b^2} \\]\n\\[ \\widetilde{\\mathbf{A}}_{\\Phi} = \\mathbf{T}^{-1} \\mathbf{A}_{\\Phi} \\mathbf{S}. \\]\n\\[ \\widetilde{b}_j = s_{1j} b_1 + \\cdots + s_{nj} b_n = \\sum_{i=1}^n s_{ij} b_i, \\quad j = 1, \\ldots, n. \\]\n\n\n\n\nCode\nfrom sklearn.decomposition import PCA\nimport matplotlib.pyplot as plt\n\n# Create example data\ndata = np.random.rand(100, 3)\n\n# Apply PCA to reduce dimensions to 2\npca = PCA(n_components=2)\nreduced_data = pca.fit_transform(data)\n\n# Plot reduced data\nplt.scatter(reduced_data[:, 0], reduced_data[:, 1])\nplt.title(\"2D Projection of 3D Data Using PCA\")\nplt.xlabel(\"Principal Component 1\")\nplt.ylabel(\"Principal Component 2\")\nplt.show()"
-  },
-  {
-    "objectID": "machine_learning/02_1_linear_algebra.html#applications-of-linear-algebra",
-    "href": "machine_learning/02_1_linear_algebra.html#applications-of-linear-algebra",
-    "title": "02. Linear Algebra",
-    "section": "",
-    "text": "Machine Learning: Gradient descent and feature transformation.\nBioinformatics: Analyzing gene expression data using matrix factorization.\nGraphics: Rotating and scaling objects in 3D space."
-  },
-  {
-    "objectID": "machine_learning/02_1_linear_algebra.html#summary",
-    "href": "machine_learning/02_1_linear_algebra.html#summary",
-    "title": "02. Linear Algebra",
-    "section": "",
-    "text": "Linear Algebra is a powerful mathematical tool for solving real-world problems across diverse fields. By mastering its principles, you can:\n\nRepresent and manipulate datasets.\nUnderstand transformations and projections.\nSolve complex systems of equations efficiently.\n\nDive deeper into applications and enhance your mathematical foundation for tackling computational challenges!\nTest (Zheng et al., 2024)\nTest_2 (Zhou et al., 2020)\nTest_3 (Tirosh et al., 2016)"
-  },
-  {
-    "objectID": "machine_learning/02_1_linear_algebra.html#references",
-    "href": "machine_learning/02_1_linear_algebra.html#references",
-    "title": "02. Linear Algebra",
-    "section": "",
-    "text": "Tirosh, I., Venteicher, A. S., Hebert, C., Escalante, L. E., Patel, A. P., Yizhak, K., Fisher, J. M., Rodman, C., Mount, C., Filbin, M. G., Neftel, C., Desai, N., Nyman, J., Izar, B., Luo, C. C., Francis, J. M., Patel, A. A., Onozato, M. L., Riggi, N., … Suvà, M. L. (2016). Single-cell RNA-seq supports a developmental hierarchy in human oligodendroglioma. Nature, 539(7628), 309–313. https://doi.org/10.1038/nature20123\n\n\nZheng, X., Liu, X., Zhang, X., Zhao, Z., Wu, W., & Yu, S. (2024). A single-cell and spatially resolved atlas of human osteosarcomas. Journal of Hematology & Oncology, 17(1), 71. https://doi.org/10.1186/s13045-024-01598-7\n\n\nZhou, Y., Yang, D., Yang, Q., Lv, X., Huang, W., Zhou, Z., Wang, Y., Zhang, Z., Yuan, T., Ding, X., Tang, L., Zhang, J., Yin, J., Huang, Y., Yu, W., Wang, Y., Zhou, C., Su, Y., He, A., … Hu, H. (2020). Single-cell RNA landscape of intratumoral heterogeneity and immunosuppressive microenvironment in advanced osteosarcoma. Nature Communications, 11(1), 6322. https://doi.org/10.1038/s41467-020-20059-6"
-  },
-  {
-    "objectID": "Basic/menu1.html",
-    "href": "Basic/menu1.html",
-    "title": "Basic1",
-    "section": "",
-    "text": "About this site\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "news.html",
-    "href": "news.html",
-    "title": "News",
-    "section": "",
-    "text": "Recently added page.\nViết thử tiếng Việt xem sao\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "tutorial-1.html",
-    "href": "tutorial-1.html",
-    "title": "Tutorial 1",
-    "section": "",
-    "text": "What is Lorem Ipsum?\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of “de Finibus Bonorum et Malorum” (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, “Lorem ipsum dolor sit amet..”, comes from a line in section 1.10.32.\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from “de Finibus Bonorum et Malorum” by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\n\n\nWhat is Lorem Ipsum?\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of “de Finibus Bonorum et Malorum” (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, “Lorem ipsum dolor sit amet..”, comes from a line in section 1.10.32.\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from “de Finibus Bonorum et Malorum” by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "tutorial-2.html",
-    "href": "tutorial-2.html",
-    "title": "Tutorial 2",
-    "section": "",
-    "text": "What is Lorem Ipsum?\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n\nWhy do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of “de Finibus Bonorum et Malorum” (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, “Lorem ipsum dolor sit amet..”, comes from a line in section 1.10.32.\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from “de Finibus Bonorum et Malorum” by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "Basic/menu2.html",
-    "href": "Basic/menu2.html",
-    "title": "Basic2",
-    "section": "",
-    "text": "About this site\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "machine_learning/02_2_linear_algebra.html",
-    "href": "machine_learning/02_2_linear_algebra.html",
-    "title": "02.2. Linear Algebra",
-    "section": "",
-    "text": "import numpy as np\nimport matplotlib.pyplot as plt\n\n\nfrom IPython.display import set_matplotlib_formats\n\n# Use high-resolution images (optional for clarity)\nset_matplotlib_formats('retina')\n\n# Explicitly set larger inline figure size\nplt.rcParams[\"figure.figsize\"] = (15, 5)  # Wider plot\n\n/tmp/ipykernel_287194/4258177917.py:4: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`\n  set_matplotlib_formats('retina')\n\n\n\n\n\n\n\n\n%matplotlib inline\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Define vectors\nx = np.array([1, 2])\ny = np.array([2, 1])\nr = x + y\n\nfig, ax = plt.subplots(figsize=(8,6))\n\n# Plot arrows using annotate\ndef draw_vector(ax, origin, vector, color='black', style='-', label=None):\n    \"\"\"\n    Draws an arrow from 'origin' to 'origin + vector'\n    using `annotate`. Optionally adds a label next to it.\n    \"\"\"\n    # Endpoint of the vector\n    end = origin + vector\n    \n    # Plot the arrow\n    ax.annotate(\n        '', \n        xy=(end[0], end[1]),\n        xytext=(origin[0], origin[1]),\n        arrowprops={\n            'arrowstyle': '-&gt;', \n            'color': color, \n            'linestyle': style,\n            'linewidth': 2\n        }\n    )\n    \n    # If label is given, place text in the midpoint\n    if label is not None:\n        midpoint = origin + vector/2\n        ax.text(midpoint[0], midpoint[1], label, \n                fontsize=12, color=color,\n                ha='center', va='center')\n\n# Draw each vector from the origin (0,0) to x, y, and x+y\norigin = np.array([0, 0])\ndraw_vector(ax, origin, x,  color='red',   style='-', label=r'$\\vec{x}$')\ndraw_vector(ax, origin, y,  color='blue',  style='-', label=r'$\\vec{y}$')\ndraw_vector(ax, origin, r,  color='green', style='--', label=r'$\\vec{x} + \\vec{y}$')\n\n# Axis limits, grid, etc.\nax.set_xlim(0, 4)\nax.set_ylim(0, 4)\nax.set_aspect('equal', adjustable='box')\nax.grid(True, linestyle='--', alpha=0.5)\n\n# Title and labels\nplt.title(\"Geometric vectors\", fontsize=14)\nplt.xlabel(\"X-axis\")\nplt.ylabel(\"Y-axis\")\n\nplt.show()\n\n\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Generate x values\nx = np.linspace(-3, 3, 500)\n\n# Define polynomials\ny1 = x\ny2 = x**2 - 2\ny3 = -x**2 + 3\ny4 = x**3 - 3*x\n\n# Create the plot\nplt.figure(figsize=(10, 4))\n\n# Plot each polynomial\nplt.plot(x, y1, label=r'$y = x$', color='blue')\nplt.plot(x, y2, label=r'$y = x^2 - 2$', color='orange')\nplt.plot(x, y3, label=r'$y = -x^2 + 3$', color='green')\nplt.plot(x, y4, label=r'$y = x^3 - 3x$', color='red')\n\n# Add labels, legend, and grid\nplt.xlabel(r'$x$', fontsize=12)\nplt.ylabel(r'$y$', fontsize=12)\nplt.title(\"Polynomials\", fontsize=14)\nplt.axhline(0, color='black', linewidth=0.5, linestyle='--')\nplt.axvline(0, color='black', linewidth=0.5, linestyle='--')\nplt.grid(color='gray', linestyle='--', linewidth=0.5, alpha=0.7)\nplt.legend(fontsize=10)\nplt.ylim(-6, 6)\n\n# Show the plot\nplt.show()\n\n\n\n\n\nimport plotly.express as px\n\ndf = px.data.iris()\nfig = px.scatter(df, x=\"sepal_width\", y=\"sepal_length\", color=\"species\")\nfig.show()\n\n/opt/mambaforge/envs/machine_learning/lib/python3.13/site-packages/plotly/express/_core.py:1985: FutureWarning: When grouping with a length-1 list-like, you will need to pass a length-1 tuple to get_group in a future version of pandas. Pass `(name,)` instead of `name` to silence this warning.\n  sf: grouped.get_group(s if len(s) &gt; 1 else s[0])\n\n\n\n                                                \n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "machine_learning/01_introduction.html",
-    "href": "machine_learning/01_introduction.html",
-    "title": "01. Introduction",
-    "section": "",
-    "text": "Machine learning is revolutionizing the way we approach complex challenges in bioinformatics and biomedical science. This blog serves as a comprehensive resource for understanding how machine learning can be applied to decipher biological data, design predictive models, and improve healthcare outcomes. Whether you are a researcher, data scientist, or enthusiast, this project aims to bridge the technical and biological domains, unlocking the potential of AI in these fields.\n\n\nThis project focuses on exploring the integration of machine learning techniques with bioinformatics and biomedical sciences. The objective is to:\n\nSimplify Data Complexity: Handle high-dimensional and heterogeneous biological data, such as genomics, proteomics, and imaging datasets.\nDiscover Patterns: Uncover hidden patterns in diseases and biological processes.\nEnhance Predictive Accuracy: Build robust models for diagnostics, personalized medicine, and disease prediction.\nInnovate with Algorithms: Leverage tools like regression, clustering, neural networks, and deep learning.\n\n\n\n\n\n\nModern technologies, such as next-generation sequencing and advanced imaging, generate enormous amounts of data. Machine learning helps process this data to extract meaningful insights.\n\n\n\nFrom predicting disease outcomes to suggesting personalized treatments, machine learning models provide evidence-based support for better healthcare decisions.\n\n\n\nMachine learning accelerates hypothesis testing, drug discovery, and understanding of molecular mechanisms.\n\n\n\n\n\n\nUnderstanding the foundational mathematics is critical. Concepts such as linear algebra, probability, and optimization will be discussed with real-world biological examples.\n\n\n\n\nSupervised Learning: Predict disease outcomes based on labeled datasets.\nUnsupervised Learning: Cluster genes or proteins with unknown functions.\nReinforcement Learning: Optimize treatment regimens in a dynamic environment.\n\n\n\n\n\nGene expression analysis using dimensionality reduction techniques like PCA.\nIdentification of biomarkers with classification algorithms such as support vector machines.\nBuilding predictive models for disease diagnosis using deep learning.\n\n\n\n\n\nAnalyzing medical images with convolutional neural networks.\nDrug discovery through generative models and reinforcement learning.\nPersonalized medicine based on patient-specific data analysis.\n\n\n\n\n\n\n\nDive deep into the mathematical underpinnings necessary to understand machine learning models. Topics include:\n\nLinear algebra for genomic data analysis.\nProbability and statistics for modeling biological uncertainty.\n\n\n\n\nExplore how algorithms like neural networks and Gaussian mixture models can solve specific problems in bioinformatics.\n\n\n\nUnderstand the deployment of machine learning tools in biological and clinical settings with tutorials and case studies.\n\n\n\n\nThis blog is for anyone passionate about the intersection of machine learning and biological sciences:\n\nResearchers aiming to integrate AI into their studies.\nStudents learning about bioinformatics or machine learning.\nProfessionals seeking to understand how AI can be applied in healthcare.\n\n\n\n\nJoin us as we delve into the fascinating world where algorithms meet biology. Through tutorials, insights, and practical examples, this blog will help you stay ahead in the rapidly evolving field of AI in bioinformatics and biomedical science.\nLet’s innovate together!"
-  },
-  {
-    "objectID": "machine_learning/01_introduction.html#what-is-this-project-about",
-    "href": "machine_learning/01_introduction.html#what-is-this-project-about",
-    "title": "01. Introduction",
-    "section": "",
-    "text": "This project focuses on exploring the integration of machine learning techniques with bioinformatics and biomedical sciences. The objective is to:\n\nSimplify Data Complexity: Handle high-dimensional and heterogeneous biological data, such as genomics, proteomics, and imaging datasets.\nDiscover Patterns: Uncover hidden patterns in diseases and biological processes.\nEnhance Predictive Accuracy: Build robust models for diagnostics, personalized medicine, and disease prediction.\nInnovate with Algorithms: Leverage tools like regression, clustering, neural networks, and deep learning."
-  },
-  {
-    "objectID": "machine_learning/01_introduction.html#why-machine-learning-in-bioinformatics-and-biomedical-science",
-    "href": "machine_learning/01_introduction.html#why-machine-learning-in-bioinformatics-and-biomedical-science",
-    "title": "01. Introduction",
-    "section": "",
-    "text": "Modern technologies, such as next-generation sequencing and advanced imaging, generate enormous amounts of data. Machine learning helps process this data to extract meaningful insights.\n\n\n\nFrom predicting disease outcomes to suggesting personalized treatments, machine learning models provide evidence-based support for better healthcare decisions.\n\n\n\nMachine learning accelerates hypothesis testing, drug discovery, and understanding of molecular mechanisms."
-  },
-  {
-    "objectID": "machine_learning/01_introduction.html#key-concepts-youll-learn",
-    "href": "machine_learning/01_introduction.html#key-concepts-youll-learn",
-    "title": "01. Introduction",
-    "section": "",
-    "text": "Understanding the foundational mathematics is critical. Concepts such as linear algebra, probability, and optimization will be discussed with real-world biological examples.\n\n\n\n\nSupervised Learning: Predict disease outcomes based on labeled datasets.\nUnsupervised Learning: Cluster genes or proteins with unknown functions.\nReinforcement Learning: Optimize treatment regimens in a dynamic environment.\n\n\n\n\n\nGene expression analysis using dimensionality reduction techniques like PCA.\nIdentification of biomarkers with classification algorithms such as support vector machines.\nBuilding predictive models for disease diagnosis using deep learning.\n\n\n\n\n\nAnalyzing medical images with convolutional neural networks.\nDrug discovery through generative models and reinforcement learning.\nPersonalized medicine based on patient-specific data analysis."
-  },
-  {
-    "objectID": "machine_learning/01_introduction.html#learning-path",
-    "href": "machine_learning/01_introduction.html#learning-path",
-    "title": "01. Introduction",
-    "section": "",
-    "text": "Dive deep into the mathematical underpinnings necessary to understand machine learning models. Topics include:\n\nLinear algebra for genomic data analysis.\nProbability and statistics for modeling biological uncertainty.\n\n\n\n\nExplore how algorithms like neural networks and Gaussian mixture models can solve specific problems in bioinformatics.\n\n\n\nUnderstand the deployment of machine learning tools in biological and clinical settings with tutorials and case studies."
-  },
-  {
-    "objectID": "machine_learning/01_introduction.html#who-should-join-this-journey",
-    "href": "machine_learning/01_introduction.html#who-should-join-this-journey",
-    "title": "01. Introduction",
-    "section": "",
-    "text": "This blog is for anyone passionate about the intersection of machine learning and biological sciences:\n\nResearchers aiming to integrate AI into their studies.\nStudents learning about bioinformatics or machine learning.\nProfessionals seeking to understand how AI can be applied in healthcare."
-  },
-  {
-    "objectID": "machine_learning/01_introduction.html#stay-connected",
-    "href": "machine_learning/01_introduction.html#stay-connected",
-    "title": "01. Introduction",
-    "section": "",
-    "text": "Join us as we delve into the fascinating world where algorithms meet biology. Through tutorials, insights, and practical examples, this blog will help you stay ahead in the rapidly evolving field of AI in bioinformatics and biomedical science.\nLet’s innovate together!"
-  },
-  {
-    "objectID": "Advance/menu4.html",
-    "href": "Advance/menu4.html",
-    "title": "Advance2",
-    "section": "",
-    "text": "About this site\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "best_practice/git/git_github_cicd.html",
-    "href": "best_practice/git/git_github_cicd.html",
-    "title": "Version Control and Continuous Integration for Pipeline Developing",
-    "section": "",
-    "text": "Agenda\n\nOverview of Version Control in Pipeline Development [Git, GitHub]\nIntroduction to Continuous Integration (CI) [GitHub Action]\nBest Practices & Practical Exercises\nSharing, collaboration and nf-core resources\n\n\n\nIntroduction to Version Control\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "best_practice/git/test.html",
-    "href": "best_practice/git/test.html",
-    "title": "Version Control and Continuous Integration for Pipeline Developing",
-    "section": "",
-    "text": "lkjasdf\n\n\n\n Back to top"
   },
   {
     "objectID": "best_practice/test/test.html",

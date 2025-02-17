@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Duy Dao">
-<meta name="dcterms.date" content="2025-02-17">
+<meta name="dcterms.date" content="2025-02-18">
 
 <title>khuongduying - Version Control and Continuous Integration for Pipeline Developing</title>
 <style>
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -108,10 +142,6 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../../best_practice/git/setup_remote_repo.html" rel="" target="">
  <span class="dropdown-text">Setting Up a Git Repository and Connecting to a Remote</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../best_practice/git/test.html" rel="" target="">
- <span class="dropdown-text">Version Control and Continuous Integration for Pipeline Developing</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Useful Bash</li>
@@ -290,12 +320,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Setting Up a Git Repository and Connecting to a Remote</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../best_practice/git/test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Version Control and Continuous Integration for Pipeline Developing</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -343,7 +367,69 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#agenda" id="toc-agenda" class="nav-link active" data-scroll-target="#agenda">Agenda</a></li>
-  <li><a href="#introduction-to-version-control" id="toc-introduction-to-version-control" class="nav-link" data-scroll-target="#introduction-to-version-control">Introduction to Version Control</a></li>
+  <li><a href="#introduction-to-version-control" id="toc-introduction-to-version-control" class="nav-link" data-scroll-target="#introduction-to-version-control">Introduction to Version Control</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><strong>Definition</strong></a></li>
+  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits"><strong>Benefits</strong></a></li>
+  </ul></li>
+  <li><a href="#what-is-git" id="toc-what-is-git" class="nav-link" data-scroll-target="#what-is-git">What is Git?</a>
+  <ul class="collapse">
+  <li><a href="#git-workflow-basics" id="toc-git-workflow-basics" class="nav-link" data-scroll-target="#git-workflow-basics">Git Workflow Basics</a>
+  <ul class="collapse">
+  <li><a href="#three-core-areas-of-a-git-repository" id="toc-three-core-areas-of-a-git-repository" class="nav-link" data-scroll-target="#three-core-areas-of-a-git-repository"><strong>Three Core Areas of a Git Repository</strong></a></li>
+  </ul></li>
+  <li><a href="#the-typical-workflow" id="toc-the-typical-workflow" class="nav-link" data-scroll-target="#the-typical-workflow">The Typical Workflow</a></li>
+  <li><a href="#basic-command" id="toc-basic-command" class="nav-link" data-scroll-target="#basic-command">Basic Command</a>
+  <ul class="collapse">
+  <li><a href="#initializing-a-repository" id="toc-initializing-a-repository" class="nav-link" data-scroll-target="#initializing-a-repository">Initializing a Repository</a></li>
+  <li><a href="#staging-and-committing-changes" id="toc-staging-and-committing-changes" class="nav-link" data-scroll-target="#staging-and-committing-changes">Staging and Committing Changes</a></li>
+  <li><a href="#viewing-commit-history" id="toc-viewing-commit-history" class="nav-link" data-scroll-target="#viewing-commit-history">Viewing Commit History</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#what-is-github" id="toc-what-is-github" class="nav-link" data-scroll-target="#what-is-github">What is GitHub?</a>
+  <ul class="collapse">
+  <li><a href="#definition-1" id="toc-definition-1" class="nav-link" data-scroll-target="#definition-1">Definition</a></li>
+  <li><a href="#key-features" id="toc-key-features" class="nav-link" data-scroll-target="#key-features">Key Features</a></li>
+  <li><a href="#setting-up-a-github-repository" id="toc-setting-up-a-github-repository" class="nav-link" data-scroll-target="#setting-up-a-github-repository">Setting Up a GitHub Repository</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-new-repository" id="toc-creating-a-new-repository" class="nav-link" data-scroll-target="#creating-a-new-repository">Creating a New Repository</a></li>
+  <li><a href="#connecting-local-git-to-github" id="toc-connecting-local-git-to-github" class="nav-link" data-scroll-target="#connecting-local-git-to-github">Connecting Local Git to GitHub</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#collaborating-on-github-branches-pull-requests" id="toc-collaborating-on-github-branches-pull-requests" class="nav-link" data-scroll-target="#collaborating-on-github-branches-pull-requests">Collaborating on GitHub – Branches &amp; Pull Requests</a>
+  <ul class="collapse">
+  <li><a href="#branching-model-for-collaboration" id="toc-branching-model-for-collaboration" class="nav-link" data-scroll-target="#branching-model-for-collaboration">Branching Model for Collaboration</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-branch" id="toc-creating-a-branch" class="nav-link" data-scroll-target="#creating-a-branch">Creating a Branch</a></li>
+  <li><a href="#merging-branches" id="toc-merging-branches" class="nav-link" data-scroll-target="#merging-branches">Merging Branches</a></li>
+  <li><a href="#pull-requests-pr" id="toc-pull-requests-pr" class="nav-link" data-scroll-target="#pull-requests-pr">Pull Requests (PR)</a></li>
+  <li><a href="#code-review-process" id="toc-code-review-process" class="nav-link" data-scroll-target="#code-review-process">Code Review Process</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#advanced-git-commands-techniques" id="toc-advanced-git-commands-techniques" class="nav-link" data-scroll-target="#advanced-git-commands-techniques">Advanced Git Commands &amp; Techniques</a>
+  <ul class="collapse">
+  <li><a href="#merging-branches-1" id="toc-merging-branches-1" class="nav-link" data-scroll-target="#merging-branches-1">Merging Branches</a></li>
+  <li><a href="#merge-conflicts" id="toc-merge-conflicts" class="nav-link" data-scroll-target="#merge-conflicts">Merge Conflicts</a></li>
+  <li><a href="#rebasing" id="toc-rebasing" class="nav-link" data-scroll-target="#rebasing">Rebasing</a></li>
+  <li><a href="#difference-between-merge-and-rebase" id="toc-difference-between-merge-and-rebase" class="nav-link" data-scroll-target="#difference-between-merge-and-rebase">Difference between Merge and Rebase</a></li>
+  </ul></li>
+  <li><a href="#best-practices-for-storing-pipelines-in-git" id="toc-best-practices-for-storing-pipelines-in-git" class="nav-link" data-scroll-target="#best-practices-for-storing-pipelines-in-git">Best Practices for Storing Pipelines in Git</a></li>
+  <li><a href="#git-workflow-branching-strategies" id="toc-git-workflow-branching-strategies" class="nav-link" data-scroll-target="#git-workflow-branching-strategies">Git Workflow &amp; Branching Strategies</a>
+  <ul class="collapse">
+  <li><a href="#more-references" id="toc-more-references" class="nav-link" data-scroll-target="#more-references">More References</a></li>
+  <li><a href="#install-gitflow" id="toc-install-gitflow" class="nav-link" data-scroll-target="#install-gitflow">Install GitFlow</a></li>
+  <li><a href="#initialize-git-flow-in-your-repository" id="toc-initialize-git-flow-in-your-repository" class="nav-link" data-scroll-target="#initialize-git-flow-in-your-repository">Initialize Git Flow in Your Repository</a></li>
+  <li><a href="#working-with-feature-branches" id="toc-working-with-feature-branches" class="nav-link" data-scroll-target="#working-with-feature-branches">Working with Feature Branches</a>
+  <ul class="collapse">
+  <li><a href="#start-a-feature" id="toc-start-a-feature" class="nav-link" data-scroll-target="#start-a-feature">Start a Feature</a></li>
+  <li><a href="#work-on-your-feature" id="toc-work-on-your-feature" class="nav-link" data-scroll-target="#work-on-your-feature">Work on Your Feature</a></li>
+  <li><a href="#finish-the-feature" id="toc-finish-the-feature" class="nav-link" data-scroll-target="#finish-the-feature">Finish the Feature</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#pipeline-versioning-strategies" id="toc-pipeline-versioning-strategies" class="nav-link" data-scroll-target="#pipeline-versioning-strategies">Pipeline Versioning Strategies</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-semantic-versioning-semver" id="toc-introduction-to-semantic-versioning-semver" class="nav-link" data-scroll-target="#introduction-to-semantic-versioning-semver">Introduction to Semantic Versioning (SemVer)</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/best_practice/git/git_github_cicd.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -373,7 +459,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 17, 2025</p>
+      <p class="date">February 18, 2025</p>
     </div>
   </div>
   
@@ -391,13 +477,323 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Best Practices &amp; Practical Exercises</p></li>
 <li><p>Sharing, collaboration and nf-core resources</p></li>
 </ol>
+<hr>
 </section>
 <section id="introduction-to-version-control" class="level1">
 <h1>Introduction to Version Control</h1>
-<p><img src="images/paste-1.png" class="img-fluid"></p>
-<p><img src="images/paste-2.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-3.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">An Illustration of version control</figcaption>
+</figure>
+</div>
+<section id="definition" class="level3">
+<h3 class="anchored" data-anchor-id="definition"><strong>Definition</strong></h3>
+<p>Version control, also known as source control, is a way to track changes in your code. It uses special software to record every change in a database. If a mistake happens, developers can review earlier versions to fix the error without affecting everyone else. This system helps keep the code safe from major issues and small errors alike.</p>
+<p><a href="https://www.atlassian.com/git/tutorials/what-is-version-control" class="uri">https://www.atlassian.com/git/tutorials/what-is-version-control</a></p>
+</section>
+<section id="benefits" class="level3">
+<h3 class="anchored" data-anchor-id="benefits"><strong>Benefits</strong></h3>
+<ul>
+<li><p>Collaboration</p></li>
+<li><p>Work faster and smarter</p></li>
+<li><p>History tracking</p></li>
+<li><p>Reproducibility</p></li>
+</ul>
+</section>
+</section>
+<section id="what-is-git" class="level1">
+<h1>What is Git?</h1>
+<p><img src="images/paste-4.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p>Git is a distributed version control system that tracks changes in files—especially source code—and facilitates collaboration by allowing multiple developers to work on a project simultaneously.</p>
+</blockquote>
+<p>Git is a mature, actively maintained open-source project originally developed in 2005 by Linus Torvalds, the famous creator of the Linux operating system kernel.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-5.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Linus Torvald</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the status and view commit history</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-6.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Storing data as changes to a base version of each file</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-7.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Storing data as snapshots of the project over time</figcaption>
+</figure>
+</div>
+<p><a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" class="uri">https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F</a></p>
+<hr>
+<section id="git-workflow-basics" class="level2">
+<h2 class="anchored" data-anchor-id="git-workflow-basics">Git Workflow Basics</h2>
+<section id="three-core-areas-of-a-git-repository" class="level3">
+<h3 class="anchored" data-anchor-id="three-core-areas-of-a-git-repository"><strong>Three Core Areas of a Git Repository</strong></h3>
+<ul>
+<li><p><strong>Working Directory:</strong> The current files you see and edit on your local machine.</p></li>
+<li><p><strong>Staging Area (Index):</strong> A snapshot of changes that will be included in your next commit.</p></li>
+<li><p><strong>Repository (History):</strong> The complete record of commits made over time.</p></li>
+</ul>
+</section>
+</section>
+<section id="the-typical-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="the-typical-workflow">The Typical Workflow</h2>
+<ul>
+<li><p><strong>Edit Files:</strong> Make changes in the working directory.</p></li>
+<li><p><strong>Stage Changes:</strong> Use <code>git add</code> to move changes to the staging area.</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="pp">*</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Commit:</strong> Use git commit to permanently record the changes in the repository.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"update README.md"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="basic-command" class="level2">
+<h2 class="anchored" data-anchor-id="basic-command">Basic Command</h2>
+<section id="initializing-a-repository" class="level3">
+<h3 class="anchored" data-anchor-id="initializing-a-repository">Initializing a Repository</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init my_project</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This command creates a new Git repository in the “my_project” directory, setting up the structure needed for version control.</p>
+</section>
+<section id="staging-and-committing-changes" class="level3">
+<h3 class="anchored" data-anchor-id="staging-and-committing-changes">Staging and Committing Changes</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add index.html</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add initial HTML file"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>git add</code> command stages the changes in the file for commit, while the git commit records the snapshot with a descriptive message.</p>
+</section>
+<section id="viewing-commit-history" class="level3">
+<h3 class="anchored" data-anchor-id="viewing-commit-history">Viewing Commit History</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Displays a chronological list of commits, allowing you to review what changes were made, by whom, and when.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="what-is-github" class="level1">
+<h1>What is GitHub?</h1>
+<p><img src="images/paste-9.png" class="img-fluid"></p>
+<section id="definition-1" class="level3">
+<h3 class="anchored" data-anchor-id="definition-1">Definition</h3>
+<p>GitHub is a web-based platform that hosts Git repositories, offering additional features for collaboration, code review, and project management.</p>
+</section>
+<section id="key-features" class="level3">
+<h3 class="anchored" data-anchor-id="key-features">Key Features</h3>
+<ul>
+<li><p><strong>Remote Repositories:</strong> Host your code online, accessible from anywhere.</p></li>
+<li><p><strong>Collaboration Tools:</strong> Pull requests, issues, wikis, and integrated CI/CD tools help teams collaborate effectively.</p></li>
+<li><p><strong>Social Coding:</strong> GitHub’s interface supports community-driven development with stars, forks, and contributions.</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A team of developers can work on a project by forking a repository, creating branches for new features, and collaborating via pull requests to integrate improvements</p>
+</div>
+</div>
+</section>
+<section id="setting-up-a-github-repository" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-a-github-repository">Setting Up a GitHub Repository</h2>
+<section id="creating-a-new-repository" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-new-repository">Creating a New Repository</h3>
+<p>Steps:</p>
+<ol type="1">
+<li><p>Log in to GitHub and click the “New Repository” button.</p></li>
+<li><p>Provide a repository name, an optional description, and choose whether the repository is public or private.</p></li>
+<li><p>Optionally, initialize with a README file to describe the project.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-10.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Go to “repositories” and create a new repo</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-11.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Repository Creation Interface</figcaption>
+</figure>
+</div>
+</section>
+<section id="connecting-local-git-to-github" class="level3">
+<h3 class="anchored" data-anchor-id="connecting-local-git-to-github">Connecting Local Git to GitHub</h3>
+<p>Copy the URL when the repo created.</p>
+<p><img src="images/paste-12.png" class="img-fluid"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/username/my_project.git</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Explanation:</p>
+<ul>
+<li><p><code>git remote add origin</code> sets the URL of the remote repository.</p></li>
+<li><p><code>git push -u origin master</code> uploads your local commits to the GitHub repository and sets the upstream branch for future pushes.</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Use meaningful repository names and clear README documentation to ensure that others understand your project quickly.</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="collaborating-on-github-branches-pull-requests" class="level1">
+<h1>Collaborating on GitHub – Branches &amp; Pull Requests</h1>
+<section id="branching-model-for-collaboration" class="level2">
+<h2 class="anchored" data-anchor-id="branching-model-for-collaboration">Branching Model for Collaboration</h2>
+<section id="creating-a-branch" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-branch">Creating a Branch</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feature/new-feature</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates and switches you to a new branch where you can develop a new user interface without affecting the main code.</p>
+</section>
+<section id="merging-branches" class="level3">
+<h3 class="anchored" data-anchor-id="merging-branches">Merging Branches</h3>
+<p>After development, merge the feature branch back into the main branch using a pull request.</p>
+<p>&lt;&lt; Example &gt;&gt;</p>
+</section>
+<section id="pull-requests-pr" class="level3">
+<h3 class="anchored" data-anchor-id="pull-requests-pr">Pull Requests (PR)</h3>
+<p>Developers open a pull request on GitHub to propose changes, allowing team members to review, comment, and discuss the modifications.</p>
+<p>&lt;&lt; Example &gt;&gt;</p>
+</section>
+<section id="code-review-process" class="level3">
+<h3 class="anchored" data-anchor-id="code-review-process">Code Review Process</h3>
+<p>A structured review process helps maintain code quality and ensures that multiple perspectives are considered before merging.</p>
+<p>&lt;&lt; Example &gt;&gt;</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="advanced-git-commands-techniques" class="level1">
+<h1>Advanced Git Commands &amp; Techniques</h1>
+<section id="merging-branches-1" class="level2">
+<h2 class="anchored" data-anchor-id="merging-branches-1">Merging Branches</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout master</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feature/new-ui</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Merges changes from the feature branch into the master branch.</p>
+</section>
+<section id="merge-conflicts" class="level2">
+<h2 class="anchored" data-anchor-id="merge-conflicts">Merge Conflicts</h2>
+<ul>
+<li><p>Occur when changes in two branches conflict. Resolve by editing the files manually and then completing the merge.</p></li>
+<li><p>Use tools like git mergetool for guided resolution.</p></li>
+</ul>
+</section>
+<section id="rebasing" class="level2">
+<h2 class="anchored" data-anchor-id="rebasing">Rebasing</h2>
+<p>Rebasing rewrites commit history to create a linear progression of changes, which can make the project history cleaner.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-13.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Source: https://tecadmin.net/wp-content/uploads/2023/05/git-rebase-practical-guide.png</figcaption>
+</figure>
+</div>
+</section>
+<section id="difference-between-merge-and-rebase" class="level2">
+<h2 class="anchored" data-anchor-id="difference-between-merge-and-rebase">Difference between Merge and Rebase</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-14.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Source: https://www.threads.net/@bytebytego/post/C3Nz-T5xsMM?hl=vi</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="best-practices-for-storing-pipelines-in-git" class="level1">
+<h1>Best Practices for Storing Pipelines in Git</h1>
+<p>&lt;&lt; Set up a Git repo and connect to the remote &gt;&gt;</p>
+<p>Link: <a href="https://khuongduying.github.io/best_practice/git/setup_remote_repo.html" class="uri">https://khuongduying.github.io/best_practice/git/setup_remote_repo.html</a></p>
+<hr>
+</section>
+<section id="git-workflow-branching-strategies" class="level1">
+<h1>Git Workflow &amp; Branching Strategies</h1>
+<ul>
+<li><p>Introduction to GitFlow and feature branches</p></li>
+<li><p>Manage development vs.&nbsp;stable releases</p></li>
+</ul>
+<p>GitFlow is a branching model for Git that provides a structured workflow for managing software development. Introduced by Vincent Driessen (<a href="https://nvie.com/posts/a-successful-git-branching-model/" class="uri">https://nvie.com/posts/a-successful-git-branching-model/</a> ), it outlines specific branch roles to organize your repository efficiently:</p>
+<ul>
+<li><p><strong>Master/Main:</strong> Contains the production-ready code.</p></li>
+<li><p><strong>Develop:</strong> Serves as the integration branch for features.</p></li>
+<li><p><strong>Feature Branches:</strong> Created off the develop branch for new features.</p></li>
+<li><p><strong>Release Branches:</strong> Used to prepare a new production release.</p></li>
+<li><p><strong>Hotfix Branches:</strong> For urgent fixes in the production code.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-15.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">https://nvie.com/posts/a-successful-git-branching-model/</figcaption>
+</figure>
+</div>
+<section id="more-references" class="level3">
+<h3 class="anchored" data-anchor-id="more-references">More References</h3>
+<p><a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow" class="uri">https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow</a></p>
+</section>
+<section id="install-gitflow" class="level2">
+<h2 class="anchored" data-anchor-id="install-gitflow">Install GitFlow</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install git-flow</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install git-flow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="initialize-git-flow-in-your-repository" class="level2">
+<h2 class="anchored" data-anchor-id="initialize-git-flow-in-your-repository">Initialize Git Flow in Your Repository</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize GitFlow and start a new feature branch</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> flow init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This command will ask you a series of questions about branch naming conventions (e.g., master/main, develop, feature, release, hotfix). You can usually accept the defaults.</p>
+</section>
+<section id="working-with-feature-branches" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-feature-branches">Working with Feature Branches</h2>
+<section id="start-a-feature" class="level3">
+<h3 class="anchored" data-anchor-id="start-a-feature">Start a Feature</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> flow feature start add-new-module</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="work-on-your-feature" class="level3">
+<h3 class="anchored" data-anchor-id="work-on-your-feature">Work on Your Feature</h3>
+<p>Make your changes, and commit them as usual:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add new feature"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="finish-the-feature" class="level3">
+<h3 class="anchored" data-anchor-id="finish-the-feature">Finish the Feature</h3>
+<p>Once your feature is complete, finish it to merge it back into develop</p>
+<p><img src="images/paste-16.png" class="img-fluid"></p>
+<hr>
+</section>
+</section>
+</section>
+<section id="pipeline-versioning-strategies" class="level1">
+<h1>Pipeline Versioning Strategies</h1>
+<section id="introduction-to-semantic-versioning-semver" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-semantic-versioning-semver">Introduction to Semantic Versioning (SemVer)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-17.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">https://medium.com/@kodegasm.id/semantic-versioning-in-software-engineering-8bc42c61364b</figcaption>
+</figure>
+</div>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
