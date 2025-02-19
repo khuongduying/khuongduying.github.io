@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Duy Dao">
-<meta name="dcterms.date" content="2025-02-18">
+<meta name="dcterms.date" content="2025-02-19">
 
 <title>khuongduying - Computing GC Content</title>
 <style>
@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 18, 2025</p>
+      <p class="date">February 19, 2025</p>
     </div>
   </div>
   
@@ -393,26 +393,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="solution">Solution</h2>
 <section id="bash" class="level3">
 <h3 class="anchored" data-anchor-id="bash">Bash</h3>
-<p>It takes a FASTA file contains multiple identical sequences</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Input params</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">string</span><span class="op">=</span><span class="va">$1</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">comp_gc ()</span> <span class="kw">{</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute G and C number</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">n_total</span><span class="op">=</span><span class="kw">`</span><span class="bu">echo</span> <span class="va">$1</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span><span class="kw">`;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">n_G</span><span class="op">=</span><span class="kw">`</span><span class="bu">echo</span> <span class="va">$1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-o</span> <span class="st">"G"</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="kw">`;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">n_C</span><span class="op">=</span><span class="kw">`</span><span class="bu">echo</span> <span class="va">$1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-o</span> <span class="st">"C"</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="kw">`;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">n_GC</span><span class="op">=</span><span class="va">$(($n_G</span> <span class="op">+</span> <span class="va">$n_C))</span><span class="kw">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Number of GC:"</span> <span class="va">$n_GC</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Percent GC</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">p_GC</span><span class="op">=</span><span class="va">$(($n_GC</span><span class="op">*</span><span class="dv">100</span><span class="op">/</span><span class="va">$n_total))</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Percent GC:"</span> <span class="va">$p_GC</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li>Modify the FASTA file to the correct structure (remove newline characters in the sequence)</li>
+<li>Compute GC percent, use gsub to count the replacing characters and perform percent calculating.</li>
+<li>Print with 6 decimal numbers format.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the newline in fasta file</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> test.fasta <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'/^&gt;/ {if (seq) print seq; print; seq=""; next} {seq = seq $0} END {if (seq) print seq}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute GC in the fasta file</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> test.fasta <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'(NR%2==1){gsub("&gt;","",$0); print}; (NR%2!=1){total=length($0); count_gc=gsub("G","") + gsub("C",""); p_gc=count_gc*100/total; printf "%.6f\n", p_gc}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="result" class="level4">
+<h4 class="anchored" data-anchor-id="result">Result</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Rosalind_6404</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>53.750000</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Rosalind_5959</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>53.571429</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Rosalind_0808</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>60.919540</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 </section>
 
