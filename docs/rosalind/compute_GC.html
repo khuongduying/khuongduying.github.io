@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Duy Dao">
+<meta name="dcterms.date" content="2025-02-18">
 
-<title>khuongduying</title>
+<title>khuongduying - Computing GC Content</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,24 +59,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -95,52 +95,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./GO_WITH_THE_FLOW/2.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../GO_WITH_THE_FLOW/2.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">khuongduying</span>
     </a>
   </div>
@@ -151,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -161,27 +130,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-best-practice">    
         <li class="dropdown-header">Git</li>
         <li>
-    <a class="dropdown-item" href="./best_practice/git/design_bioinfo_folder_structure.html" rel="" target="">
+    <a class="dropdown-item" href="../best_practice/git/design_bioinfo_folder_structure.html" rel="" target="">
  <span class="dropdown-text">Bioinformatics Folder Structure</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./best_practice/git/git_github_cicd.html" rel="" target="">
+    <a class="dropdown-item" href="../best_practice/git/git_github_cicd.html" rel="" target="">
  <span class="dropdown-text">Version Control and Continuous Integration for Pipeline Developing</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./best_practice/git/setup_remote_repo.html" rel="" target="">
+    <a class="dropdown-item" href="../best_practice/git/setup_remote_repo.html" rel="" target="">
  <span class="dropdown-text">Setting Up a Git Repository and Connecting to a Remote</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Useful Bash</li>
         <li>
-    <a class="dropdown-item" href="./best_practice/useful_bash/bash.html" rel="" target="">
+    <a class="dropdown-item" href="../best_practice/useful_bash/bash.html" rel="" target="">
  <span class="dropdown-text">Useful Bash Command Line</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">test</li>
         <li>
-    <a class="dropdown-item" href="./news.html" rel="" target="">
+    <a class="dropdown-item" href="../news.html" rel="" target="">
  <span class="dropdown-text">News</span></a>
   </li>  
     </ul>
@@ -192,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-rosalind">    
         <li>
-    <a class="dropdown-item" href="./rosalind/compute_GC.html" rel="" target="">
+    <a class="dropdown-item" href="../rosalind/compute_GC.html" rel="" target="">
  <span class="dropdown-text">Computing GC Content</span></a>
   </li>  
     </ul>
@@ -203,15 +172,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-machine-learning">    
         <li>
-    <a class="dropdown-item" href="./machine_learning/01_introduction.html" rel="" target="">
+    <a class="dropdown-item" href="../machine_learning/01_introduction.html" rel="" target="">
  <span class="dropdown-text">01. Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machine_learning/02_1_linear_algebra.html" rel="" target="">
+    <a class="dropdown-item" href="../machine_learning/02_1_linear_algebra.html" rel="" target="">
  <span class="dropdown-text">02. Linear Algebra</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machine_learning/02_2_linear_algebra.html" rel="" target="">
+    <a class="dropdown-item" href="../machine_learning/02_2_linear_algebra.html" rel="" target="">
  <span class="dropdown-text">02.2. Linear Algebra</span></a>
   </li>  
     </ul>
@@ -222,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-fundamentals">    
         <li>
-    <a class="dropdown-item" href="./fundamentals.html" rel="" target="">
+    <a class="dropdown-item" href="../fundamentals.html" rel="" target="">
  <span class="dropdown-text">fundamentals.html</span></a>
   </li>  
     </ul>
@@ -233,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-reference">    
         <li>
-    <a class="dropdown-item" href="./reference.html" rel="" target="">
+    <a class="dropdown-item" href="../reference.html" rel="" target="">
  <span class="dropdown-text">reference.html</span></a>
   </li>  
     </ul>
@@ -245,11 +214,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-basic">    
         <li class="dropdown-header">Basic</li>
         <li>
-    <a class="dropdown-item" href="./Basic/menu1.html" rel="" target="">
+    <a class="dropdown-item" href="../Basic/menu1.html" rel="" target="">
  <span class="dropdown-text">Basic1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Basic/menu2.html" rel="" target="">
+    <a class="dropdown-item" href="../Basic/menu2.html" rel="" target="">
  <span class="dropdown-text">Basic2</span></a>
   </li>  
     </ul>
@@ -260,25 +229,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-advance">    
         <li>
-    <a class="dropdown-item" href="./Advance/menu3.html" rel="" target="">
+    <a class="dropdown-item" href="../Advance/menu3.html" rel="" target="">
  <span class="dropdown-text">Advance1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Advance/menu4.html" rel="" target="">
+    <a class="dropdown-item" href="../Advance/menu4.html" rel="" target="">
  <span class="dropdown-text">Advance2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Advance/test.html" rel="" target="">
+    <a class="dropdown-item" href="../Advance/test.html" rel="" target="">
  <span class="dropdown-text">Test</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./news.html" rel="" target="">
+    <a class="nav-link" href="../news.html" rel="" target="">
  <span class="menu-text">News</span></a>
   </li>  
 </ul>
@@ -308,50 +277,146 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../rosalind/compute_GC.html">Computing GC Content</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <div class="quarto-title-block"><div><h1 class="title">khuongduying</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind/compute_GC.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Computing GC Content</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem" id="toc-problem" class="nav-link active" data-scroll-target="#problem"><strong>Problem</strong></a></li>
+  <li><a href="#sample-dataset" id="toc-sample-dataset" class="nav-link" data-scroll-target="#sample-dataset"><strong>Sample Dataset</strong></a></li>
+  <li><a href="#sample-output" id="toc-sample-output" class="nav-link" data-scroll-target="#sample-output"><strong>Sample Output</strong></a></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a>
+  <ul class="collapse">
+  <li><a href="#bash" id="toc-bash" class="nav-link" data-scroll-target="#bash">Bash</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/rosalind/compute_GC.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Computing GC Content</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Workspace</div>
+    <div class="quarto-category">Bioinformatics</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Duy Dao </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 18, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="problem" class="level2">
+<h2 class="anchored" data-anchor-id="problem"><strong>Problem</strong></h2>
+<p>The GC-content of a <a href="https://rosalind.info/glossary/dna-string/">DNA string</a> is given by the percentage of <a href="https://rosalind.info/glossary/symbol/">symbols</a> in the string that are ‘C’ or ‘G’. For example, the GC-content of “AGCTATAG” is 37.5%. Note that the <a href="https://rosalind.info/glossary/reverse-complement/">reverse complement</a> of any DNA string has the same GC-content.</p>
+<p>DNA strings must be labeled when they are consolidated into a database. A commonly used method of string labeling is called <a href="https://rosalind.info/glossary/fasta-format/"><strong>FASTA format</strong></a>. In this format, the string is introduced by a line that begins with ‘&gt;’, followed by some labeling information. Subsequent lines contain the string itself; the first line to begin with ‘&gt;’ indicates the label of the next string.</p>
+<p>In Rosalind’s implementation, a string in FASTA format will be labeled by the ID “Rosalind_xxxx”, where “xxxx” denotes a four-digit code between 0000 and 9999.</p>
+<p><strong>Given:</strong> At most 10 <a href="https://rosalind.info/glossary/dna-string/">DNA strings</a> in FASTA format (of length at most 1 <a href="https://rosalind.info/glossary/kbp/">kbp</a> each).</p>
+<p><strong>Return:</strong> The ID of the string having the highest GC-content, followed by the GC-content of that string. Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated; please see the note on <a href="https://rosalind.info/glossary/absolute-error/"><strong>absolute error</strong></a> below.</p>
+</section>
+<section id="sample-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="sample-dataset"><strong>Sample Dataset</strong></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;Rosalind_6404</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCC</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">TCCCACTAATAATTCTGAGG</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;Rosalind_5959</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCT</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">ATATCCATTTGTCAGCAGACACGC</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;Rosalind_0808</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGAC</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">TGGGAACCTGCGGGCAGTAGGTGGAAT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sample-output" class="level2">
+<h2 class="anchored" data-anchor-id="sample-output"><strong>Sample Output</strong></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Rosalind_0808</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>60.919540</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="solution" class="level2">
+<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<section id="bash" class="level3">
+<h3 class="anchored" data-anchor-id="bash">Bash</h3>
+<p>It takes a FASTA file contains multiple identical sequences</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Input params</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">string</span><span class="op">=</span><span class="va">$1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">comp_gc ()</span> <span class="kw">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute G and C number</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">n_total</span><span class="op">=</span><span class="kw">`</span><span class="bu">echo</span> <span class="va">$1</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span><span class="kw">`;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">n_G</span><span class="op">=</span><span class="kw">`</span><span class="bu">echo</span> <span class="va">$1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-o</span> <span class="st">"G"</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="kw">`;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">n_C</span><span class="op">=</span><span class="kw">`</span><span class="bu">echo</span> <span class="va">$1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-o</span> <span class="st">"C"</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="kw">`;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">n_GC</span><span class="op">=</span><span class="va">$(($n_G</span> <span class="op">+</span> <span class="va">$n_C))</span><span class="kw">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Number of GC:"</span> <span class="va">$n_GC</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Percent GC</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">p_GC</span><span class="op">=</span><span class="va">$(($n_GC</span><span class="op">*</span><span class="dv">100</span><span class="op">/</span><span class="va">$n_total))</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Percent GC:"</span> <span class="va">$p_GC</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
+</section>
 
-
-<!-- -->
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -635,27 +700,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "khuongduying"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">listing:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  contents: posts</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  sort: "date desc"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  type: default</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  categories: true</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  sort-ui: false</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  filter-ui: false</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">page-layout:</span><span class="co"> full</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="an">title-block-banner:</span><span class="co"> true</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Copyright 2024, Duy Dao</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

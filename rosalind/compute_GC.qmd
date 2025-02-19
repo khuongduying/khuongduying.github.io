@@ -1,0 +1,83 @@
+---
+title: "Computing GC Content"
+author: "Duy Dao"
+date: today
+date-format: long
+
+format: 
+    html:
+        code-line-numbers: false
+        code-fold: false
+        code-overflow: scroll
+        code-tools:
+            source: false
+            toggle: false
+            caption: none
+        code-block-bg: true
+        code-block-border-left: "#31BAE9"
+        code-link: true
+highlight-style: pygments
+categories: [Workspace, Bioinformatics]
+---
+
+## **Problem**
+
+The GC-content of a [DNA string](https://rosalind.info/glossary/dna-string/) is given by the percentage of [symbols](https://rosalind.info/glossary/symbol/) in the string that are 'C' or 'G'. For example, the GC-content of "AGCTATAG" is 37.5%. Note that the [reverse complement](https://rosalind.info/glossary/reverse-complement/) of any DNA string has the same GC-content.
+
+DNA strings must be labeled when they are consolidated into a database. A commonly used method of string labeling is called [**FASTA format**](https://rosalind.info/glossary/fasta-format/). In this format, the string is introduced by a line that begins with '\>', followed by some labeling information. Subsequent lines contain the string itself; the first line to begin with '\>' indicates the label of the next string.
+
+In Rosalind's implementation, a string in FASTA format will be labeled by the ID "Rosalind_xxxx", where "xxxx" denotes a four-digit code between 0000 and 9999.
+
+**Given:** At most 10 [DNA strings](https://rosalind.info/glossary/dna-string/) in FASTA format (of length at most 1 [kbp](https://rosalind.info/glossary/kbp/) each).
+
+**Return:** The ID of the string having the highest GC-content, followed by the GC-content of that string. Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated; please see the note on [**absolute error**](https://rosalind.info/glossary/absolute-error/) below.
+
+## **Sample Dataset**
+
+``` md
+>Rosalind_6404
+CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCC
+TCCCACTAATAATTCTGAGG
+>Rosalind_5959
+CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCT
+ATATCCATTTGTCAGCAGACACGC
+>Rosalind_0808
+CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGAC
+TGGGAACCTGCGGGCAGTAGGTGGAAT
+```
+
+## **Sample Output**
+
+``` md
+Rosalind_0808
+60.919540
+```
+
+## Solution
+
+### Bash
+
+1.  Modify the FASTA file to the correct structure (remove newline characters in the sequence)
+2.  Compute GC percent, use gsub to count the replacing characters and perform percent calculating.
+3.  Print with 6 decimal numbers format.
+
+``` bash
+# Remove the newline in fasta file
+cat test.fasta | awk '/^>/ {if (seq) print seq; print; seq=""; next} {seq = seq $0} END {if (seq) print seq}'
+```
+
+``` bash
+# Compute GC in the fasta file
+cat test.fasta | awk '(NR%2==1){gsub(">","",$0); print}; (NR%2!=1){total=length($0); count_gc=gsub("G","") + gsub("C",""); p_gc=count_gc*100/total; printf "%.6f\n", p_gc}'
+```
+
+#### Result
+
+``` md
+Rosalind_6404
+53.750000
+Rosalind_5959
+53.571429
+Rosalind_0808
+60.919540
+```

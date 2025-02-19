@@ -259,7 +259,7 @@ Rebasing rewrites commit history to create a linear progression of changes, whic
 
 Link: <https://khuongduying.github.io/best_practice/git/setup_remote_repo.html>
 
----
+------------------------------------------------------------------------
 
 # Git Workflow & Branching Strategies
 
@@ -324,7 +324,7 @@ Once your feature is complete, finish it to merge it back into develop
 
 ![](images/paste-16.png)
 
----
+------------------------------------------------------------------------
 
 # Pipeline Versioning Strategies
 
@@ -389,7 +389,7 @@ echo "Pipeline version updated from $current_version to $new_version"
 
 This approach provides a simple and effective way to implement and manage versioning in your pipeline, ensuring that users and collaborators understand the impact of each release update.
 
----
+------------------------------------------------------------------------
 
 # Maintaining Stable Release Versions
 
@@ -509,7 +509,7 @@ jobs:
         run: npx semantic-release
 ```
 
----
+------------------------------------------------------------------------
 
 # Introduction to Continuous Integration (CI)
 

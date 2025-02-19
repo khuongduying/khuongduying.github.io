@@ -18,6 +18,7 @@ website:
       #     - text: "Test"
       #       href: best_practice/test/*
       - sidebar:best_practice
+      - sidebar:rosalind
       - sidebar:machine_learning
       - sidebar:fundamentals
       - sidebar:reference
@@ -65,6 +66,15 @@ website:
           contents:
             - news.qmd
     
+    - id: rosalind
+      title: "Rosalind"
+      style: "docked"
+      search: true
+      background: light
+      collapse-level: 2
+      contents:
+        - auto: rosalind/*
+
     - id: machine_learning
       title: "Machine Learning"
       contents:

@@ -537,5 +537,40 @@
     "title": "",
     "section": "",
     "text": "Back to top"
+  },
+  {
+    "objectID": "rosalind/compute_GC.html",
+    "href": "rosalind/compute_GC.html",
+    "title": "Computing GC Content",
+    "section": "",
+    "text": "The GC-content of a DNA string is given by the percentage of symbols in the string that are ‘C’ or ‘G’. For example, the GC-content of “AGCTATAG” is 37.5%. Note that the reverse complement of any DNA string has the same GC-content.\nDNA strings must be labeled when they are consolidated into a database. A commonly used method of string labeling is called FASTA format. In this format, the string is introduced by a line that begins with ‘&gt;’, followed by some labeling information. Subsequent lines contain the string itself; the first line to begin with ‘&gt;’ indicates the label of the next string.\nIn Rosalind’s implementation, a string in FASTA format will be labeled by the ID “Rosalind_xxxx”, where “xxxx” denotes a four-digit code between 0000 and 9999.\nGiven: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).\nReturn: The ID of the string having the highest GC-content, followed by the GC-content of that string. Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated; please see the note on absolute error below."
+  },
+  {
+    "objectID": "rosalind/compute_GC.html#problem",
+    "href": "rosalind/compute_GC.html#problem",
+    "title": "Computing GC Content",
+    "section": "",
+    "text": "The GC-content of a DNA string is given by the percentage of symbols in the string that are ‘C’ or ‘G’. For example, the GC-content of “AGCTATAG” is 37.5%. Note that the reverse complement of any DNA string has the same GC-content.\nDNA strings must be labeled when they are consolidated into a database. A commonly used method of string labeling is called FASTA format. In this format, the string is introduced by a line that begins with ‘&gt;’, followed by some labeling information. Subsequent lines contain the string itself; the first line to begin with ‘&gt;’ indicates the label of the next string.\nIn Rosalind’s implementation, a string in FASTA format will be labeled by the ID “Rosalind_xxxx”, where “xxxx” denotes a four-digit code between 0000 and 9999.\nGiven: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).\nReturn: The ID of the string having the highest GC-content, followed by the GC-content of that string. Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated; please see the note on absolute error below."
+  },
+  {
+    "objectID": "rosalind/compute_GC.html#sample-dataset",
+    "href": "rosalind/compute_GC.html#sample-dataset",
+    "title": "Computing GC Content",
+    "section": "Sample Dataset",
+    "text": "Sample Dataset\n&gt;Rosalind_6404\nCCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCC\nTCCCACTAATAATTCTGAGG\n&gt;Rosalind_5959\nCCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCT\nATATCCATTTGTCAGCAGACACGC\n&gt;Rosalind_0808\nCCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGAC\nTGGGAACCTGCGGGCAGTAGGTGGAAT"
+  },
+  {
+    "objectID": "rosalind/compute_GC.html#sample-output",
+    "href": "rosalind/compute_GC.html#sample-output",
+    "title": "Computing GC Content",
+    "section": "Sample Output",
+    "text": "Sample Output\nRosalind_0808\n60.919540"
+  },
+  {
+    "objectID": "rosalind/compute_GC.html#solution",
+    "href": "rosalind/compute_GC.html#solution",
+    "title": "Computing GC Content",
+    "section": "Solution",
+    "text": "Solution\n\nBash\nIt takes a FASTA file contains multiple identical sequences\n# Input params\nstring=$1\n\ncomp_gc () {\n    # Compute G and C number\n    n_total=`echo $1 | wc -c`;\n    n_G=`echo $1 | grep -o \"G\" | wc -l`;\n    n_C=`echo $1 | grep -o \"C\" | wc -l`;\n    n_GC=$(($n_G + $n_C));\n    \n    echo \"Number of GC:\" $n_GC\n\n    # Percent GC\n    p_GC=$(($n_GC*100/$n_total))\n    \n    echo \"Percent GC:\" $p_GC\n}"
   }
 ]
