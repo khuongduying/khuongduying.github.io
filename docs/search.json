@@ -39,7 +39,7 @@
     "href": "rosalind/compute_GC.html#solution",
     "title": "Computing GC Content",
     "section": "Solution",
-    "text": "Solution\n\nBash\n\nModify the FASTA file to the correct structure (remove newline characters in the sequence)\nCompute GC percent, use gsub to count the replacing characters and perform percent calculating.\nPrint with 6 decimal numbers format.\n\n# Remove the newline in fasta file\ncat test.fasta | awk '/^&gt;/ {if (seq) print seq; print; seq=\"\"; next} {seq = seq $0} END {if (seq) print seq}'\n# Compute GC in the fasta file\ncat test.fasta | awk '(NR%2==1){gsub(\"&gt;\",\"\",$0); print}; (NR%2!=1){total=length($0); count_gc=gsub(\"G\",\"\") + gsub(\"C\",\"\"); p_gc=count_gc*100/total; printf \"%.6f\\n\", p_gc}'\n\nResult\nRosalind_6404\n53.750000\nRosalind_5959\n53.571429\nRosalind_0808\n60.919540"
+    "text": "Solution\n\nBash\n\nModify the FASTA file to the correct structure (remove newline characters in the sequence)\nCompute GC percent, use gsub to count the replacing characters and perform percent calculating.\nPrint with 6 decimal numbers format.\n\n# Remove the newline in fasta file\ncat test.fasta | awk '/^&gt;/ {if (seq) print seq; print; seq=\"\"; next} {seq = seq $0} END {if (seq) print seq}'\n# Compute GC in the fasta file\ncat test.fasta | awk '(NR%2==1){gsub(\"&gt;\",\"\",$0); print}; (NR%2!=1){total=length($0); count_gc=gsub(\"G\",\"\") + gsub(\"C\",\"\"); p_gc=count_gc*100/total; printf \"%.6f\\n\", p_gc}'\n\n\nResult\nRosalind_6404\n53.750000\nRosalind_5959\n53.571429\nRosalind_0808\n60.919540"
   },
   {
     "objectID": "testing/index.html",
@@ -572,5 +572,40 @@
     "title": "",
     "section": "",
     "text": "Back to top"
+  },
+  {
+    "objectID": "rosalind/counting_point_mutations.html",
+    "href": "rosalind/counting_point_mutations.html",
+    "title": "Counting Point Mutations",
+    "section": "",
+    "text": "Given two strings ss and tt of equal length, the Hamming distance between ss and tt, denoted dH(s,t)dH(s,t), is the number of corresponding symbols that differ in ss and tt. See Figure 2.\nGiven: Two DNA strings ss and tt of equal length (not exceeding 1 kbp).\nReturn: The Hamming distance dH(s,t)dH(s,t)."
+  },
+  {
+    "objectID": "rosalind/counting_point_mutations.html#problem",
+    "href": "rosalind/counting_point_mutations.html#problem",
+    "title": "Counting Point Mutations",
+    "section": "",
+    "text": "Given two strings ss and tt of equal length, the Hamming distance between ss and tt, denoted dH(s,t)dH(s,t), is the number of corresponding symbols that differ in ss and tt. See Figure 2.\nGiven: Two DNA strings ss and tt of equal length (not exceeding 1 kbp).\nReturn: The Hamming distance dH(s,t)dH(s,t)."
+  },
+  {
+    "objectID": "rosalind/counting_point_mutations.html#sample-dataset",
+    "href": "rosalind/counting_point_mutations.html#sample-dataset",
+    "title": "Counting Point Mutations",
+    "section": "Sample Dataset",
+    "text": "Sample Dataset\nGAGCCTACTAACGGGAT\nCATCGTAATGACGGCCT"
+  },
+  {
+    "objectID": "rosalind/counting_point_mutations.html#sample-output",
+    "href": "rosalind/counting_point_mutations.html#sample-output",
+    "title": "Counting Point Mutations",
+    "section": "Sample Output",
+    "text": "Sample Output\n7"
+  },
+  {
+    "objectID": "rosalind/counting_point_mutations.html#solution",
+    "href": "rosalind/counting_point_mutations.html#solution",
+    "title": "Counting Point Mutations",
+    "section": "Solution",
+    "text": "Solution\nstr_1=\"GAGCCTACTAACGGGAT\"\nstr_2=\"CATCGTAATGACGGCCT\"\n# str_1=`cat rosalind_hamm.txt | awk '(NR==1){print}'`\n# str_2=`cat rosalind_hamm.txt | awk '(NR==2){print}'`\n\n# The length of string 1\nstr_size=${#str_1}\n\ncount=0\nfor (( i=0; i&lt;=str_size-1; i++ )); do\n    #echo ${str_1:i:1} ${str_2:i:1}\n    if [ ${str_1:i:1} != ${str_2:i:1} ]; then\n        ((count++));\n    else\n        continue\n    fi\ndone; echo $count"
   }
 ]

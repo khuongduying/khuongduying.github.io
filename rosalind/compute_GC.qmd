@@ -71,7 +71,7 @@ cat test.fasta | awk '/^>/ {if (seq) print seq; print; seq=""; next} {seq = seq 
 cat test.fasta | awk '(NR%2==1){gsub(">","",$0); print}; (NR%2!=1){total=length($0); count_gc=gsub("G","") + gsub("C",""); p_gc=count_gc*100/total; printf "%.6f\n", p_gc}'
 ```
 
-#### Result
+### Result
 
 ``` md
 Rosalind_6404

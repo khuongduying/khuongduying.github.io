@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Duy Dao">
-<meta name="dcterms.date" content="2025-02-19">
+<meta name="dcterms.date" content="2025-02-20">
 
 <title>khuongduying - Computing GC Content</title>
 <style>
@@ -66,6 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../rosalind/counting_point_mutations.html" rel="next">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -163,6 +164,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../rosalind/compute_GC.html" rel="" target="">
  <span class="dropdown-text">Computing GC Content</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../rosalind/counting_point_mutations.html" rel="" target="">
+ <span class="dropdown-text">Counting Point Mutations</span></a>
   </li>  
     </ul>
   </li>
@@ -308,6 +313,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Computing GC Content</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind/counting_point_mutations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Counting Point Mutations</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -324,6 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a>
   <ul class="collapse">
   <li><a href="#bash" id="toc-bash" class="nav-link" data-scroll-target="#bash">Bash</a></li>
+  <li><a href="#result" id="toc-result" class="nav-link" data-scroll-target="#result">Result</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/rosalind/compute_GC.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -354,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 19, 2025</p>
+      <p class="date">February 20, 2025</p>
     </div>
   </div>
   
@@ -402,8 +414,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> test.fasta <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'/^&gt;/ {if (seq) print seq; print; seq=""; next} {seq = seq $0} END {if (seq) print seq}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute GC in the fasta file</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> test.fasta <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'(NR%2==1){gsub("&gt;","",$0); print}; (NR%2!=1){total=length($0); count_gc=gsub("G","") + gsub("C",""); p_gc=count_gc*100/total; printf "%.6f\n", p_gc}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="result" class="level4">
-<h4 class="anchored" data-anchor-id="result">Result</h4>
+</section>
+<section id="result" class="level3">
+<h3 class="anchored" data-anchor-id="result">Result</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Rosalind_6404</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>53.750000</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Rosalind_5959</span>
@@ -412,7 +425,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>60.919540</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
-</section>
 </section>
 </section>
 
@@ -701,6 +713,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../rosalind/counting_point_mutations.html" class="pagination-link">
+        <span class="nav-page-text">Counting Point Mutations</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
