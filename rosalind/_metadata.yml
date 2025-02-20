@@ -1,0 +1,17 @@
+author: "Duy Dao"
+date-format: long
+
+format: 
+    html:
+        code-line-numbers: false
+        code-fold: false
+        code-overflow: scroll
+        code-tools:
+            source: false
+            toggle: false
+            caption: none
+        code-block-bg: true
+        code-block-border-left: "#31BAE9"
+        code-link: true
+highlight-style: pygments
+categories: [Competition, Bioinformatics]

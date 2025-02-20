@@ -1,0 +1,49 @@
+---
+title: "Counting Point Mutations"
+author: "Duy Dao"
+date: today
+date-format: long
+---
+
+## **Problem**
+
+Given two [strings](https://rosalind.info/glossary/string/) ss and tt of equal length, the [**Hamming distance**](https://rosalind.info/glossary/hamming-distance/) between ss and tt, denoted dH(s,t)dH(s,t), is the number of corresponding symbols that differ in ss and tt. See [**Figure 2**](https://rosalind.info/media/problems/hamm/Hamming_distance.png).
+
+**Given:** Two [DNA strings](https://rosalind.info/glossary/dna-string/) ss and tt of equal length (not exceeding 1 [kbp](https://rosalind.info/glossary/kbp/)).
+
+**Return:** The Hamming distance dH(s,t)dH(s,t).
+
+## **Sample Dataset**
+
+``` md
+GAGCCTACTAACGGGAT
+CATCGTAATGACGGCCT
+```
+
+## **Sample Output**
+
+``` md
+7
+```
+
+## Solution
+
+``` bash
+str_1="GAGCCTACTAACGGGAT"
+str_2="CATCGTAATGACGGCCT"
+# str_1=`cat rosalind_hamm.txt | awk '(NR==1){print}'`
+# str_2=`cat rosalind_hamm.txt | awk '(NR==2){print}'`
+
+# The length of string 1
+str_size=${#str_1}
+
+count=0
+for (( i=0; i<=str_size-1; i++ )); do
+    #echo ${str_1:i:1} ${str_2:i:1}
+    if [ ${str_1:i:1} != ${str_2:i:1} ]; then
+        ((count++));
+    else
+        continue
+    fi
+done; echo $count
+```
