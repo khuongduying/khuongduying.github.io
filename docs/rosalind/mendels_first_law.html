@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Duy Dao">
+<meta name="dcterms.date" content="2025-02-25">
 
-<title>khuongduying - Tutorials</title>
+<title>khuongduying - Mendel’s First Law</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,22 +59,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../rosalind/counting_point_mutations.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -94,20 +97,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./GO_WITH_THE_FLOW/2.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../GO_WITH_THE_FLOW/2.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">khuongduying</span>
     </a>
   </div>
@@ -118,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -128,27 +133,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-best-practice">    
         <li class="dropdown-header">Git</li>
         <li>
-    <a class="dropdown-item" href="./best_practice/git/design_bioinfo_folder_structure.html" rel="" target="">
+    <a class="dropdown-item" href="../best_practice/git/design_bioinfo_folder_structure.html" rel="" target="">
  <span class="dropdown-text">Bioinformatics Folder Structure</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./best_practice/git/git_github_cicd.html" rel="" target="">
+    <a class="dropdown-item" href="../best_practice/git/git_github_cicd.html" rel="" target="">
  <span class="dropdown-text">Version Control and Continuous Integration for Pipeline Developing</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./best_practice/git/setup_remote_repo.html" rel="" target="">
+    <a class="dropdown-item" href="../best_practice/git/setup_remote_repo.html" rel="" target="">
  <span class="dropdown-text">Setting Up a Git Repository and Connecting to a Remote</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Useful Bash</li>
         <li>
-    <a class="dropdown-item" href="./best_practice/useful_bash/bash.html" rel="" target="">
+    <a class="dropdown-item" href="../best_practice/useful_bash/bash.html" rel="" target="">
  <span class="dropdown-text">Useful Bash Command Line</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">test</li>
         <li>
-    <a class="dropdown-item" href="./news.html" rel="" target="">
+    <a class="dropdown-item" href="../news.html" rel="" target="">
  <span class="dropdown-text">News</span></a>
   </li>  
     </ul>
@@ -159,15 +164,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-rosalind">    
         <li>
-    <a class="dropdown-item" href="./rosalind/compute_GC.html" rel="" target="">
+    <a class="dropdown-item" href="../rosalind/compute_GC.html" rel="" target="">
  <span class="dropdown-text">Computing GC Content</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./rosalind/counting_point_mutations.html" rel="" target="">
+    <a class="dropdown-item" href="../rosalind/counting_point_mutations.html" rel="" target="">
  <span class="dropdown-text">Counting Point Mutations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./rosalind/mendels_first_law.html" rel="" target="">
+    <a class="dropdown-item" href="../rosalind/mendels_first_law.html" rel="" target="">
  <span class="dropdown-text">Mendel’s First Law</span></a>
   </li>  
     </ul>
@@ -178,15 +183,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-machine-learning">    
         <li>
-    <a class="dropdown-item" href="./machine_learning/01_introduction.html" rel="" target="">
+    <a class="dropdown-item" href="../machine_learning/01_introduction.html" rel="" target="">
  <span class="dropdown-text">01. Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machine_learning/02_1_linear_algebra.html" rel="" target="">
+    <a class="dropdown-item" href="../machine_learning/02_1_linear_algebra.html" rel="" target="">
  <span class="dropdown-text">02. Linear Algebra</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machine_learning/02_2_linear_algebra.html" rel="" target="">
+    <a class="dropdown-item" href="../machine_learning/02_2_linear_algebra.html" rel="" target="">
  <span class="dropdown-text">02.2. Linear Algebra</span></a>
   </li>  
     </ul>
@@ -197,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-fundamentals">    
         <li>
-    <a class="dropdown-item" href="./fundamentals.html" rel="" target="">
+    <a class="dropdown-item" href="../fundamentals.html" rel="" target="">
  <span class="dropdown-text">fundamentals.html</span></a>
   </li>  
     </ul>
@@ -208,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-reference">    
         <li>
-    <a class="dropdown-item" href="./reference.html" rel="" target="">
+    <a class="dropdown-item" href="../reference.html" rel="" target="">
  <span class="dropdown-text">reference.html</span></a>
   </li>  
     </ul>
@@ -220,11 +225,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-basic">    
         <li class="dropdown-header">Basic</li>
         <li>
-    <a class="dropdown-item" href="./Basic/menu1.html" rel="" target="">
+    <a class="dropdown-item" href="../Basic/menu1.html" rel="" target="">
  <span class="dropdown-text">Basic1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Basic/menu2.html" rel="" target="">
+    <a class="dropdown-item" href="../Basic/menu2.html" rel="" target="">
  <span class="dropdown-text">Basic2</span></a>
   </li>  
     </ul>
@@ -235,25 +240,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-advance">    
         <li>
-    <a class="dropdown-item" href="./Advance/menu3.html" rel="" target="">
+    <a class="dropdown-item" href="../Advance/menu3.html" rel="" target="">
  <span class="dropdown-text">Advance1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Advance/menu4.html" rel="" target="">
+    <a class="dropdown-item" href="../Advance/menu4.html" rel="" target="">
  <span class="dropdown-text">Advance2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Advance/test.html" rel="" target="">
+    <a class="dropdown-item" href="../Advance/test.html" rel="" target="">
  <span class="dropdown-text">Test</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./news.html" rel="" target="">
+    <a class="nav-link" href="../news.html" rel="" target="">
  <span class="menu-text">News</span></a>
   </li>  
 </ul>
@@ -283,27 +288,96 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../rosalind/mendels_first_law.html">Mendel’s First Law</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind/compute_GC.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Computing GC Content</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind/counting_point_mutations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Counting Point Mutations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind/mendels_first_law.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Mendel’s First Law</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem" id="toc-problem" class="nav-link active" data-scroll-target="#problem">Problem</a>
+  <ul class="collapse">
+  <li><a href="#sample-dataset" id="toc-sample-dataset" class="nav-link" data-scroll-target="#sample-dataset">Sample Dataset</a></li>
+  <li><a href="#sample-output" id="toc-sample-output" class="nav-link" data-scroll-target="#sample-output">Sample Output</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/rosalind/mendels_first_law.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Tutorials</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-</div>
+<h1 class="title">Mendel’s First Law</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Competition</div>
+    <div class="quarto-category">Bioinformatics</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Duy Dao </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 25, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -311,10 +385,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="problem" class="level1">
+<h1>Problem</h1>
+<p>Probability is the mathematical study of randomly occurring phenomena. We will model such a phenomenon with a random variable, which is simply a variable that can take a number of different distinct outcomes depending on the result of an underlying random process.</p>
+<p>For example, say that we have a bag containing 3 red balls and 2 blue balls. If we let the <span class="math inline">\(X\)</span> represent the random variable corresponding to the color of a drawn ball, then the probability of each of the two outcomes is given by <span class="math inline">\(Pr(X = red) = \frac{3}{5}\)</span> and <span class="math inline">\(Pr(X = blue) = \frac{2}{5}\)</span>.</p>
+<p>Random variables can be combined to yield new random variables. Returning to the ball example, let <span class="math inline">\(Y\)</span> model the color of a second ball drawn from the bag (without replacing the first ball). The probability of <span class="math inline">\(Y\)</span> being red depends on whether the first ball was red or blue. To represent all outcomes of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span><em>,</em> we therefore use a probability tree diagram. This branching diagram represents all possible individual probabilities for <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, with outcomes at the endpoints (“leaves”) of the tree.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption"><strong>Figure:</strong> The probability of any outcome (leaf) in a probability tree diagram is given by the product of probabilities from the start of the tree to the outcome. For example, the probability that X is blue and Y is blue is equal to (2/5)(1/4), or 1/10.</figcaption>
+</figure>
+</div>
+<p>An event is simply a collection of outcomes. Because outcomes are distinct, the probability of an event can be written as the sum of the probabilities of its constituent outcomes. For our colored ball example, let A be the event “Y is blue.” Pr(A) is equal to the sum of the probabilities of two different outcomes:</p>
+<p><span class="math display">\[
+\Pr(X = \text{blue} \text{ and } Y = \text{blue}) + \Pr(X = \text{red} \text{ and } Y = \text{blue})
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+\frac{3}{10} + \frac{1}{10} = \frac{2}{5}
+\]</span></p>
+<p><strong>Given</strong>: Three positive integers k, m and n, representing a population containing $k + m + n $ orgaisisms: <span class="math inline">\(k\)</span> individuals are homozygous dominant for a factor, <span class="math inline">\(m\)</span> are heterozygous, and <span class="math inline">\(n\)</span> are homozygous recessive.</p>
+<p><strong>Return:</strong> The probability that two randomly selected mating organisms will produce an individual possessing a dominant allele (and thus displaying the dominant phenotype). Assume that any two organisms can mate.</p>
+<section id="sample-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="sample-dataset">Sample Dataset</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>2 2 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sample-output" class="level2">
+<h2 class="anchored" data-anchor-id="sample-output">Sample Output</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>0.78333</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
-<!-- -->
-
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -600,18 +702,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Tutorials"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../rosalind/counting_point_mutations.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Counting Point Mutations</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Copyright 2024, Duy Dao</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/khuongduying/edit/main/tutorials.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
