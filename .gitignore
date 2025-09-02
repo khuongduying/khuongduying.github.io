@@ -1,1 +1,7 @@
-/.quarto/
+.quarto/
+/.quarto/           # Quarto cache and build files
+/_site/             # Generated site output
+*.ipynb_checkpoints # Jupyter notebook checkpoints
+.DS_Store           # macOS system files
+*.Rproj.user        # RStudio project files
+*.log               # Log files
