@@ -31,6 +31,7 @@ If the repository has issue templates:
 ### 3. Write a Clear and Descriptive Title
 
 **Best Practices for Titles:**
+
 - Use imperative mood (e.g., "Fix login redirect bug" instead of "Login redirect is broken")
 - Be specific and concise (50-72 characters recommended)
 - Include relevant keywords for searchability
