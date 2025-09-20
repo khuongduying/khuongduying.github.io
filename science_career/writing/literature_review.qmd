@@ -1,0 +1,13 @@
+# Literature Review Workflow and Techniques 
+
+[How To Read Papers Fast & Effectively - PhD student](https://www.youtube.com/watch?v=EXALI6jFu6E)
+
+Note:
+1. Skim the title, abstract
+2. Scan the figures
+3. Read the results and method
+4. Read the discussion
+5. Remember more (taking note), use voice memmor
+6. Connect the dot ([researchrabbit.ai](https://www.researchrabbit.ai/reviews))
+7. Search the first or last author's name on youtube to see their presentation at conferences.
+8. 
