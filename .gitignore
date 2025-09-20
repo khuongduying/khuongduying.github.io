@@ -5,3 +5,21 @@
 .DS_Store           # macOS system files
 *.Rproj.user        # RStudio project files
 *.log               # Log files
+/.quarto/
+
+## Ignore tables
+*/*.csv
+*/*.txt
+*/*.tsv
+*/*.xlsx
+*/*.xls
+
+# ## Ignore images
+# */*.png
+# */*.jpg
+# */*.jpeg
+# */*.gif
+# */*.svg
+
+## Ignore scripts
+statistics/nipt_risk_calculator.py
