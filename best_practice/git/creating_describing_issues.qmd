@@ -1,6 +1,6 @@
 ---
 title: "Creating and Describing Issues in Git Repositories"
-date: "2024-06-20"
+date: "2025-09-20"
 categories: ["best_practice", "git"]
 description: "Guidelines for effectively creating and describing issues in Git repositories to enhance collaboration and project management."
 image: "https://example.com/images/git-issues.png"
