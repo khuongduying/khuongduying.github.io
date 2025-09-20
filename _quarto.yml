@@ -20,10 +20,12 @@ website:
       - sidebar:best_practice
       - sidebar:rosalind
       - sidebar:machine_learning
-      - sidebar:fundamentals
-      - sidebar:reference
-      - sidebar:basic
-      - sidebar:advance
+      - sidebar:science_career
+      - sidebar:statistics
+      #- sidebar:fundamentals
+      #- sidebar:reference
+      #- sidebar:basic
+      #- sidebar:advance
       - about.qmd
       - news.qmd
     tools:
@@ -66,6 +68,29 @@ website:
           contents:
             - news.qmd
     
+    - id: science_career
+      title: "Be a Scientist"
+      style: "docked"
+      search: true
+      background: light
+      collapse-level: 2
+      contents:
+        - section: Writing
+          contents:
+            - auto: science_career/writing/*
+        - section: Become a Scientist
+          contents:
+            - auto: science_career/research_journey/*
+    
+    - id: statistics
+      title: "Statistics"
+      style: "docked"
+      search: true
+      background: light
+      collapse-level: 2
+      contents:
+        - auto: statistics/*
+
     - id: rosalind
       title: "Rosalind"
       style: "docked"

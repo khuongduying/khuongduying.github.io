@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>khuongduying - Risk Score Calculation for Chromosomes 13, 18, and 21 Using Logistic Approach</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../statistics/ppr_t21_cal.html" rel="next">
+<link href="../statistics/narrative_reviews.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../GO_WITH_THE_FLOW/2.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">khuongduying</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-best-practice" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Best Practice</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-best-practice">    
+        <li class="dropdown-header">Git</li>
+        <li>
+    <a class="dropdown-item" href="../best_practice/git/creating_describing_issues.html" rel="" target="">
+ <span class="dropdown-text">Best Practice - Creating and Describing Issues in Git Repositories</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../best_practice/git/design_bioinfo_folder_structure.html" rel="" target="">
+ <span class="dropdown-text">Bioinformatics Folder Structure</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../best_practice/git/git_github_cicd.html" rel="" target="">
+ <span class="dropdown-text">Version Control and Continuous Integration for Pipeline Developing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../best_practice/git/setup_remote_repo.html" rel="" target="">
+ <span class="dropdown-text">Setting Up a Git Repository and Connecting to a Remote</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Useful Bash</li>
+        <li>
+    <a class="dropdown-item" href="../best_practice/useful_bash/bash.html" rel="" target="">
+ <span class="dropdown-text">Useful Bash Command Line</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">test</li>
+        <li>
+    <a class="dropdown-item" href="../news.html" rel="" target="">
+ <span class="dropdown-text">News</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-rosalind" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Rosalind</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-rosalind">    
+        <li>
+    <a class="dropdown-item" href="../rosalind/compute_GC.html" rel="" target="">
+ <span class="dropdown-text">Computing GC Content</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../rosalind/counting_point_mutations.html" rel="" target="">
+ <span class="dropdown-text">Counting Point Mutations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../rosalind/mendels_first_law.html" rel="" target="">
+ <span class="dropdown-text">Mendel’s First Law</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-machine-learning" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Machine Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-machine-learning">    
+        <li>
+    <a class="dropdown-item" href="../machine_learning/01_introduction.html" rel="" target="">
+ <span class="dropdown-text">01. Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../machine_learning/02_1_linear_algebra.html" rel="" target="">
+ <span class="dropdown-text">02. Linear Algebra</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../machine_learning/02_2_linear_algebra.html" rel="" target="">
+ <span class="dropdown-text">02.2. Linear Algebra</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-be-a-scientist" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Be a Scientist</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-be-a-scientist">    
+        <li class="dropdown-header">Writing</li>
+        <li>
+    <a class="dropdown-item" href="../science_career/writing/literature_review.html" rel="" target="">
+ <span class="dropdown-text">Literature Review Workflow and Techniques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../science_career/writing/note.html" rel="" target="">
+ <span class="dropdown-text">Note</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../science_career/writing/write_better.html" rel="" target="">
+ <span class="dropdown-text">Tools for Making a Scientific Project</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Become a Scientist</li>
+        <li>
+    <a class="dropdown-item" href="../science_career/research_journey/to_become_a_scientist.html" rel="" target="">
+ <span class="dropdown-text">To become a Scientist</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics">    
+        <li>
+    <a class="dropdown-item" href="../statistics/bayesian_nipt_risk_score.html" rel="" target="">
+ <span class="dropdown-text">Risk Score Calculation in NIPT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/bayesian_nipt_risk_score_2.html" rel="" target="">
+ <span class="dropdown-text">Risk Score Calculation in NIPT jupyter</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/narrative_reviews.html" rel="" target="">
+ <span class="dropdown-text">Narrative Reviews: NIPT Risk Score</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/ppr_logis_13_18_21.html" rel="" target="">
+ <span class="dropdown-text">Risk Score Calculation for Chromosomes 13, 18, and 21 Using Logistic Approach</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/ppr_t21_cal.html" rel="" target="">
+ <span class="dropdown-text">Calculating PPR (Personalized Posteriori Risk) for NIPT Samples</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/README_nipt_calculator.html" rel="" target="">
+ <span class="dropdown-text">NIPT Risk Calculator Usage Guide</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../news.html" rel="" target="">
+ <span class="menu-text">News</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto tools-wide">
+    <a href="https://www.linkedin.com/in/khuongduying/" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/khuongduying">
+            My repositories
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="">
+            Report a bug
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/ppr_logis_13_18_21.html">Risk Score Calculation for Chromosomes 13, 18, and 21 Using Logistic Approach</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/bayesian_nipt_risk_score.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Risk Score Calculation in NIPT</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/bayesian_nipt_risk_score_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Risk Score Calculation in NIPT jupyter</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/narrative_reviews.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Narrative Reviews: NIPT Risk Score</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/ppr_logis_13_18_21.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Risk Score Calculation for Chromosomes 13, 18, and 21 Using Logistic Approach</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/ppr_t21_cal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculating PPR (Personalized Posteriori Risk) for NIPT Samples</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/README_nipt_calculator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NIPT Risk Calculator Usage Guide</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#add-5-random-samples-with-t21-z-scores-between-3-and-5" id="toc-add-5-random-samples-with-t21-z-scores-between-3-and-5" class="nav-link active" data-scroll-target="#add-5-random-samples-with-t21-z-scores-between-3-and-5">Add 5 random samples with T21 z-scores between 3 and 5</a></li>
+  <li><a href="#visualization-of-results" id="toc-visualization-of-results" class="nav-link" data-scroll-target="#visualization-of-results">Visualization of Results</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/khuongduying/blob/main/statistics/ppr_logis_13_18_21.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Risk Score Calculation for Chromosomes 13, 18, and 21 Using Logistic Approach</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the new dataset</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df_jk <span class="op">=</span> pd.read_csv(<span class="st">'/mnt/rdisk/duydao/khuongduying.github.io/statistics/JK_report.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for high risk cases based on the existing risk columns</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boolean mask for high risk cases using the existing risk assessment columns</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>high_risk_mask <span class="op">=</span> (</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    (df_jk[<span class="st">'T21 risk'</span>].<span class="bu">str</span>.lower() <span class="op">==</span> <span class="st">'high'</span>) <span class="op">|</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    (df_jk[<span class="st">'T18 risk'</span>].<span class="bu">str</span>.lower() <span class="op">==</span> <span class="st">'high'</span>) <span class="op">|</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    (df_jk[<span class="st">'T13 risk'</span>].<span class="bu">str</span>.lower() <span class="op">==</span> <span class="st">'high'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the dataframe to keep only high risk cases</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>df_jk_high_risk <span class="op">=</span> df_jk[high_risk_mask]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Original dataset: </span><span class="sc">{</span><span class="bu">len</span>(df_jk)<span class="sc">}</span><span class="ss"> rows"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"High risk cases: </span><span class="sc">{</span><span class="bu">len</span>(df_jk_high_risk)<span class="sc">}</span><span class="ss"> rows"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Percentage of high risk cases: </span><span class="sc">{</span><span class="bu">len</span>(df_jk_high_risk)<span class="op">/</span><span class="bu">len</span>(df_jk)<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Show breakdown by risk type</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Risk breakdown:"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"T21 high risk: </span><span class="sc">{</span>(df_jk[<span class="st">'T21 risk'</span>].<span class="bu">str</span>.lower() <span class="op">==</span> <span class="st">'high'</span>)<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss"> cases"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"T18 high risk: </span><span class="sc">{</span>(df_jk[<span class="st">'T18 risk'</span>].<span class="bu">str</span>.lower() <span class="op">==</span> <span class="st">'high'</span>)<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss"> cases"</span>) </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"T13 high risk: </span><span class="sc">{</span>(df_jk[<span class="st">'T13 risk'</span>].<span class="bu">str</span>.lower() <span class="op">==</span> <span class="st">'high'</span>)<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss"> cases"</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the filtered results</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>df_jk_high_risk.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Original dataset: 441 rows
+High risk cases: 29 rows
+Percentage of high risk cases: 6.6%
+
+Risk breakdown:
+T21 high risk: 17 cases
+T18 high risk: 10 cases
+T13 high risk: 2 cases</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">tid</th>
+<th data-quarto-table-cell-role="th">sampleID</th>
+<th data-quarto-table-cell-role="th">ReportType</th>
+<th data-quarto-table-cell-role="th">Datavolumn</th>
+<th data-quarto-table-cell-role="th">note</th>
+<th data-quarto-table-cell-role="th">T13 risk</th>
+<th data-quarto-table-cell-role="th">T18 risk</th>
+<th data-quarto-table-cell-role="th">T21 risk</th>
+<th data-quarto-table-cell-role="th">risk score of T13</th>
+<th data-quarto-table-cell-role="th">risk score of T18</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Angelman syndrome</th>
+<th data-quarto-table-cell-role="th">Prader–Willi syndrome</th>
+<th data-quarto-table-cell-role="th">15q26 duplication syndrome</th>
+<th data-quarto-table-cell-role="th">16p12.2 microdeletion syndrome</th>
+<th data-quarto-table-cell-role="th">17p13.3 deletion syndrome</th>
+<th data-quarto-table-cell-role="th">Smith-Magenis syndrome</th>
+<th data-quarto-table-cell-role="th">Potocki-Lupski syndrome</th>
+<th data-quarto-table-cell-role="th">22q11.2 deletion syndrome</th>
+<th data-quarto-table-cell-role="th">10p14-p13 deletion syndrome\n(DiGeorge 2 syndrome)</th>
+<th data-quarto-table-cell-role="th">22q11.2 deletion syndrome\n(DiGeorge syndrome)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">118</td>
+<td>S250102680_L01_4</td>
+<td>N134B-1</td>
+<td>NIPT-BASE</td>
+<td>15M</td>
+<td>NaN</td>
+<td>low</td>
+<td>low</td>
+<td>high</td>
+<td>1/8030591900</td>
+<td>1/5230881157</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">119</td>
+<td>S250102680_L01_2</td>
+<td>N133B-1</td>
+<td>NIPT-BASE</td>
+<td>15M</td>
+<td>NaN</td>
+<td>low</td>
+<td>high</td>
+<td>low</td>
+<td>1/612553201</td>
+<td>&gt;1/20</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">120</td>
+<td>S250102680_L01_12</td>
+<td>N134B-2</td>
+<td>NIPT-BASE</td>
+<td>15M</td>
+<td>NaN</td>
+<td>low</td>
+<td>low</td>
+<td>high</td>
+<td>1/3441710328</td>
+<td>1/3006116462</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">121</td>
+<td>S250102680_L01_5</td>
+<td>N134C-1</td>
+<td>NIPT-BASE</td>
+<td>15M</td>
+<td>NaN</td>
+<td>low</td>
+<td>low</td>
+<td>high</td>
+<td>1/4792571586</td>
+<td>1/1290472369</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">126</td>
+<td>S250102680_L01_10</td>
+<td>N133B-2</td>
+<td>NIPT-BASE</td>
+<td>15M</td>
+<td>NaN</td>
+<td>low</td>
+<td>high</td>
+<td>low</td>
+<td>1/598816024</td>
+<td>&gt;1/20</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 132 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the results dataframe to CSV</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>results_df.to_csv(<span class="st">'/mnt/rdisk/duydao/khuongduying.github.io/statistics/trisomy_risk_results.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Results saved to: /mnt/rdisk/duydao/khuongduying.github.io/statistics/trisomy_risk_results.csv"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Saved </span><span class="sc">{</span><span class="bu">len</span>(results_df)<span class="sc">}</span><span class="ss"> rows with </span><span class="sc">{</span><span class="bu">len</span>(results_df.columns)<span class="sc">}</span><span class="ss"> columns"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Results saved to: /mnt/rdisk/duydao/khuongduying.github.io/statistics/trisomy_risk_results.csv
+Saved 34 rows with 144 columns</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_trisomy_risk_logistic(z_score, trisomy_type<span class="op">=</span><span class="st">'T21'</span>, prior_risk<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate trisomy risk using logistic approach for chromosomes 13, 18, and 21</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">    - z_score: observed z-score</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">    - trisomy_type: 'T21', 'T18', or 'T13'</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    - prior_risk: a priori risk (if None, uses default values)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">    - probability (0-1)</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Default prior risks based on maternal age and clinical data</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prior_risk <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        prior_risks <span class="op">=</span> {</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">'T21'</span>: <span class="fl">0.001</span>,   <span class="co"># 1 in 1000 (0.1%)</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">'T18'</span>: <span class="fl">0.0003</span>,  <span class="co"># 1 in 3333 (0.03%)</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">'T13'</span>: <span class="fl">0.0002</span>   <span class="co"># 1 in 5000 (0.02%)</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        prior_risk <span class="op">=</span> prior_risks.get(trisomy_type, <span class="fl">0.001</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert prior risk to log odds</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    prior_log_odds <span class="op">=</span> np.log(prior_risk <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> prior_risk))</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Trisomy-specific parameters for logistic function</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># These are tuned based on clinical performance expectations</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    logistic_params <span class="op">=</span> {</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T21'</span>: {<span class="st">'coefficient'</span>: <span class="fl">2.0</span>, <span class="st">'intercept'</span>: <span class="op">-</span><span class="fl">6.0</span>},   <span class="co"># Most sensitive</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T18'</span>: {<span class="st">'coefficient'</span>: <span class="fl">1.8</span>, <span class="st">'intercept'</span>: <span class="op">-</span><span class="fl">5.5</span>},   <span class="co"># Moderate sensitivity  </span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T13'</span>: {<span class="st">'coefficient'</span>: <span class="fl">1.6</span>, <span class="st">'intercept'</span>: <span class="op">-</span><span class="fl">5.0</span>}    <span class="co"># Lower sensitivity</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> logistic_params.get(trisomy_type, logistic_params[<span class="st">'T21'</span>])</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Z-score contribution to log odds</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    z_contribution <span class="op">=</span> params[<span class="st">'coefficient'</span>] <span class="op">*</span> z_score <span class="op">+</span> params[<span class="st">'intercept'</span>]</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combined log odds</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    combined_log_odds <span class="op">=</span> prior_log_odds <span class="op">+</span> z_contribution</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert back to probability using logistic function</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    probability <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>combined_log_odds))</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> probability</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_risk_level(probability_pct):</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Classify risk level based on probability percentage"""</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> probability_pct <span class="op">&gt;=</span> <span class="dv">99</span>:</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Very High Risk"</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> probability_pct <span class="op">&gt;=</span> <span class="dv">90</span>:</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"High Risk"</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> probability_pct <span class="op">&gt;=</span> <span class="dv">50</span>:</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Moderate Risk"</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> probability_pct <span class="op">&gt;=</span> <span class="dv">10</span>:</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Low-Moderate Risk"</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> probability_pct <span class="op">&gt;=</span> <span class="dv">1</span>:</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Low Risk"</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Very Low Risk"</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_all_trisomy_risks(df):</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate risk scores for all three trisomies</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co">    Assumes columns: score21, score18, score13</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>    results_df <span class="op">=</span> df.copy()</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate risks for each trisomy</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>    trisomies <span class="op">=</span> {</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T21'</span>: <span class="st">'score21'</span>,</span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T18'</span>: <span class="st">'score18'</span>, </span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T13'</span>: <span class="st">'score13'</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> trisomy, z_score_col <span class="kw">in</span> trisomies.items():</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> z_score_col <span class="kw">in</span> df.columns:</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calculate probabilities</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>            prob_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_probability'</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>            prob_pct_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_probability_pct'</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>            risk_level_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_risk_level'</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>            results_df[prob_col] <span class="op">=</span> df[z_score_col].<span class="bu">apply</span>(</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>                <span class="kw">lambda</span> x: calculate_trisomy_risk_logistic(x, trisomy) <span class="cf">if</span> pd.notna(x) <span class="cf">else</span> np.nan</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>            results_df[prob_pct_col] <span class="op">=</span> results_df[prob_col] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>            results_df[risk_level_col] <span class="op">=</span> results_df[prob_pct_col].<span class="bu">apply</span>(</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>                <span class="kw">lambda</span> x: classify_risk_level(x) <span class="cf">if</span> pd.notna(x) <span class="cf">else</span> <span class="st">"Unknown"</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Warning: Column </span><span class="sc">{</span>z_score_col<span class="sc">}</span><span class="ss"> not found in dataframe"</span>)</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Read your data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df = pd.read_csv('/mnt/rdisk/duydao/khuongduying.github.io/statistics/T21_high.csv')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="add-5-random-samples-with-t21-z-scores-between-3-and-5" class="level3">
+<h3 class="anchored" data-anchor-id="add-5-random-samples-with-t21-z-scores-between-3-and-5">Add 5 random samples with T21 z-scores between 3 and 5</h3>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame from the high risk dataset</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df_jk_high_risk.copy()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random seed for reproducibility</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">42</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create 5 new samples</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>new_samples <span class="op">=</span> []</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate random T21 z-score between 3 and 5</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    random_z21 <span class="op">=</span> np.random.uniform(<span class="fl">3.0</span>, <span class="fl">5.0</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a new sample row</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    new_sample <span class="op">=</span> {</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'tid'</span>: <span class="ss">f'RANDOM_SAMPLE_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'sampleID'</span>: <span class="ss">f'TEST_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'ReportType'</span>: <span class="st">'NIPT-TEST'</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Datavolumn'</span>: <span class="st">'10M'</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'note'</span>: np.nan,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T13 risk'</span>: <span class="st">'low'</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T18 risk'</span>: <span class="st">'low'</span>, </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T21 risk'</span>: <span class="st">'moderate'</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'risk score of T13'</span>: <span class="st">'1/10000000'</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">'risk score of T18'</span>: <span class="st">'1/10000000'</span>,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'risk score of T21'</span>: <span class="st">'1/100'</span>,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'rawdata'</span>: np.random.uniform(<span class="dv">20</span>, <span class="dv">60</span>),</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'uniqueread'</span>: np.random.uniform(<span class="dv">15</span>, <span class="dv">40</span>),</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">'uniqueGC'</span>: np.random.uniform(<span class="dv">35</span>, <span class="dv">45</span>),</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">'readQC'</span>: <span class="st">'Passed'</span>,</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">'GCQC'</span>: <span class="st">'Passed'</span>,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">'fetalfraction'</span>: np.random.uniform(<span class="dv">8</span>, <span class="dv">20</span>),</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">'fetalgender'</span>: np.random.choice([<span class="st">'M'</span>, <span class="st">'F'</span>]),</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">'score21'</span>: random_z21,  <span class="co"># Our target z-score</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">'score18'</span>: np.random.uniform(<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>),  <span class="co"># Random T18 z-score (normal range)</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">'score13'</span>: np.random.uniform(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>),  <span class="co"># Random T13 z-score (normal range)</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">'score22'</span>: np.random.uniform(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>),  <span class="co"># Random other chromosome scores</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scoreXO'</span>: np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>),</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scoreXXX'</span>: np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>),</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scoreXXY'</span>: np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>),</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scoreXYY'</span>: np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fill in all other columns with NaN to match the original dataframe structure</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> df_jk_high_risk.columns:</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> new_sample:</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>            new_sample[col] <span class="op">=</span> np.nan</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>    new_samples.append(new_sample)</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame from new samples</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>new_df <span class="op">=</span> pd.DataFrame(new_samples)</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure column order matches original dataframe</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>new_df <span class="op">=</span> new_df.reindex(columns<span class="op">=</span>df_jk_high_risk.columns)</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Append to original dataframe</span></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.concat([df_jk_high_risk, new_df], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Added 5 random samples. DataFrame now has </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss"> rows."</span>)</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">New samples added:"</span>)</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">'tid'</span>, <span class="st">'score21'</span>, <span class="st">'score18'</span>, <span class="st">'score13'</span>]].tail())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Added 5 random samples. DataFrame now has 34 rows.
+
+New samples added:
+                tid   score21   score18   score13
+29  RANDOM_SAMPLE_1  3.749080 -1.800050 -0.081502
+30  RANDOM_SAMPLE_2  4.877105 -1.136110 -0.417542
+31  RANDOM_SAMPLE_3  4.570352 -0.639385 -0.099001
+32  RANDOM_SAMPLE_4  3.461788 -0.181359 -0.482440
+33  RANDOM_SAMPLE_5  4.939169 -1.346918  0.140888</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate risks for all trisomies</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> calculate_all_trisomy_risks(df)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Trisomy Risk Calculation Results:"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Show available columns first</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Available columns:"</span>, results_df.columns.tolist())</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Display T21 results (since we know this column exists)</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'score21'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Chromosome 21 (T21) Results:"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    display_cols <span class="op">=</span> [<span class="st">'tid'</span>, <span class="st">'score21'</span>, <span class="st">'t21_probability_pct'</span>, <span class="st">'t21_risk_level'</span>]</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    available_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> results_df.columns]</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(results_df[available_cols].head(<span class="dv">20</span>))</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Display T18 results if available</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'score18'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Chromosome 18 (T18) Results:"</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    display_cols <span class="op">=</span> [<span class="st">'tid'</span>, <span class="st">'score18'</span>, <span class="st">'t18_probability_pct'</span>, <span class="st">'t18_risk_level'</span>]</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    available_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> results_df.columns]</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(results_df[available_cols].head(<span class="dv">20</span>))</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Display T13 results if available  </span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'score13'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Chromosome 13 (T13) Results:"</span>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    display_cols <span class="op">=</span> [<span class="st">'tid'</span>, <span class="st">'score13'</span>, <span class="st">'t13_probability_pct'</span>, <span class="st">'t13_risk_level'</span>]</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    available_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> results_df.columns]</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(results_df[available_cols].head(<span class="dv">20</span>))</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Summary Statistics:"</span>)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">50</span>)</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> trisomy <span class="kw">in</span> [<span class="st">'T21'</span>, <span class="st">'T18'</span>, <span class="st">'T13'</span>]:</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    z_col <span class="op">=</span> <span class="ss">f'score</span><span class="sc">{</span>trisomy[<span class="op">-</span><span class="dv">2</span>:]<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    prob_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_probability_pct'</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> z_col <span class="kw">in</span> results_df.columns <span class="kw">and</span> prob_col <span class="kw">in</span> results_df.columns:</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>trisomy<span class="sc">}</span><span class="ss"> Statistics:"</span>)</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  Z-scores - Mean: </span><span class="sc">{</span>results_df[z_col]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">, "</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"Std: </span><span class="sc">{</span>results_df[z_col]<span class="sc">.</span>std()<span class="sc">:.2f}</span><span class="ss">, "</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"Range: </span><span class="sc">{</span>results_df[z_col]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.1f}</span><span class="ss"> to </span><span class="sc">{</span>results_df[z_col]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  Risk % - Mean: </span><span class="sc">{</span>results_df[prob_col]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">%, "</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"Median: </span><span class="sc">{</span>results_df[prob_col]<span class="sc">.</span>median()<span class="sc">:.1f}</span><span class="ss">%, "</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"Max: </span><span class="sc">{</span>results_df[prob_col]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss">%"</span>)</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Risk level distribution</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_risk_level'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>            risk_dist <span class="op">=</span> results_df[<span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_risk_level'</span>].value_counts()</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"  Risk Distribution:"</span>)</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> level, count <span class="kw">in</span> risk_dist.items():</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>                pct <span class="op">=</span> (count <span class="op">/</span> <span class="bu">len</span>(results_df)) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"    </span><span class="sc">{</span>level<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>pct<span class="sc">:.1f}</span><span class="ss">%)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Trisomy Risk Calculation Results:
+================================================================================
+Available columns: ['tid', 'sampleID', 'ReportType', 'Datavolumn', 'note', 'T13 risk', 'T18 risk', 'T21 risk', 'risk score of T13', 'risk score of T18', 'risk score of T21', 'rawdata', 'uniqueread', 'uniqueGC', 'readQC', 'GCQC', 'fetalfraction', 'fetalgender', 'score1', 'score2', 'score3', 'score4', 'score5', 'score6', 'score7', 'score8', 'score9', 'score10', 'score11', 'score12', 'score13', 'score14', 'score15', 'score16', 'score17', 'score18', 'score19', 'score20', 'score21', 'score22', 'scoreXO', 'scoreXXX', 'scoreXXY', 'scoreXYY', 'Partial monosomy 1p', 'Monosomy 1q21→q32', 'Monosomy 1q42→qter', 'Trisomy 1q23→qter', 'Partial monosomy 2p', 'Partial trisomy 2p', 'Partial monosomy 2q', 'Partial trisomy 2q', 'Monosomy 3p11→p21', 'Monosomy 3p25→pter', 'Partial trisomy 3p', 'Partial monosomy 3q', 'Partial trisomy 3q', 'Partial monosomy3p and partial trisomy 3q', 'Partial monosomy 4p', 'Partial trisomy 4p', 'Monosomy 4q21→q31', 'Monosomy 4q31→qter', 'Partial trisomy 4q', 'Partial monosomy 4p and partial trisomy 4q', 'Partial trisomy 5p', 'Partial monosomy 5q', 'Partial trisomy 5q', 'Partial trisomy 6p', 'Partial monosomy 6q', 'Partial trisomy 6q', 'Partial monosomy 7p', 'Partial trisomy 7p', 'monosomy 7q32→qter', 'Trisomy 7q21→q31', 'Trisomy 7q32→qter', 'Partial trisomy 8q', 'Partial monosomy 9p', 'Partial trisomy 9p', 'Partial monosomy 9q', 'Partial trisomy 9q', 'Partial monosomy 10p', 'Partial trisomy 10p', 'Partial monosomy 10q', 'Partial trisomy 10q', 'Partial trisomy 11p', 'Partial monosomy 11q', 'Partial trisomy 11q', 'Partial monosomy 12p', 'Partial trisomy 12p', 'Partial trisomy 12q', 'Monosomy 13q14', 'Monosomy 13q21→qter', 'Trisomy 13cen→q14', 'Trisomy 13q21→qter', 'Partial trisomy 14', 'Trisomy 14q24-qter', 'supernumerary inv dup (15)', 'Trisomy 15q22→qter', 'Partial trisomy 16p', 'Partial monosomy 16q', 'Partial trisomy 16q', 'Trisomy 17pter→q21', 'Partial monosomy 18p', 'Partial tetrasomy 18p', 'Trisomy 18pter→q12', 'Monosomy 18q21→qter', 'Trisomy 18q12→qter', 'Partial monosomy 20p', 'Trisomy 20p', 'Partial monosomy 21', '1p36 deletion syndrome', '2p16.1-p15 deletion syndrome', '2q33.1 deletion syndrome', '2q37 deletion syndrome', '3p deletion syndrome', '4p16.31 deletion syndrome', 'Cri-du-chat syndrome', '7q11.2 deletion syndrome', 'Langer-Giedion syndrome', '8p23.1 deletion syndrome', '8p23.1 duplication syndrome', '11q23.3-q25 deletion syndrome', 'Angelman syndrome', 'Prader–Willi syndrome', '15q26 duplication syndrome', '16p12.2 microdeletion syndrome', '17p13.3 deletion syndrome', 'Smith-Magenis syndrome', 'Potocki-Lupski syndrome', '22q11.2 deletion syndrome', '10p14-p13 deletion syndrome\n(DiGeorge 2 syndrome)', '22q11.2 deletion syndrome\n(DiGeorge syndrome)', 't21_probability', 't21_probability_pct', 't21_risk_level', 't18_probability', 't18_probability_pct', 't18_risk_level', 't13_probability', 't13_probability_pct', 't13_risk_level']
+
+Chromosome 21 (T21) Results:
+                  tid  score21  t21_probability_pct     t21_risk_level
+0    S250102680_L01_4   12.306            99.999175     Very High Risk
+1    S250102680_L01_2    0.257             0.000415      Very Low Risk
+2   S250102680_L01_12   10.745            99.981282     Very High Risk
+3    S250102680_L01_5   12.573            99.999516     Very High Risk
+4   S250102680_L01_10    0.496             0.000669      Very Low Risk
+5   S250102680_L01_13   11.793            99.997698     Very High Risk
+6   S250127334_L01_18    0.743             0.001097      Very Low Risk
+7   S250127345_L01_13    0.441             0.000599      Very Low Risk
+8   S250127408_L01_13    1.314             0.003435      Very Low Risk
+9   S250127493_L01_17   10.215            99.945992     Very High Risk
+10  S250127522_L01_18    0.961             0.001696      Very Low Risk
+11  S250127522_L01_17   10.114            99.933910     Very High Risk
+12  S250127526_L01_42   10.745            99.981282     Very High Risk
+13  S250127614_L01_17   10.865            99.985275     Very High Risk
+14  S250127727_L01_17    9.775            99.869890     Very High Risk
+15   S250130739_L01_4   -0.124             0.000194      Very Low Risk
+16   S250130739_L01_3   19.710           100.000000     Very High Risk
+17  S250130884_L01_19    6.560            55.311020      Moderate Risk
+18  S250130884_L01_26    6.546            54.617932      Moderate Risk
+19  S250130783_L01_26    5.449            11.828679  Low-Moderate Risk
+
+Chromosome 18 (T18) Results:
+                  tid  score18  t18_probability_pct  t18_risk_level
+0    S250102680_L01_4   -2.045             0.000003   Very Low Risk
+1    S250102680_L01_2   17.715            99.999999  Very High Risk
+2   S250102680_L01_12   -1.270             0.000012   Very Low Risk
+3    S250102680_L01_5   -1.132             0.000016   Very Low Risk
+4   S250102680_L01_10   19.488           100.000000  Very High Risk
+5   S250102680_L01_13   -1.628             0.000007   Very Low Risk
+6   S250127334_L01_18   13.940            99.998967  Very High Risk
+7   S250127345_L01_13   -1.840             0.000004   Very Low Risk
+8   S250127408_L01_13   -2.394             0.000002   Very Low Risk
+9   S250127493_L01_17    0.716             0.000445   Very Low Risk
+10  S250127522_L01_18   15.098            99.999872  Very High Risk
+11  S250127522_L01_17   -0.081             0.000106   Very Low Risk
+12  S250127526_L01_42   -1.547             0.000008   Very Low Risk
+13  S250127614_L01_17    0.502             0.000303   Very Low Risk
+14  S250127727_L01_17    0.641             0.000389   Very Low Risk
+15   S250130739_L01_4   21.369           100.000000  Very High Risk
+16   S250130739_L01_3   -1.324             0.000011   Very Low Risk
+17  S250130884_L01_19   -1.544             0.000008   Very Low Risk
+18  S250130884_L01_26    2.393             0.009105   Very Low Risk
+19  S250130783_L01_26    2.009             0.004562   Very Low Risk
+
+Chromosome 13 (T13) Results:
+                  tid  score13  t13_probability_pct     t13_risk_level
+0    S250102680_L01_4   -0.007             0.000133      Very Low Risk
+1    S250102680_L01_2   -0.374             0.000074      Very Low Risk
+2   S250102680_L01_12    0.562             0.000331      Very Low Risk
+3    S250102680_L01_5    0.233             0.000196      Very Low Risk
+4   S250102680_L01_10   -0.321             0.000081      Very Low Risk
+5   S250102680_L01_13    0.406             0.000258      Very Low Risk
+6   S250127334_L01_18    0.334             0.000230      Very Low Risk
+7   S250127345_L01_13    7.110            10.517588  Low-Moderate Risk
+8   S250127408_L01_13    7.254            12.891423  Low-Moderate Risk
+9   S250127493_L01_17   -1.101             0.000023      Very Low Risk
+10  S250127522_L01_18    0.989             0.000656      Very Low Risk
+11  S250127522_L01_17   -1.505             0.000012      Very Low Risk
+12  S250127526_L01_42   -0.457             0.000065      Very Low Risk
+13  S250127614_L01_17   -0.639             0.000048      Very Low Risk
+14  S250127727_L01_17   -1.155             0.000021      Very Low Risk
+15   S250130739_L01_4    0.055             0.000147      Very Low Risk
+16   S250130739_L01_3    1.163             0.000867      Very Low Risk
+17  S250130884_L01_19   -2.197             0.000004      Very Low Risk
+18  S250130884_L01_26   -1.204             0.000020      Very Low Risk
+19  S250130783_L01_26   -0.956             0.000029      Very Low Risk
+
+Summary Statistics:
+==================================================
+
+T21 Statistics:
+  Z-scores - Mean: 6.45, Std: 5.94, Range: -0.5 to 19.8
+  Risk % - Mean: 42.7%, Median: 8.2%, Max: 100.0%
+  Risk Distribution:
+    Very Low Risk: 14 (41.2%)
+    Very High Risk: 13 (38.2%)
+    Low Risk: 3 (8.8%)
+    Moderate Risk: 2 (5.9%)
+    Low-Moderate Risk: 2 (5.9%)
+
+T18 Statistics:
+  Z-scores - Mean: 4.97, Std: 9.01, Range: -2.4 to 23.3
+  Risk % - Mean: 29.4%, Median: 0.0%, Max: 100.0%
+  Risk Distribution:
+    Very Low Risk: 24 (70.6%)
+    Very High Risk: 10 (29.4%)
+
+T13 Statistics:
+  Z-scores - Mean: 0.18, Std: 2.04, Range: -2.8 to 7.3
+  Risk % - Mean: 0.7%, Median: 0.0%, Max: 12.9%
+  Risk Distribution:
+    Very Low Risk: 32 (94.1%)
+    Low-Moderate Risk: 2 (5.9%)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> probability_to_ratio(probability):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Convert probability to "1 in X" format</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">    - probability: float between 0 and 1</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">    - string in format "1 in X" or "&gt;99%" for very high probabilities</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(probability) <span class="kw">or</span> probability <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Invalid"</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> probability <span class="op">&gt;=</span> <span class="fl">0.99</span>:</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"&gt;99% (</span><span class="sc">{</span>probability<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> probability <span class="op">&gt;=</span> <span class="fl">0.01</span>:  <span class="co"># 1% or higher, show as percentage</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>probability<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%"</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert to "1 in X" format</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        ratio <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="dv">1</span> <span class="op">/</span> probability))</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"1 in </span><span class="sc">{</span>ratio<span class="sc">:,}</span><span class="ss">"</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_probability_comprehensive(probability):</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co">    Show both percentage and ratio format for comprehensive view</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(probability) <span class="kw">or</span> probability <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Invalid"</span>, <span class="st">"Invalid"</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Percentage format</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    pct_format <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>probability<span class="op">*</span><span class="dv">100</span><span class="sc">:.3f}</span><span class="ss">%"</span> <span class="cf">if</span> probability <span class="op">&lt;</span> <span class="fl">0.01</span> <span class="cf">else</span> <span class="ss">f"</span><span class="sc">{</span>probability<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%"</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ratio format  </span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> probability <span class="op">&gt;=</span> <span class="fl">0.99</span>:</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>        ratio_format <span class="op">=</span> <span class="st">"&gt;99%"</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> probability <span class="op">&gt;=</span> <span class="fl">0.01</span>:</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>        ratio_format <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>probability<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%"</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>        ratio <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="dv">1</span> <span class="op">/</span> probability))</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>        ratio_format <span class="op">=</span> <span class="ss">f"1 in </span><span class="sc">{</span>ratio<span class="sc">:,}</span><span class="ss">"</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pct_format, ratio_format</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Add ratio columns to results</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_ratio_columns(results_df):</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Add ratio format columns for all trisomies"""</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> trisomy <span class="kw">in</span> [<span class="st">'T21'</span>, <span class="st">'T18'</span>, <span class="st">'T13'</span>]:</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>        prob_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_probability'</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>        ratio_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_ratio'</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>        comprehensive_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_risk_summary'</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> prob_col <span class="kw">in</span> results_df.columns:</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Add simple ratio column</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>            results_df[ratio_col] <span class="op">=</span> results_df[prob_col].<span class="bu">apply</span>(probability_to_ratio)</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Add comprehensive format (percentage + ratio)</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>            results_df[comprehensive_col] <span class="op">=</span> results_df[prob_col].<span class="bu">apply</span>(</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>                <span class="kw">lambda</span> x: <span class="ss">f"</span><span class="sc">{</span>format_probability_comprehensive(x)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>format_probability_comprehensive(x)[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">)"</span> </span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> pd.notna(x) <span class="cf">else</span> <span class="st">"Unknown"</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results_df</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the ratio formatting</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> add_ratio_columns(results_df)</span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Trisomy Risk Results with Ratio Format:"</span>)</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Display T21 results with ratio format</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'score21'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Chromosome 21 (T21) Results:"</span>)</span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>    display_cols <span class="op">=</span> [<span class="st">'tid'</span>, <span class="st">'score21'</span>, <span class="st">'t21_probability_pct'</span>, <span class="st">'t21_ratio'</span>, <span class="st">'t21_risk_level'</span>]</span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>    available_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> results_df.columns]</span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(results_df[available_cols].head(<span class="dv">10</span>))</span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Display T18 results if available</span></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'score18'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Chromosome 18 (T18) Results:"</span>)</span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>    display_cols <span class="op">=</span> [<span class="st">'tid'</span>, <span class="st">'score18'</span>, <span class="st">'t18_probability_pct'</span>, <span class="st">'t18_ratio'</span>, <span class="st">'t18_risk_level'</span>]</span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a>    available_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> results_df.columns]</span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(results_df[available_cols].head(<span class="dv">10</span>))</span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Display T13 results if available  </span></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'score13'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Chromosome 13 (T13) Results:"</span>)</span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a>    display_cols <span class="op">=</span> [<span class="st">'tid'</span>, <span class="st">'score13'</span>, <span class="st">'t13_probability_pct'</span>, <span class="st">'t13_ratio'</span>, <span class="st">'t13_risk_level'</span>]</span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>    available_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> results_df.columns]</span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(results_df[available_cols].head(<span class="dv">10</span>))</span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Trisomy Risk Results with Ratio Format:
+====================================================================================================
+Chromosome 21 (T21) Results:
+                 tid  score21  t21_probability_pct      t21_ratio  \
+0   S250102680_L01_4   12.306            99.999175  &gt;99% (100.0%)   
+1   S250102680_L01_2    0.257             0.000415   1 in 241,050   
+2  S250102680_L01_12   10.745            99.981282  &gt;99% (100.0%)   
+3   S250102680_L01_5   12.573            99.999516  &gt;99% (100.0%)   
+4  S250102680_L01_10    0.496             0.000669   1 in 149,457   
+5  S250102680_L01_13   11.793            99.997698  &gt;99% (100.0%)   
+6  S250127334_L01_18    0.743             0.001097    1 in 91,196   
+7  S250127345_L01_13    0.441             0.000599   1 in 166,835   
+8  S250127408_L01_13    1.314             0.003435    1 in 29,109   
+9  S250127493_L01_17   10.215            99.945992   &gt;99% (99.9%)   
+
+   t21_risk_level  
+0  Very High Risk  
+1   Very Low Risk  
+2  Very High Risk  
+3  Very High Risk  
+4   Very Low Risk  
+5  Very High Risk  
+6   Very Low Risk  
+7   Very Low Risk  
+8   Very Low Risk  
+9  Very High Risk  
+
+Chromosome 18 (T18) Results:
+                 tid  score18  t18_probability_pct        t18_ratio  \
+0   S250102680_L01_4   -2.045             0.000003  1 in 32,359,819   
+1   S250102680_L01_2   17.715            99.999999    &gt;99% (100.0%)   
+2  S250102680_L01_12   -1.270             0.000012   1 in 8,019,833   
+3   S250102680_L01_5   -1.132             0.000016   1 in 6,255,854   
+4  S250102680_L01_10   19.488           100.000000    &gt;99% (100.0%)   
+5  S250102680_L01_13   -1.628             0.000007  1 in 15,276,528   
+6  S250127334_L01_18   13.940            99.998967    &gt;99% (100.0%)   
+7  S250127345_L01_13   -1.840             0.000004  1 in 22,374,402   
+8  S250127408_L01_13   -2.394             0.000002  1 in 60,649,870   
+9  S250127493_L01_17    0.716             0.000445     1 in 224,725   
+
+   t18_risk_level  
+0   Very Low Risk  
+1  Very High Risk  
+2   Very Low Risk  
+3   Very Low Risk  
+4  Very High Risk  
+5   Very Low Risk  
+6  Very High Risk  
+7   Very Low Risk  
+8   Very Low Risk  
+9   Very Low Risk  
+
+Chromosome 13 (T13) Results:
+                 tid  score13  t13_probability_pct       t13_ratio  \
+0   S250102680_L01_4   -0.007             0.000133    1 in 750,275   
+1   S250102680_L01_2   -0.374             0.000074  1 in 1,349,701   
+2  S250102680_L01_12    0.562             0.000331    1 in 301,884   
+3   S250102680_L01_5    0.233             0.000196    1 in 511,036   
+4  S250102680_L01_10   -0.321             0.000081  1 in 1,239,965   
+5  S250102680_L01_13    0.406             0.000258    1 in 387,471   
+6  S250127334_L01_18    0.334             0.000230    1 in 434,780   
+7  S250127345_L01_13    7.110            10.517588           10.5%   
+8  S250127408_L01_13    7.254            12.891423           12.9%   
+9  S250127493_L01_17   -1.101             0.000023  1 in 4,319,255   
+
+      t13_risk_level  
+0      Very Low Risk  
+1      Very Low Risk  
+2      Very Low Risk  
+3      Very Low Risk  
+4      Very Low Risk  
+5      Very Low Risk  
+6      Very Low Risk  
+7  Low-Moderate Risk  
+8  Low-Moderate Risk  
+9      Very Low Risk  
+</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> probability_to_ratio_custom(probability):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Convert probability to "1 in X" format with custom logic</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">    - Use "&gt;1/20" if probability &gt; 5%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">    - Otherwise use "1 in X" format</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(probability) <span class="kw">or</span> probability <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Invalid"</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> probability <span class="op">&gt;</span> <span class="fl">0.05</span>:  <span class="co"># More than 5%</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"&gt;1/20"</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert to "1 in X" format</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        ratio <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="dv">1</span> <span class="op">/</span> probability))</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"1/</span><span class="sc">{</span>ratio<span class="sc">:,}</span><span class="ss">"</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_risk_level_custom(probability_pct):</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">    Classify risk level with custom logic:</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">    - High Risk if &gt;5% probability</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">    - Low Risk otherwise</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(probability_pct):</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Unknown"</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> probability_pct <span class="op">&gt;</span> <span class="fl">5.0</span>:  <span class="co"># More than 5%</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"High Risk"</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Low Risk"</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_all_trisomy_risks_custom(df):</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate risk scores for all three trisomies with custom formatting</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    results_df <span class="op">=</span> df.copy()</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate risks for each trisomy</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    trisomies <span class="op">=</span> {</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T21'</span>: <span class="st">'score21'</span>,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T18'</span>: <span class="st">'score18'</span>, </span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">'T13'</span>: <span class="st">'score13'</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> trisomy, z_score_col <span class="kw">in</span> trisomies.items():</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> z_score_col <span class="kw">in</span> df.columns:</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calculate probabilities</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>            prob_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_probability'</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>            prob_pct_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_probability_pct'</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>            ratio_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_ratio'</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>            risk_level_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_risk_level'</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calculate base probability</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>            results_df[prob_col] <span class="op">=</span> df[z_score_col].<span class="bu">apply</span>(</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>                <span class="kw">lambda</span> x: calculate_trisomy_risk_logistic(x, trisomy) <span class="cf">if</span> pd.notna(x) <span class="cf">else</span> np.nan</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Convert to percentage</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>            results_df[prob_pct_col] <span class="op">=</span> results_df[prob_col] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Apply custom ratio formatting</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>            results_df[ratio_col] <span class="op">=</span> results_df[prob_col].<span class="bu">apply</span>(probability_to_ratio_custom)</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Apply custom risk level classification</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>            results_df[risk_level_col] <span class="op">=</span> results_df[prob_pct_col].<span class="bu">apply</span>(classify_risk_level_custom)</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Warning: Column </span><span class="sc">{</span>z_score_col<span class="sc">}</span><span class="ss"> not found in dataframe"</span>)</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results_df</span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Recalculate with custom logic</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> calculate_all_trisomy_risks_custom(df)</span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Trisomy Risk Results with Custom Logic:"</span>)</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Custom Rules:"</span>)</span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"- Probability ratio: '&gt;1/20' if &gt;5%, otherwise '1/X'"</span>)</span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"- Risk level: 'High Risk' if &gt;5%, otherwise 'Low Risk'"</span>)</span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Display T21 results with custom format</span></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'score21'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Chromosome 21 (T21) Results:"</span>)</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>    display_cols <span class="op">=</span> [<span class="st">'tid'</span>, <span class="st">'score21'</span>, <span class="st">'t21_probability_pct'</span>, <span class="st">'t21_ratio'</span>, <span class="st">'t21_risk_level'</span>]</span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>    available_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> results_df.columns]</span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(results_df[available_cols].head(<span class="dv">15</span>))</span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Display T18 results if available</span></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'score18'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Chromosome 18 (T18) Results:"</span>)</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>    display_cols <span class="op">=</span> [<span class="st">'tid'</span>, <span class="st">'score18'</span>, <span class="st">'t18_probability_pct'</span>, <span class="st">'t18_ratio'</span>, <span class="st">'t18_risk_level'</span>]</span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>    available_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> results_df.columns]</span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(results_df[available_cols].head(<span class="dv">15</span>))</span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a><span class="co"># Display T13 results if available  </span></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'score13'</span> <span class="kw">in</span> results_df.columns:</span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Chromosome 13 (T13) Results:"</span>)</span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>    display_cols <span class="op">=</span> [<span class="st">'tid'</span>, <span class="st">'score13'</span>, <span class="st">'t13_probability_pct'</span>, <span class="st">'t13_ratio'</span>, <span class="st">'t13_risk_level'</span>]</span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>    available_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> results_df.columns]</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(results_df[available_cols].head(<span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Trisomy Risk Results with Custom Logic:
+====================================================================================================
+Custom Rules:
+- Probability ratio: '&gt;1/20' if &gt;5%, otherwise '1/X'
+- Risk level: 'High Risk' if &gt;5%, otherwise 'Low Risk'
+====================================================================================================
+
+Chromosome 21 (T21) Results:
+                  tid  score21  t21_probability_pct  t21_ratio t21_risk_level
+0    S250102680_L01_4   12.306            99.999175      &gt;1/20      High Risk
+1    S250102680_L01_2    0.257             0.000415  1/241,050       Low Risk
+2   S250102680_L01_12   10.745            99.981282      &gt;1/20      High Risk
+3    S250102680_L01_5   12.573            99.999516      &gt;1/20      High Risk
+4   S250102680_L01_10    0.496             0.000669  1/149,457       Low Risk
+5   S250102680_L01_13   11.793            99.997698      &gt;1/20      High Risk
+6   S250127334_L01_18    0.743             0.001097   1/91,196       Low Risk
+7   S250127345_L01_13    0.441             0.000599  1/166,835       Low Risk
+8   S250127408_L01_13    1.314             0.003435   1/29,109       Low Risk
+9   S250127493_L01_17   10.215            99.945992      &gt;1/20      High Risk
+10  S250127522_L01_18    0.961             0.001696   1/58,969       Low Risk
+11  S250127522_L01_17   10.114            99.933910      &gt;1/20      High Risk
+12  S250127526_L01_42   10.745            99.981282      &gt;1/20      High Risk
+13  S250127614_L01_17   10.865            99.985275      &gt;1/20      High Risk
+14  S250127727_L01_17    9.775            99.869890      &gt;1/20      High Risk
+
+Chromosome 18 (T18) Results:
+                  tid  score18  t18_probability_pct     t18_ratio  \
+0    S250102680_L01_4   -2.045             0.000003  1/32,359,819   
+1    S250102680_L01_2   17.715            99.999999         &gt;1/20   
+2   S250102680_L01_12   -1.270             0.000012   1/8,019,833   
+3    S250102680_L01_5   -1.132             0.000016   1/6,255,854   
+4   S250102680_L01_10   19.488           100.000000         &gt;1/20   
+5   S250102680_L01_13   -1.628             0.000007  1/15,276,528   
+6   S250127334_L01_18   13.940            99.998967         &gt;1/20   
+7   S250127345_L01_13   -1.840             0.000004  1/22,374,402   
+8   S250127408_L01_13   -2.394             0.000002  1/60,649,870   
+9   S250127493_L01_17    0.716             0.000445     1/224,725   
+10  S250127522_L01_18   15.098            99.999872         &gt;1/20   
+11  S250127522_L01_17   -0.081             0.000106     1/943,384   
+12  S250127526_L01_42   -1.547             0.000008  1/13,203,970   
+13  S250127614_L01_17    0.502             0.000303     1/330,325   
+14  S250127727_L01_17    0.641             0.000389     1/257,206   
+
+   t18_risk_level  
+0        Low Risk  
+1       High Risk  
+2        Low Risk  
+3        Low Risk  
+4       High Risk  
+5        Low Risk  
+6       High Risk  
+7        Low Risk  
+8        Low Risk  
+9        Low Risk  
+10      High Risk  
+11       Low Risk  
+12       Low Risk  
+13       Low Risk  
+14       Low Risk  
+
+Chromosome 13 (T13) Results:
+                  tid  score13  t13_probability_pct    t13_ratio  \
+0    S250102680_L01_4   -0.007             0.000133    1/750,275   
+1    S250102680_L01_2   -0.374             0.000074  1/1,349,701   
+2   S250102680_L01_12    0.562             0.000331    1/301,884   
+3    S250102680_L01_5    0.233             0.000196    1/511,036   
+4   S250102680_L01_10   -0.321             0.000081  1/1,239,965   
+5   S250102680_L01_13    0.406             0.000258    1/387,471   
+6   S250127334_L01_18    0.334             0.000230    1/434,780   
+7   S250127345_L01_13    7.110            10.517588        &gt;1/20   
+8   S250127408_L01_13    7.254            12.891423        &gt;1/20   
+9   S250127493_L01_17   -1.101             0.000023  1/4,319,255   
+10  S250127522_L01_18    0.989             0.000656    1/152,451   
+11  S250127522_L01_17   -1.505             0.000012  1/8,243,976   
+12  S250127526_L01_42   -0.457             0.000065  1/1,541,388   
+13  S250127614_L01_17   -0.639             0.000048  1/2,062,426   
+14  S250127727_L01_17   -1.155             0.000021  1/4,709,034   
+
+   t13_risk_level  
+0        Low Risk  
+1        Low Risk  
+2        Low Risk  
+3        Low Risk  
+4        Low Risk  
+5        Low Risk  
+6        Low Risk  
+7       High Risk  
+8       High Risk  
+9        Low Risk  
+10       Low Risk  
+11       Low Risk  
+12       Low Risk  
+13       Low Risk  
+14       Low Risk  </code></pre>
+</div>
+</div>
+</section>
+<section id="visualization-of-results" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-of-results">Visualization of Results</h2>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comprehensive visualization</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">12</span>))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Available trisomies for plotting</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>available_trisomies <span class="op">=</span> []</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> trisomy <span class="kw">in</span> [<span class="st">'T21'</span>, <span class="st">'T18'</span>, <span class="st">'T13'</span>]:</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    z_col <span class="op">=</span> <span class="ss">f'score</span><span class="sc">{</span>trisomy[<span class="op">-</span><span class="dv">2</span>:]<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    prob_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_probability_pct'</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> z_col <span class="kw">in</span> results_df.columns <span class="kw">and</span> prob_col <span class="kw">in</span> results_df.columns:</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        available_trisomies.append((trisomy, z_col, prob_col))</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 1: Z-score vs Risk Probability for all available trisomies</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'blue'</span>, <span class="st">'green'</span>, <span class="st">'red'</span>]</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (trisomy, z_col, prob_col) <span class="kw">in</span> <span class="bu">enumerate</span>(available_trisomies):</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>,<span class="dv">0</span>].scatter(results_df[z_col], results_df[prob_col], </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>                     alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span>trisomy, color<span class="op">=</span>colors[i <span class="op">%</span> <span class="bu">len</span>(colors)], s<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>,<span class="dv">0</span>].set_xlabel(<span class="st">'Z-Score'</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>,<span class="dv">0</span>].set_ylabel(<span class="st">'Risk Probability (%)'</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>,<span class="dv">0</span>].set_title(<span class="st">'Trisomy Risk vs Z-Score (Logistic Method)'</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>,<span class="dv">0</span>].legend()</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>,<span class="dv">0</span>].grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>,<span class="dv">0</span>].set_yscale(<span class="st">'log'</span>)  <span class="co"># Log scale to better see low probabilities</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 2: Risk distribution histogram for T21 (if available)</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(available_trisomies) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    trisomy, z_col, prob_col <span class="op">=</span> available_trisomies[<span class="dv">0</span>]  <span class="co"># Use first available</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>,<span class="dv">1</span>].hist(results_df[prob_col].dropna(), bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, color<span class="op">=</span><span class="st">'blue'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>,<span class="dv">1</span>].set_xlabel(<span class="st">'Risk Probability (%)'</span>)</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>,<span class="dv">1</span>].set_ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>,<span class="dv">1</span>].set_title(<span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">}</span><span class="ss"> Risk Distribution'</span>)</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>,<span class="dv">1</span>].grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 3: Comparison of z-scores across trisomies (if multiple available)</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(available_trisomies) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    z_data <span class="op">=</span> []</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> []</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> trisomy, z_col, prob_col <span class="kw">in</span> available_trisomies:</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>        z_data.append(results_df[z_col].dropna())</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>        labels.append(trisomy)</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>,<span class="dv">0</span>].boxplot(z_data, labels<span class="op">=</span>labels)</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>,<span class="dv">0</span>].set_ylabel(<span class="st">'Z-Score'</span>)</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>,<span class="dv">0</span>].set_title(<span class="st">'Z-Score Distribution by Trisomy'</span>)</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>,<span class="dv">0</span>].grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>,<span class="dv">0</span>].text(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">'Multiple trisomies</span><span class="ch">\n</span><span class="st">not available'</span>, </span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>                   ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, transform<span class="op">=</span>axes[<span class="dv">1</span>,<span class="dv">0</span>].transAxes)</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>,<span class="dv">0</span>].set_title(<span class="st">'Z-Score Comparison (Not Available)'</span>)</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 4: Risk level pie chart for T21 (if available)</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(available_trisomies) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>    trisomy, z_col, prob_col <span class="op">=</span> available_trisomies[<span class="dv">0</span>]</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>    risk_col <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">_risk_level'</span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> risk_col <span class="kw">in</span> results_df.columns:</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>        risk_counts <span class="op">=</span> results_df[risk_col].value_counts()</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>        axes[<span class="dv">1</span>,<span class="dv">1</span>].pie(risk_counts.values, labels<span class="op">=</span>risk_counts.index, autopct<span class="op">=</span><span class="st">'</span><span class="sc">%1.1f%%</span><span class="st">'</span>, startangle<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>        axes[<span class="dv">1</span>,<span class="dv">1</span>].set_title(<span class="ss">f'</span><span class="sc">{</span>trisomy<span class="sc">}</span><span class="ss"> Risk Level Distribution'</span>)</span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>        axes[<span class="dv">1</span>,<span class="dv">1</span>].text(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">'Risk levels</span><span class="ch">\n</span><span class="st">not calculated'</span>, </span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>                       ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, transform<span class="op">=</span>axes[<span class="dv">1</span>,<span class="dv">1</span>].transAxes)</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="ppr_logis_13_18_21_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../statistics/narrative_reviews.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Narrative Reviews: NIPT Risk Score</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../statistics/ppr_t21_cal.html" class="pagination-link">
+        <span class="nav-page-text">Calculating PPR (Personalized Posteriori Risk) for NIPT Samples</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2024, Duy Dao</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/khuongduying">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/khuongduying/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

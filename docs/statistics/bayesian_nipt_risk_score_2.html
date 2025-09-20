@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Duy Dao">
+<meta name="dcterms.date" content="2025-09-20">
+
+<title>khuongduying - Risk Score Calculation in NIPT jupyter</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../statistics/narrative_reviews.html" rel="next">
+<link href="../statistics/bayesian_nipt_risk_score.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../GO_WITH_THE_FLOW/2.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">khuongduying</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-best-practice" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Best Practice</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-best-practice">    
+        <li class="dropdown-header">Git</li>
+        <li>
+    <a class="dropdown-item" href="../best_practice/git/creating_describing_issues.html" rel="" target="">
+ <span class="dropdown-text">Best Practice - Creating and Describing Issues in Git Repositories</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../best_practice/git/design_bioinfo_folder_structure.html" rel="" target="">
+ <span class="dropdown-text">Bioinformatics Folder Structure</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../best_practice/git/git_github_cicd.html" rel="" target="">
+ <span class="dropdown-text">Version Control and Continuous Integration for Pipeline Developing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../best_practice/git/setup_remote_repo.html" rel="" target="">
+ <span class="dropdown-text">Setting Up a Git Repository and Connecting to a Remote</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Useful Bash</li>
+        <li>
+    <a class="dropdown-item" href="../best_practice/useful_bash/bash.html" rel="" target="">
+ <span class="dropdown-text">Useful Bash Command Line</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">test</li>
+        <li>
+    <a class="dropdown-item" href="../news.html" rel="" target="">
+ <span class="dropdown-text">News</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-rosalind" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Rosalind</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-rosalind">    
+        <li>
+    <a class="dropdown-item" href="../rosalind/compute_GC.html" rel="" target="">
+ <span class="dropdown-text">Computing GC Content</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../rosalind/counting_point_mutations.html" rel="" target="">
+ <span class="dropdown-text">Counting Point Mutations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../rosalind/mendels_first_law.html" rel="" target="">
+ <span class="dropdown-text">Mendel’s First Law</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-machine-learning" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Machine Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-machine-learning">    
+        <li>
+    <a class="dropdown-item" href="../machine_learning/01_introduction.html" rel="" target="">
+ <span class="dropdown-text">01. Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../machine_learning/02_1_linear_algebra.html" rel="" target="">
+ <span class="dropdown-text">02. Linear Algebra</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../machine_learning/02_2_linear_algebra.html" rel="" target="">
+ <span class="dropdown-text">02.2. Linear Algebra</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-be-a-scientist" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Be a Scientist</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-be-a-scientist">    
+        <li class="dropdown-header">Writing</li>
+        <li>
+    <a class="dropdown-item" href="../science_career/writing/literature_review.html" rel="" target="">
+ <span class="dropdown-text">Literature Review Workflow and Techniques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../science_career/writing/note.html" rel="" target="">
+ <span class="dropdown-text">Note</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../science_career/writing/write_better.html" rel="" target="">
+ <span class="dropdown-text">Tools for Making a Scientific Project</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Become a Scientist</li>
+        <li>
+    <a class="dropdown-item" href="../science_career/research_journey/to_become_a_scientist.html" rel="" target="">
+ <span class="dropdown-text">To become a Scientist</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics">    
+        <li>
+    <a class="dropdown-item" href="../statistics/bayesian_nipt_risk_score.html" rel="" target="">
+ <span class="dropdown-text">Risk Score Calculation in NIPT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/bayesian_nipt_risk_score_2.html" rel="" target="">
+ <span class="dropdown-text">Risk Score Calculation in NIPT jupyter</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/narrative_reviews.html" rel="" target="">
+ <span class="dropdown-text">Narrative Reviews: NIPT Risk Score</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/ppr_logis_13_18_21.html" rel="" target="">
+ <span class="dropdown-text">Risk Score Calculation for Chromosomes 13, 18, and 21 Using Logistic Approach</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/ppr_t21_cal.html" rel="" target="">
+ <span class="dropdown-text">Calculating PPR (Personalized Posteriori Risk) for NIPT Samples</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../statistics/README_nipt_calculator.html" rel="" target="">
+ <span class="dropdown-text">NIPT Risk Calculator Usage Guide</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../news.html" rel="" target="">
+ <span class="menu-text">News</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto tools-wide">
+    <a href="https://www.linkedin.com/in/khuongduying/" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/khuongduying">
+            My repositories
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="">
+            Report a bug
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/bayesian_nipt_risk_score_2.html">Risk Score Calculation in NIPT jupyter</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/bayesian_nipt_risk_score.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Risk Score Calculation in NIPT</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/bayesian_nipt_risk_score_2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Risk Score Calculation in NIPT jupyter</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/narrative_reviews.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Narrative Reviews: NIPT Risk Score</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/ppr_logis_13_18_21.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Risk Score Calculation for Chromosomes 13, 18, and 21 Using Logistic Approach</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/ppr_t21_cal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculating PPR (Personalized Posteriori Risk) for NIPT Samples</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/README_nipt_calculator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NIPT Risk Calculator Usage Guide</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#risk-score" id="toc-risk-score" class="nav-link active" data-scroll-target="#risk-score">Risk Score</a>
+  <ul class="collapse">
+  <li><a href="#terminology" id="toc-terminology" class="nav-link" data-scroll-target="#terminology">Terminology</a></li>
+  <li><a href="#reference-application" id="toc-reference-application" class="nav-link" data-scroll-target="#reference-application">Reference Application</a>
+  <ul class="collapse">
+  <li><a href="#niptric-an-online-tool-for-clinical-interpretation-of-non-invasive-prenatal-testing-nipt-results" id="toc-niptric-an-online-tool-for-clinical-interpretation-of-non-invasive-prenatal-testing-nipt-results" class="nav-link" data-scroll-target="#niptric-an-online-tool-for-clinical-interpretation-of-non-invasive-prenatal-testing-nipt-results">NIPTRIC: an online tool for clinical interpretation of non-invasive prenatal testing (NIPT) results</a></li>
+  <li><a href="#the-ppr-calculator" id="toc-the-ppr-calculator" class="nav-link" data-scroll-target="#the-ppr-calculator">The PPR calculator</a></li>
+  <li><a href="#a-priori-risk" id="toc-a-priori-risk" class="nav-link" data-scroll-target="#a-priori-risk">a priori risk</a></li>
+  <li><a href="#ppr-calculation" id="toc-ppr-calculation" class="nav-link" data-scroll-target="#ppr-calculation">PPR calculation</a></li>
+  <li><a href="#concrete-example" id="toc-concrete-example" class="nav-link" data-scroll-target="#concrete-example">Concrete Example</a></li>
+  <li><a href="#visual-understanding" id="toc-visual-understanding" class="nav-link" data-scroll-target="#visual-understanding">Visual Understanding</a></li>
+  <li><a href="#why-this-matters-for-ppr-calculation" id="toc-why-this-matters-for-ppr-calculation" class="nav-link" data-scroll-target="#why-this-matters-for-ppr-calculation">Why This Matters for PPR Calculation</a></li>
+  <li><a href="#key-insights" id="toc-key-insights" class="nav-link" data-scroll-target="#key-insights">Key Insights</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability">Conditional Probability</a>
+  <ul class="collapse">
+  <li><a href="#the-basic-concept" id="toc-the-basic-concept" class="nav-link" data-scroll-target="#the-basic-concept">The Basic Concept</a></li>
+  <li><a href="#nipt-example-understanding-conditional-probability" id="toc-nipt-example-understanding-conditional-probability" class="nav-link" data-scroll-target="#nipt-example-understanding-conditional-probability">NIPT Example: Understanding Conditional Probability</a></li>
+  <li><a href="#why-z-scores-matter-in-conditional-probability" id="toc-why-z-scores-matter-in-conditional-probability" class="nav-link" data-scroll-target="#why-z-scores-matter-in-conditional-probability">Why Z-scores Matter in Conditional Probability</a></li>
+  <li><a href="#how-prior-risk-affects-conditional-probability" id="toc-how-prior-risk-affects-conditional-probability" class="nav-link" data-scroll-target="#how-prior-risk-affects-conditional-probability">How Prior Risk Affects Conditional Probability</a></li>
+  <li><a href="#example-visualizing-conditional-probability-in-nipt" id="toc-example-visualizing-conditional-probability-in-nipt" class="nav-link" data-scroll-target="#example-visualizing-conditional-probability-in-nipt">Example: Visualizing Conditional Probability in NIPT</a></li>
+  <li><a href="#intuitive-takeaways" id="toc-intuitive-takeaways" class="nav-link" data-scroll-target="#intuitive-takeaways">Intuitive Takeaways</a></li>
+  <li><a href="#references-learning-resources" id="toc-references-learning-resources" class="nav-link" data-scroll-target="#references-learning-resources">References &amp; Learning resources</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/khuongduying/blob/main/statistics/bayesian_nipt_risk_score_2.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/khuongduying/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Risk Score Calculation in NIPT jupyter</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Duy Dao </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 20, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="risk-score" class="level1">
+<h1>Risk Score</h1>
+<section id="terminology" class="level2">
+<h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
+<p>Risk factors (priori risk):</p>
+<ul>
+<li>Maternal age</li>
+<li>Likelihood from nuchal translucency thickness</li>
+<li>Serum pregnancy-associated plasma protein-A</li>
+<li>Serum free B-human chorionic gonadotropin and plasma cfDNA</li>
+</ul>
+<p>Positive likelihood ratio (trisomic/euploid) Negative likelihood ratio (euploid/trisomic)</p>
+<p>Posteriori risk (Sikkema-Raddatz et al., 2016) &gt; True likelihood of carrying a foetus with trisomy</p>
+<p>Conditional Probability (https://en.wikipedia.org/wiki/Conditional_probability)</p>
+</section>
+<section id="reference-application" class="level2">
+<h2 class="anchored" data-anchor-id="reference-application">Reference Application</h2>
+<section id="niptric-an-online-tool-for-clinical-interpretation-of-non-invasive-prenatal-testing-nipt-results" class="level3">
+<h3 class="anchored" data-anchor-id="niptric-an-online-tool-for-clinical-interpretation-of-non-invasive-prenatal-testing-nipt-results">NIPTRIC: an online tool for clinical interpretation of non-invasive prenatal testing (NIPT) results</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">alt text</figcaption>
+</figure>
+</div>
+<p>The tool takes input: - a priori risk - z-score</p>
+<p>PPR can be calculated for combitionations of the 4 parameters: - a priori risk - observed z-score - fetal fraction - coefficient of variation (CV)</p>
+<p>Output:</p>
+<ul>
+<li>PPR (Personalized Posteriori Risk)</li>
+</ul>
+<blockquote class="blockquote">
+<p>“For z&lt;5, PPR is considerably higher at a high a priori risk than at a low a priori risk”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“The PPR is effectively <strong>independent</strong> under all conditions for Z-scores above 6”</p>
+</blockquote>
+<p>When the count was too high, then the PPR is no more dependent on the a priori risk. No matter how prevalent the condition is, a very high z-score is very likely to be a true positive.</p>
+<section id="what-is-an-a-priori-risk" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-an-a-priori-risk">What is an “a priori risk”?</h4>
+<p>her a priori risk for a specific foetal trisomy:</p>
+<ul>
+<li>her age</li>
+<li>the gestational age</li>
+</ul>
+<blockquote class="blockquote">
+<p>“presenting NIPT results to clinicians and pregnant women as “normal or abnormal” or as a Z-score makes it difficult for clinicians to interpret and use the result to correctly inform a pregnant woman of her true likelihood of carrying a foetus with a trisomy”</p>
+</blockquote>
+<p>True chance of carrying a foetus with a positive test</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Personalized a posteriori risk</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="the-ppr-calculator" class="level3">
+<h3 class="anchored" data-anchor-id="the-ppr-calculator">The PPR calculator</h3>
+<p>4 input parameters: - a priori risk (calculated based on the mother’s age and gestational age, or based on other screening tests) - z-score - fetal fraction - coefficient of variation of the control group</p>
+</section>
+<section id="a-priori-risk" class="level3">
+<h3 class="anchored" data-anchor-id="a-priori-risk">a priori risk</h3>
+<p>a priori risk from Trisomy 21</p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/10204206/">Maternal age- and gestation-specific risk for trisomy 21</a></p>
+<p>Can I categoize these priori risk for each syndrome?</p>
+<p>bivariate linear interpolation</p>
+<p>use bivariate linear interpolation to calculate the <code>a priori risk</code> from the maternal age in combination with the gestational age at which the NIPT was performed.</p>
+<p><strong>First trimester combined test (FCT)</strong></p>
+<blockquote class="blockquote">
+<p>The first-trimester combined test (FCT) is a prenatal screening that assesses the risk of chromosomal abnormalities, such as Down syndrome, by combining maternal age, a nuchal translucency (NT) ultrasound, and blood levels of two hormones: free β-human chorionic gonadotropin (β-hCG) and pregnancy-associated plasma protein A (PAPP-A).</p>
+</blockquote>
+<p><strong>Z-score</strong></p>
+<blockquote class="blockquote">
+<p>A Z-score represents the number of standard deviations that the sample fraction of that chromosome deviates from the mean measured in normal (diploid) pregnancies assessed by a Gaussian distribution.</p>
+</blockquote>
+<p><strong>Distinction between “normal” and “abnormal” NIPT results</strong></p>
+<blockquote class="blockquote">
+<p>The distinction is based on the statistical assumption that 99.7% of the plasma samples derived from pregnant women with a diploid foetus give a Z-score between −3 and +3.</p>
+</blockquote>
+<p>The more the <code>Z-score</code> deviates from zero, the more the <code>individual sample</code> deviates from the <code>control group</code> and thus points towards an <code>aneuploidy</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Important Note">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The higher value of the Z-score for aneuploid samples, and thus the reliability of NIPT, however, depends on the <code>assay precision</code> which, in turn, depends on a number of factors such as the number of reads, the reference samples chosen, the method of sample preparation, and sequencing method. All these factors are encompassed in the coefficient of variation of control samples and, together with the percentage of foetal DNA in the maternal plasma, they influence the Z-score.</p>
+</div>
+</div>
+<p><strong>Fetal fraction</strong></p>
+<p>Given a weight for each fetal fraction</p>
+<section id="coefficient-of-variation" class="level4">
+<h4 class="anchored" data-anchor-id="coefficient-of-variation">Coefficient of Variation</h4>
+<blockquote class="blockquote">
+<p>The random variability of the test is measured as the coefficient of variation of the control group.</p>
+<p>The coefficient will increase as the assay precision decreases, depending on the quality of the laboratory procedure, i.e.&nbsp;sample preparation or number of reads.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="attachment:image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="attachment:image-2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image-2.png</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>Increasing the number of reads can improve the assay precision and thus reduce the coefficient of variation of the control group.</p>
+</blockquote>
+<p><strong>Practical Example</strong></p>
+<p>Imagine we’re analyzing chromosome 21 in maternal blood samples:</p>
+<p>Scenario 1: Low-Coverage Sequencing (5 million reads)</p>
+<pre><code>Sample 1: 100,000 reads mapped to chr21 (2.00% of total)
+Sample 2: 98,500 reads mapped to chr21 (1.97% of total)
+Sample 3: 101,200 reads mapped to chr21 (2.02% of total)
+Sample 4: 97,800 reads mapped to chr21 (1.96% of total)
+Sample 5: 102,500 reads mapped to chr21 (2.05% of total)</code></pre>
+<p>Calculating CV:</p>
+<ul>
+<li>Mean: 2.00%</li>
+<li>Standard Deviation: 0.036%</li>
+<li>CV = (0.036/2.00) × 100% = 1.8%</li>
+</ul>
+<p>Scenario 2: High-Coverage Sequencing (20 million reads)</p>
+<pre><code>Sample 1: 400,000 reads mapped to chr21 (2.00% of total)
+Sample 2: 398,500 reads mapped to chr21 (1.99% of total)
+Sample 3: 401,200 reads mapped to chr21 (2.01% of total)
+Sample 4: 399,800 reads mapped to chr21 (2.00% of total)
+Sample 5: 402,500 reads mapped to chr21 (2.01% of total)</code></pre>
+<p>Calculating CV:</p>
+<ul>
+<li>Mean: 2.00%</li>
+<li>Standard Deviation: 0.008%</li>
+<li>CV = (0.008/2.00) × 100% = 0.4%</li>
+</ul>
+<p><strong>Impact on NIPT Performance</strong></p>
+<pre><code>Z expected = (percentage of foetal DNA × 0.5)/(100 × coefficient of variation)</code></pre>
+<p>Let’s assume 6% fetal DNA:</p>
+<ul>
+<li>Low-Coverage (CV=1.8%): Z expected = (6 × 0.5)/(100 × 1.8) = 0.17</li>
+<li>High-Coverage (CV=0.4%): Z expected = (6 × 0.5)/(100 × 0.4) = 0.75</li>
+</ul>
+<p><strong>Real-World Impact:</strong></p>
+<ol type="1">
+<li>Trisomy Detection: A baby with trisomy 21 and 6% fetal DNA would show:</li>
+</ol>
+<ul>
+<li>Z ≈ 0.17 with low coverage (barely above normal range)</li>
+<li>Z ≈ 0.75 with high coverage (more clearly abnormal)</li>
+</ul>
+<ol start="2" type="1">
+<li><p>Separation of Distributions: The distance between normal and trisomy distributions is 4.5× greater with high coverage</p></li>
+<li><p>Clinical Sensitivity: At 6% fetal DNA:</p></li>
+</ol>
+<ul>
+<li>Low coverage: Approximately 67% sensitivity</li>
+<li>High coverage: Approximately 99.87% sensitivity</li>
+</ul>
+<p><strong>Visual Explanation</strong></p>
+<p>Imagine two bell curves representing the distribution of z-scores:</p>
+<ul>
+<li>With low coverage (high CV), the curves overlap significantly</li>
+<li>With high coverage (low CV), the curves are more clearly separated</li>
+</ul>
+<p>This is why increasing the number of reads is so important - it reduces the “noise” in the measurement system, making it easier to distinguish true positives from normal results, especially in cases with low fetal fraction.</p>
+</section>
+<section id="coefficient-of-variation-1" class="level4">
+<h4 class="anchored" data-anchor-id="coefficient-of-variation-1">Coefficient of Variation</h4>
+<blockquote class="blockquote">
+<p>The random variability of the test is measured as the coefficient of variation of the control group.</p>
+<p>The coefficient will increase as the assay precision decreases, depending on the quality of the laboratory procedure, i.e.&nbsp;sample preparation or number of reads.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_nipt_risk_score_2_files/figure-html/fafce9da-5-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_nipt_risk_score_2_files/figure-html/fafce9da-1-image-2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image-2.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_nipt_risk_score_2_files/figure-html/fafce9da-4-image-5.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image-5.png</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>Increasing the number of reads can improve the assay precision and thus reduce the coefficient of variation of the control group.</p>
+<p>Different algorithms have been developed to increase precision, by reducing the variation in the control group, e.g.&nbsp;GC correction, or by using an adapted Z-score calculation, such as the normalised chromosome value.</p>
+<img src="bayesian_nipt_risk_score_2_files/figure-html/fafce9da-2-image-3.png" class="img-fluid" alt="image-3.png">
+<p>The coefficient of variation is used in combination with the percentage of foetal DNA to compute the expected distance between the two Gaussian distributions for diploid pregnancies and trisomic pregnancies.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_nipt_risk_score_2_files/figure-html/fafce9da-3-image-4.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image-4.png</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>As the coefficient of variation increases, the distance between the diploid and aneuploid distribution will decrease, resulting in a decrease of sensitivity for detecting a trisomy.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>For example, a coefficient of variation of <code>0.5%</code> for chromosome 21 would result in <code>99.87%</code> sensitivity at a foetal DNA percentage of <code>6%</code>, while the sensitivity would drop to <code>84.13%</code> at a foetal DNA percentage of <code>4%</code>. A <code>99.87%</code> sensitivity at <code>4%</code> foetal DNA can only be obtained with a coefficient of variation of <code>0.33%</code>.</p>
+<p>Thus, a higher coefficient of variation will decrease the sensitivity, especially at low percentages of foetal DNA.</p>
+<p>A coefficient of variation of 0.5% (chromosome 21) is used as the default setting in our program because this is close to empirically measured values.</p>
+<p>For chromosomes 13 and 18, we recommend 0.4% as a default setting.</p>
+<p>The number of reads is higher for these chromosomes, leading to the expectation of a <strong>lower coefficient of variation</strong> than for chromosome 21. However, if the coefficient of variation is measured and lower than our default setting, this value should be used for a more accurate PPR calculation.</p>
+</blockquote>
+<p>How can I compute the coefficient of variation in my data?</p>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 38%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th><strong>Variance</strong></th>
+<th><strong>Coefficient of Variation (CV)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Definition</strong></td>
+<td>A measure of how far data points spread out from the mean.</td>
+<td>A standardized measure of relative variability (ratio of standard deviation to mean).</td>
+</tr>
+<tr class="even">
+<td><strong>Formula</strong></td>
+<td><span class="math inline">\(\text{Var}(X) = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2\)</span></td>
+<td><span class="math inline">\(\text{CV} = \frac{\sigma}{\mu} \times 100\%\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Units</strong></td>
+<td>Square of the units of the data (e.g., if data in cm, variance in cm²).</td>
+<td>Dimensionless (no units, expressed as a percentage).</td>
+</tr>
+<tr class="even">
+<td><strong>Dependence on Scale</strong></td>
+<td>Scale-dependent (sensitive to units of measurement).</td>
+<td>Scale-independent (normalizes variability relative to mean).</td>
+</tr>
+<tr class="odd">
+<td><strong>Interpretation</strong></td>
+<td>Indicates <strong>absolute spread</strong> of data around the mean.</td>
+<td>Indicates <strong>relative spread</strong> (useful for comparing datasets with different units or means).</td>
+</tr>
+<tr class="even">
+<td><strong>Range</strong></td>
+<td><span class="math inline">\(\geq 0\)</span> (cannot be negative).</td>
+<td>Usually <span class="math inline">\(\geq 0\)</span>, but undefined if mean (<span class="math inline">\(\mu = 0\)</span>).</td>
+</tr>
+<tr class="odd">
+<td><strong>Use Case</strong></td>
+<td>Best for analyzing spread within a single dataset.</td>
+<td>Best for comparing variability <strong>between datasets</strong> with different units or scales.</td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+<td>Variance of exam scores (points²).</td>
+<td>CV of exam scores (%), useful to compare across different tests.</td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<p><img src="bayesian_nipt_risk_score_2_files/figure-html/cell-2-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="ppr-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="ppr-calculation">PPR calculation</h3>
+<p>The PPR calculation is made as follows.</p>
+<p>First, the expected Z-score, if a trisomy is present, is calculated using the coefficient of variation of the control group and the percentage of foetal DNA:</p>
+<p><code>Z expected = (percentage of foetal DNA × 0.5)/(100 × coefficient of variation)</code></p>
+<p>Why this formula works:</p>
+<ul>
+<li>In a trisomy, there’s a 50% increase in chromosome material (× 0.5)</li>
+<li>The 100 in the denominator converts to percentage format</li>
+<li>CV represents test variability - lower CV means more reliable detection</li>
+</ul>
+<section id="what-is-z-expected" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-z-expected">What is Z-Expected?</h4>
+<blockquote class="blockquote">
+<p>Z-expected is the theoretical z-score we would expect to observe if a fetus has a trisomy (like Down syndrome), given:</p>
+</blockquote>
+<ul>
+<li>The fetal fraction (percentage of fetal DNA in maternal blood)</li>
+<li>The test’s coefficient of variation (measurement precision)</li>
+</ul>
+</section>
+<section id="the-formula-logic" class="level4">
+<h4 class="anchored" data-anchor-id="the-formula-logic">The Formula Logic</h4>
+<pre><code>Z expected = (percentage of foetal DNA × 0.5) / (100 × coefficient of variation)</code></pre>
+<p>Let’s dissect each component:</p>
+<p><strong>1. Why × 0.5 (50% increase)?</strong></p>
+<p>In a trisomy 21 pregnancy:</p>
+<ul>
+<li>Normal pregnancies have 2 copies of chromosome 21</li>
+<li>Trisomy 21 pregnancies have 3 copies of chromosome 21</li>
+<li>This represents a 50% increase in chromosome 21 material (3/2 = 1.5, so +0.5 or +50%)</li>
+</ul>
+<p><strong>2. Why ÷ 100?</strong></p>
+<p>This converts the percentage to a decimal format for the calculation.</p>
+<p><strong>3. Why ÷ coefficient of variation?</strong></p>
+<p>The CV represents the “noise” or variability in your measurement system:</p>
+<ul>
+<li>Lower CV = more precise measurements = easier to detect small changes</li>
+<li>Higher CV = less precise measurements = harder to detect small changes</li>
+</ul>
+<p>The z-score measures “how many standard deviations away from normal” a measurement is. A more precise test (lower CV) will show the same biological difference as a higher z-score.</p>
+</section>
+</section>
+<section id="concrete-example" class="level3">
+<h3 class="anchored" data-anchor-id="concrete-example">Concrete Example</h3>
+<p>Let’s work through a real example:</p>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li>Fetal fraction = 8%</li>
+<li>CV = 0.5% (high-quality test)</li>
+</ul>
+<p><strong>Calculation:</strong></p>
+<pre><code>Z expected = (8 × 0.5) / (100 × 0.005) = 4 / 0.5 = 8.0</code></pre>
+<p>Interpretation: If this pregnancy has trisomy 21, we expect to see a z-score around 8.0.</p>
+<p>What if the test was less precise?</p>
+<ul>
+<li>Same fetal fraction = 8%</li>
+<li>CV = 1.5% (lower quality test)</li>
+</ul>
+<pre><code>Z expected = (8 × 0.5) / (100 × 0.015) = 4 / 1.5 = 2.67</code></pre>
+<p>The less precise test would only show a z-score around 2.67 for the same biological condition.</p>
+</section>
+<section id="visual-understanding" class="level3">
+<h3 class="anchored" data-anchor-id="visual-understanding">Visual Understanding</h3>
+<p>Imagine two bell curves representing chromosome 21 percentages:</p>
+<ol type="1">
+<li>Normal pregnancies: Centered at ~2.0%</li>
+<li>Trisomy 21 pregnancies: Centered at ~2.0% + (fetal_fraction × 0.5)%</li>
+</ol>
+<p>The <code>distance between these curves</code> (measured in standard deviations) is the Z-expected.</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="2">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Z-expected = 8"</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="bayesian_nipt_risk_score_2_files/figure-html/cell-3-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="why-this-matters-for-ppr-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="why-this-matters-for-ppr-calculation">Why This Matters for PPR Calculation</h3>
+<p>The Z-expected tells us:</p>
+<ol type="1">
+<li>How far apart the normal and trisomy distributions should be</li>
+<li>How confident we can be in our test result</li>
+<li>What range of z-scores we might expect due to biological variability</li>
+</ol>
+<p>Clinical Implications:</p>
+<ul>
+<li><strong>High Z-expected (&gt;4):</strong> Even moderate observed z-scores strongly suggest trisomy</li>
+<li><strong>Low Z-expected (&lt;2):</strong> Need very high observed z-scores to be confident</li>
+<li><strong>Very low fetal fraction</strong> or <strong>high CV</strong>: May not be able to reliably detect trisomy</li>
+</ul>
+</section>
+<section id="key-insights" class="level3">
+<h3 class="anchored" data-anchor-id="key-insights">Key Insights</h3>
+<ol type="1">
+<li><strong>Fetal fraction is crucial</strong>: Higher fetal fraction = easier detection</li>
+<li><strong>Test precision matters</strong>: Lower CV = better separation of normal vs.&nbsp;trisomy</li>
+<li><strong>The 50% factor is biological</strong>: Reflects the extra chromosome copy in trisomy</li>
+<li><strong>Z-expected sets expectations</strong>: Helps interpret whether an observed z-score is significant</li>
+</ol>
+<p>This is why NIPT labs often have minimum fetal fraction thresholds (usually 4%) - below this, the Z-expected becomes too low for reliable trisomy detection.</p>
+<p>Why CV has the unit of percentage (%)?</p>
+<section id="z-score-distribution-modeling" class="level5">
+<h5 class="anchored" data-anchor-id="z-score-distribution-modeling">Z-score Distribution Modeling</h5>
+<blockquote class="blockquote">
+<p>The actual Z-score in the case of a trisomy is a random variable with the “Z expected” value and standard deviation both equal to 1.0.</p>
+</blockquote>
+</section>
+<section id="fetal-fraction-integration" class="level5">
+<h5 class="anchored" data-anchor-id="fetal-fraction-integration">Fetal Fraction Integration</h5>
+<blockquote class="blockquote">
+<p>Because the percentage of foetal DNA cannot be exactly measured, the empirical distribution of Z-scores will be a weighted sum of distributions over all possible values for the foetal DNA percentage.</p>
+<blockquote class="blockquote">
+<p>A weighted sum is a method for combining values where each value is multiplied by a specific weight, representing its relative importance, and then these products are summed together.</p>
+</blockquote>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_nipt_risk_score_2_files/figure-html/e1f918e4-1-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>Technically, this percentage is a nuisance parameter that is integrated out to compute the probability that the observed Z-score originates from a trisomic pregnancy.</p>
+</blockquote>
+<p>This uses a statistical technique called “nuisance parameter integration” where:</p>
+<ul>
+<li>A range of possible fetal fractions is considered</li>
+<li>Each possible value contributes to the final probability calculation</li>
+<li>The model converts fetal DNA percentage to expected Z-score ranges</li>
+</ul>
+<blockquote class="blockquote">
+<p>In our computational model, we allow the range for the foetal DNA percentage to be known and input exactly.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The actual integration of the nuisance parameter of foetal percentage is done by converting the foetal DNA percentage to a lower and upper value for the expected Z- score.</p>
+</blockquote>
+<p>The post-test probability or personalised a posteriori risk (PPR) is calculated as:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_nipt_risk_score_2_files/figure-html/52831db1-1-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+</section>
+<section id="the-core-concept" class="level5">
+<h5 class="anchored" data-anchor-id="the-core-concept">The Core Concept</h5>
+<p>The formula uses Bayesian statistics to answer: “Given this z-score result, what’s the probability this pregnancy has trisomy 21?”</p>
+</section>
+<section id="the-formula-explained-simply" class="level5">
+<h5 class="anchored" data-anchor-id="the-formula-explained-simply">The Formula Explained Simply</h5>
+<p>The formula calculates PPR by integrating over a range of possible expected z-scores (Zexp), since fetal fraction can’t be measured precisely.</p>
+<p><code>The Numerator (Top Part)</code></p>
+<p><span class="math display">\[
+\int_{Lower Z_{exp}}^{Upper Z_{exp}} \frac{e^{-(Z_{exp}-Z_{obs})^2/2}}{Upper Z_{exp} - Lower Z_{exp}} \, dZ_{exp} \times P_{a \ priori}
+\]</span></p>
+<p>This represents:</p>
+<ul>
+<li>The probability of observing the measured z-score (Zobs) if the fetus has trisomy</li>
+<li>Multiplied by the prior risk (Pa priori)</li>
+</ul>
+<p><code>The Denominator (Bottom Part)</code></p>
+<p><span class="math display">\[
+\int_{Lower Z_{exp}}^{Upper Z_{exp}} \frac{e^{-(Z_{exp}-Z_{obs})^2/2}}{Upper Z_{exp} - Lower Z_{exp}} \, dZ_{exp} \times P_{a \ priori} + (1 - P_{a \ priori}) \times e^{-Z_{obs}^2/2}
+\]</span></p>
+<p>This adds:</p>
+<ul>
+<li>The same calculation as the numerator (probability if trisomy × prior risk)</li>
+<li>The probability of observing this z-score in a normal pregnancy × prior probability of normal</li>
+</ul>
+</section>
+<section id="the-range-calculations" class="level5">
+<h5 class="anchored" data-anchor-id="the-range-calculations">The Range Calculations</h5>
+<p>The formula defines two different ranges for integration:</p>
+<ol type="1">
+<li>Range A: Uses the full range from lower to upper expected z-score</li>
+<li>Range B: Uses a narrower range:
+<ul>
+<li>Lower bound = Lower Zexp + 5/22 × (Upper Zexp - Lower Zexp)</li>
+<li>Upper bound = Lower Zexp + 17/22 × (Upper Zexp - Lower Zexp)</li>
+</ul></li>
+</ol>
+<p>The final PPR is a weighted average:</p>
+<pre><code>Post-test probability = 0.4 × PPR range A + 0.6 × PPR range B</code></pre>
+</section>
+<section id="in-plain-language" class="level5">
+<h5 class="anchored" data-anchor-id="in-plain-language">In Plain Language</h5>
+<p>This formula:</p>
+<ol type="1">
+<li>Starts with your baseline risk based on maternal age</li>
+<li>Adjusts this risk based on how your z-score compares to what we’d expect for normal and trisomy pregnancies</li>
+<li>Accounts for uncertainty in fetal fraction by considering a range of possible values</li>
+<li>Gives more weight (60%) to the central part of the distribution where most real values likely fall</li>
+</ol>
+<p>This produces a personalized risk assessment that’s more accurate than simply using a threshold z-score or only considering maternal age.</p>
+</section>
+<section id="examples-of-the-use-of-the-ppr-calculator." class="level4">
+<h4 class="anchored" data-anchor-id="examples-of-the-use-of-the-ppr-calculator.">Examples of the use of the PPR calculator.</h4>
+<p>To demonstrate the use of the calculator and the effects of varying a priori risk values and observed Z-scores on the PPR, we have generated tables and concomitant figures.</p>
+<p>In order to clarify the calculations, we:</p>
+<ul>
+<li>fixed the coefficient of variation at 0.5 and</li>
+<li>used a range of 1–23% of cell-free foetal DNA.</li>
+</ul>
+<p>The PPR was calculated as a percentage for:</p>
+<ul>
+<li>a priori risks of <code>0.0001, 0.0002, 0.0005, 0.0010, 0.0015, 0.0020, 0.0025, 0.0050, 0.0100, 0.0250, 0.0500</code> and <code>0.1000</code>,</li>
+<li>for observed Z-scores of <code>2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5</code> and <code>6</code>.</li>
+</ul>
+<p>To demonstrate the additional effect on the PPR of variable foetal DNA percentages in maternal blood, the PPR was calculated for an a priori risk of <code>0.001</code>, <code>0.01</code> and <code>0.1</code>, for Z-scores varying from <code>0</code> to <code>7</code> and foetal DNA varying from <code>3%</code> to <code>10%</code>.</p>
+</section>
+<section id="performance-of-the-ppr-calculator" class="level4">
+<h4 class="anchored" data-anchor-id="performance-of-the-ppr-calculator">Performance of the PPR calculator</h4>
+<p>To test the performance of our PPR calculator, we analysed 209 maternal blood samples obtained from pregnant women with an elevated risk for trisomy 13, 18 or 21 due to an FTC &gt; 1:200 between 10 and 16 weeks of gestation.</p>
+<p>likelihood ratio</p>
+<p>discriminate likelihood ratio and probability:</p>
+<ul>
+<li><p><strong>Probability</strong>: varies the data while keeping parameters fixed.</p></li>
+<li><p><strong>Likelihood</strong>: varies the parameters while keeping the data fixed.</p></li>
+</ul>
+<p>coefficient of variation</p>
+<p>intersection and union</p>
+<p>numerator</p>
+<p>denominator</p>
+<p>Bayesian post-test risk modeling</p>
+<hr>
+</section>
+</section>
+</section>
+</section>
+<section id="conditional-probability" class="level1">
+<h1>Conditional Probability</h1>
+<p>Conditional probability is the foundation of the Bayesian approach used in NIPT. Let’s break it down using intuitive examples from prenatal testing.</p>
+<section id="the-basic-concept" class="level2">
+<h2 class="anchored" data-anchor-id="the-basic-concept">The Basic Concept</h2>
+<p>Conditional probability is about how the probability of one event changes when we know another event has occurred.</p>
+<p>We write it as <code>P(A|B)</code>, which means “the probability of A given that B has happened.”</p>
+</section>
+<section id="nipt-example-understanding-conditional-probability" class="level2">
+<h2 class="anchored" data-anchor-id="nipt-example-understanding-conditional-probability">NIPT Example: Understanding Conditional Probability</h2>
+<p>Let’s work with a concrete example:</p>
+<p><strong>1. Basic Probabilities in NIPT</strong></p>
+<ul>
+<li><p><code>P(T21)</code> = Probability a baby has trisomy 21 (Down syndrome)</p></li>
+<li><p><code>P(Positive)</code> = Probability of getting a positive test result</p></li>
+<li><p><code>P(T21|Positive)</code> = Probability baby has Down syndrome given a positive test</p></li>
+<li><p><code>P(Positive|T21)</code> = Probability of a positive test given the baby has Down syndrome</p></li>
+</ul>
+<p><strong>2. Real-World NIPT Scenario</strong></p>
+<p>Imagine 10,000 pregnant women being tested:</p>
+<ul>
+<li>100 babies have Down syndrome (<code>P(T21)</code> = 100/10,000 = 0.01 or 1%)</li>
+<li>99 of those 100 babies with Down syndrome test positive (<code>sensitivity</code> = 99%)</li>
+<li>9,900 babies don’t have Down syndrome</li>
+<li>10 of those 9,900 babies without Down syndrome test positive (<code>false positive rate</code> = 0.1%)</li>
+<li>Total positive tests: 99 + 10 = 109</li>
+</ul>
+<p><strong>3. Conditional Probability in Action</strong></p>
+<p><code>P(Positive|T21) = 99/100 = 0.99 (99%)</code></p>
+<p>This is the test sensitivity</p>
+<blockquote class="blockquote">
+<p>“If a baby has Down syndrome, there’s a 99% chance the test is positive”</p>
+</blockquote>
+<p><code>P(T21|Positive) = 99/109 ≈ 0.908 (90.8%)</code></p>
+<p>This is the positive predictive value</p>
+<blockquote class="blockquote">
+<p>“If the test is positive, there’s a 90.8% chance the baby has Down syndrome”</p>
+</blockquote>
+</section>
+<section id="why-z-scores-matter-in-conditional-probability" class="level2">
+<h2 class="anchored" data-anchor-id="why-z-scores-matter-in-conditional-probability">Why Z-scores Matter in Conditional Probability</h2>
+<p>The z-score in NIPT is a continuous measure, not a binary yes/no:</p>
+<ul>
+<li><code>P(T21|z=3)</code> might be 50%</li>
+<li><code>P(T21|z=5)</code> might be 80%</li>
+<li><code>P(T21|z=7)</code> might be 95%</li>
+</ul>
+<blockquote class="blockquote">
+<p>This shows how the condition (the z-score value) dramatically changes the probability of the baby having Down syndrome.</p>
+</blockquote>
+</section>
+<section id="how-prior-risk-affects-conditional-probability" class="level2">
+<h2 class="anchored" data-anchor-id="how-prior-risk-affects-conditional-probability">How Prior Risk Affects Conditional Probability</h2>
+<p>For a 25-year-old mother (baseline risk 0.1%):</p>
+<ul>
+<li><p>Out of 10,000 pregnancies, only 10 babies have Down syndrome (<code>P(T21)</code>)</p></li>
+<li><p>With the same test characteristics, a positive result gives <code>P(T21|Positive)</code> ≈ 50%</p></li>
+<li><p>This demonstrates how the conditional probability <code>P(T21|Positive)</code> depends heavily on the population being tested.</p></li>
+</ul>
+</section>
+<section id="example-visualizing-conditional-probability-in-nipt" class="level2">
+<h2 class="anchored" data-anchor-id="example-visualizing-conditional-probability-in-nipt">Example: Visualizing Conditional Probability in NIPT</h2>
+<p>Given the z-score from 1 to 8</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="36">
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>1</li><li>1.5</li><li>2</li><li>2.5</li><li>3</li><li>3.5</li><li>4</li><li>4.5</li><li>5</li><li>5.5</li><li>6</li><li>6.5</li><li>7</li><li>7.5</li><li>8</li></ol>
+</div>
+</div>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to calculate P(T21|z) for different age groups</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters estimated based on typical NIPT results</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>calculate_pt21_given_z <span class="ot">&lt;-</span> <span class="cf">function</span>(z, prior_risk) {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Likelihood ratio increases exponentially with z-score</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  lr <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fl">0.8</span> <span class="sc">*</span> z <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Apply Bayes theorem</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  posterior <span class="ot">&lt;-</span> (prior_risk <span class="sc">*</span> lr) <span class="sc">/</span> (prior_risk <span class="sc">*</span> lr <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> prior_risk))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(posterior)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is calculating <code>P(T21|z)</code> - the probability of trisomy 21 given a specific z-score.</p>
+<p><strong>How It Works</strong></p>
+<ul>
+<li>The z-score represents the number of standard deviations from the expected normal DNA fraction</li>
+<li>Higher z-scores indicate a higher likelihood of trisomy 21</li>
+<li>The function converts z-scores to likelihood ratios using exp(0.8 * z - 2)</li>
+<li>Then applies Bayes’ theorem to calculate the posterior probability</li>
+</ul>
+<pre><code>lr &lt;- exp(0.8 * z - 2)</code></pre>
+<p>This formula calculates the likelihood ratio (LR) from a z-score in your NIPT analysis.</p>
+<p>For different z-scores, this formula produces:</p>
+<ul>
+<li>z=1: LR ≈ 0.135 (strong evidence against T21)</li>
+<li>z=2.5: LR ≈ 1.0 (neutral evidence)</li>
+<li>z=4: LR ≈ 7.4 (moderate evidence for T21)</li>
+<li>z=6: LR ≈ 54.6 (strong evidence for T21)</li>
+<li>z=8: LR ≈ 403.4 (overwhelming evidence for T21)</li>
+</ul>
+<p>These values produce the beautiful curves in your visualization, showing how:</p>
+<ol type="1">
+<li>At low z-scores (1-4), prior risk still strongly influences posterior probability</li>
+<li>At high z-scores (6+), the likelihood ratio becomes so high that it overwhelms the prior risk</li>
+</ol>
+<p>In statistics, Probability is not Likelihood</p>
+<p>https://www.youtube.com/watch?v=pYxNSUDSFH4&amp;t=165s</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="39">
+<div class="cell-output cell-output-display">
+<style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class="dl-inline"><dt>20-25 yrs (0.1%)</dt><dd>0.001</dd><dt>30-35 yrs (0.3%)</dt><dd>0.003</dd><dt>35-40 yrs (0.8%)</dt><dd>0.008</dd><dt>40+ yrs (1.5%)</dt><dd>0.015</dd></dl>
+</div>
+</div>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>nipt_df <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A data.frame: 20 × 3</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">z_score</th>
+<th data-quarto-table-cell-role="th" scope="col">age_group</th>
+<th data-quarto-table-cell-role="th" scope="col">conditional_prob</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;fct&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">1</td>
+<td>1.0</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0003014048</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">2</td>
+<td>1.5</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0004495765</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">3</td>
+<td>2.0</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0006705411</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">4</td>
+<td>2.5</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0010000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">5</td>
+<td>3.0</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0014910913</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">6</td>
+<td>3.5</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0022228168</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">7</td>
+<td>4.0</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0033124317</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">8</td>
+<td>4.5</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0049335300</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">9</td>
+<td>5.0</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0073421467</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">10</td>
+<td>5.5</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0109137856</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">11</td>
+<td>6.0</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0161945280</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">12</td>
+<td>6.5</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0239684910</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">13</td>
+<td>7.0</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0353401862</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">14</td>
+<td>7.5</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0518206586</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">15</td>
+<td>8.0</td>
+<td>20-25 yrs (0.1%)</td>
+<td>0.0753859995</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">16</td>
+<td>1.0</td>
+<td>30-35 yrs (0.3%)</td>
+<td>0.0009054809</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">17</td>
+<td>1.5</td>
+<td>30-35 yrs (0.3%)</td>
+<td>0.0013502175</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">18</td>
+<td>2.0</td>
+<td>30-35 yrs (0.3%)</td>
+<td>0.0020129510</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">19</td>
+<td>2.5</td>
+<td>30-35 yrs (0.3%)</td>
+<td>0.0030000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">20</td>
+<td>3.0</td>
+<td>30-35 yrs (0.3%)</td>
+<td>0.0044688804</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>How <code>P(T21|z-score)</code> changes based on different z-scores and starting risks.</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-fig.width="12" data-fig.height="6" data-execution_count="34">
+<div class="cell-output cell-output-display">
+<p><img src="bayesian_nipt_risk_score_2_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;r&quot;}" data-fig.width="12" data-fig.height="6" data-execution_count="29">
+<div class="cell-output cell-output-display">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Example of how conditional probability changes with z-score and prior risk</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Z-score</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold;">Age Group</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Prior Risk</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Posterior Risk P(T21|z)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">20-25 yrs</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">0.018</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">30-35 yrs</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.052</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">35-40 yrs</td>
+<td style="text-align: right;">0.008</td>
+<td style="text-align: right;">0.129</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">3</td>
+<td style="text-align: left; background-color: rgba(255, 255, 217, 255) !important;">40+ yrs</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.015</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.219</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">7</td>
+<td style="text-align: left; background-color: rgba(255, 255, 217, 255) !important;">20-25 yrs</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.001</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.883</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">7</td>
+<td style="text-align: left; background-color: rgba(255, 255, 217, 255) !important;">30-35 yrs</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.003</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.957</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">7</td>
+<td style="text-align: left; background-color: rgba(255, 255, 217, 255) !important;">35-40 yrs</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.008</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.985</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">7</td>
+<td style="text-align: left; background-color: rgba(255, 255, 217, 255) !important;">40+ yrs</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.015</td>
+<td style="text-align: right; background-color: rgba(255, 255, 217, 255) !important;">0.992</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span class="math display">\[
+\text{Posterior Risk} = \frac{\frac{1}{100} \times 0.99}{\left(\frac{1}{100} \times 0.99\right) + \left(\frac{99}{100} \times 0.001\right)}
+\approx 0.99 \text{ or } 99\%
+\]</span></p>
+</section>
+<section id="intuitive-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="intuitive-takeaways">Intuitive Takeaways</h2>
+<ul>
+<li><p><strong>Context matters</strong>: The meaning of a positive test depends on who’s being tested</p></li>
+<li><p><strong>Conditioning changes probabilities</strong>: The probability of Down syndrome changes dramatically when conditioned on test results</p></li>
+<li><p><strong>Visual intuition</strong>: The higher the z-score, the more it “conditions” our understanding of the risk</p></li>
+<li><p><strong>Practical interpretation</strong>: When a doctor says “given your positive test and age, your risk is X%,” they’re applying conditional probability</p></li>
+</ul>
+<p>Conditional probability helps us understand that test results don’t exist in isolation—they must be interpreted in the context of prior risk factors and test performance characteristics.</p>
+</section>
+<section id="references-learning-resources" class="level2">
+<h2 class="anchored" data-anchor-id="references-learning-resources">References &amp; Learning resources</h2>
+<p>https://en.wikipedia.org/wiki/Conditional_probability</p>
+<ol type="1">
+<li>Intro to Conditional Probability: <a href="https://www.youtube.com/watch?v=ibINrxJLvlM">Youtube</a></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image-2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">alt text</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image-3.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">alt text</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image-5.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">alt text</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image-4.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">alt text</figcaption>
+</figure>
+</div>
+<ol start="2" type="1">
+<li>Two Conditional Probability Examples (what’s the difference???) <a href="https://www.youtube.com/watch?v=OYT0AcuLXu8">Youtube</a></li>
+<li>Conditional Probabilities, Clearly Explained!!! <a href="https://www.youtube.com/watch?v=_IgyaD7vOOA&amp;t=44s">Youtube</a></li>
+</ol>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../statistics/bayesian_nipt_risk_score.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Risk Score Calculation in NIPT</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../statistics/narrative_reviews.html" class="pagination-link">
+        <span class="nav-page-text">Narrative Reviews: NIPT Risk Score</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2024, Duy Dao</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/khuongduying">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/khuongduying/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
