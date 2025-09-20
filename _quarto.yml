@@ -89,7 +89,7 @@ website:
       background: light
       collapse-level: 2
       contents:
-        - auto: statistics/*
+        - auto: statistics/*pub*
 
     - id: rosalind
       title: "Rosalind"
